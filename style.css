@@ -728,3 +728,10 @@ body.full-width-page .main-content {
     justify-content: center;
     border-radius: 50%;
 }
+
+.back-button {
+    font-size: 24px;
+    color: var(--text-dark);
+    margin-right: 20px;
+    cursor: pointer;
+}
