@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudy - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <h2>Estudy</h2>
+                <p>Learn From Home</p>
+            </div>
+
+            <nav class="menu">
+                <a href="index.html" class="active"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                <a href="courses.html"><i class="fa-regular fa-file-lines"></i> Course</a>
+                <a href="#"><i class="fa-regular fa-bookmark"></i> Resources</a>
+                <a href="chat.html"><i class="fa-regular fa-comment-dots"></i> Chat</a>
+                <a href="schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
+                <a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a>
+                <a href="#"><i class="fa-solid fa-gear"></i> Setting</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="upgrade-card">
+                    <img src="https://via.placeholder.com/80x100?text=Girl" alt="User" class="upgrade-img">
+                    <p>Upgrade to PRO for more resources</p>
+                    <button class="btn-upgrade">Upgrade Now</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Dashboard</h1>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </header>
+
+            <section class="hero-banner">
+                <div class="hero-text">
+                    <h2>Hi Martin!</h2>
+                    <p>You have completed 5 lessons in the last day. Start your learning today.</p>
+                </div>
+                <div class="hero-illustration">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+            </section>
+
+            <section class="stats-grid">
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <h3>Learning Time</h3>
+                        <select><option>Today</option></select>
+                    </div>
+                    <div class="chart-circle">
+                        <div class="circle-inner">
+                            <span>2h 35m</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <span><span class="dot green"></span> Reading</span>
+                        <span><span class="dot orange"></span> Writing</span>
+                    </div>
+                </div>
+
+                <div class="card stats-card wide">
+                    <div class="card-header">
+                        <h3>My Activity</h3>
+                        <select><option>Weekly</option></select>
+                    </div>
+                    <div class="graph-placeholder">
+                        <svg viewBox="0 0 300 100" class="wave-chart">
+                            <path d="M0,80 Q30,70 50,40 T100,50 T150,30 T200,60 T250,20 T300,10" fill="none" stroke="#41D185" stroke-width="3"/>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="courses-section">
+                <div class="section-header">
+                    <h3>My Courses</h3>
+                    <div class="tabs">
+                        <span class="active">All</span>
+                        <span>Ongoing</span>
+                        <span>Complete</span>
+                    </div>
+                </div>
+
+                <div class="course-list">
+                    <div class="course-card">
+                        <div class="icon orange"><i class="fa-solid fa-book"></i></div>
+                        <div class="course-info">
+                            <h4>History of graphic design</h4>
+                            <p>By William Joe</p>
+                        </div>
+                        <div class="progress-wrapper">
+                            <span>25%</span>
+                            <div class="progress-bar"><div class="fill" style="width: 25%"></div></div>
+                        </div>
+                        <div class="rating">★ 4.3</div>
+                        <button class="btn-view">View Course</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="icon blue"><i class="fa-solid fa-mobile-screen"></i></div>
+                        <div class="course-info">
+                            <h4>App Design Course</h4>
+                            <p>By William Joe</p>
+                        </div>
+                        <div class="progress-wrapper">
+                            <span>25%</span>
+                            <div class="progress-bar"><div class="fill" style="width: 25%"></div></div>
+                        </div>
+                        <div class="rating">★ 4.3</div>
+                        <button class="btn-view">View Course</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="right-panel">
+            <div class="profile-header">
+                <i class="fa-regular fa-bell"></i>
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Martin">
+                    <span>Martin nel</span>
+                </div>
+            </div>
+
+            <div class="calendar-widget">
+                <div class="cal-header">
+                    <h4>June 28 Monday</h4>
+                    <div class="nav-arrows">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="calendar-grid">
+                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                    <span class="faded">27</span><span class="faded">28</span><span class="faded">29</span><span class="faded">30</span><span class="faded">31</span><span>1</span><span>2</span>
+                    <span>3</span><span>4</span><span class="active-date">5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                    <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+                </div>
+            </div>
+
+            <div class="upcoming-tasks">
+                <div class="task-header">
+                    <h3>Upcoming Task</h3>
+                    <a href="#">See all</a>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-icon purple"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="task-detail">
+                        <h4>Discussion Algorithm</h4>
+                        <p>08:00 AM - 15:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-icon green"><i class="fa-solid fa-ruler-combined"></i></div>
+                    <div class="task-detail">
+                        <h4>Simple Home Page Design</h4>
+                        <p>08:00 AM - 15:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-history">
+                <div class="task-header">
+                    <h3>Payment History</h3>
+                    <a href="#">See all</a>
+                </div>
+                <div class="payment-row">
+                    <span>Wireframe & Prototype</span>
+                    <strong>$120</strong>
+                </div>
+                <div class="payment-row">
+                    <span>MSc in Machine Learning</span>
+                    <strong>$140</strong>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudy - Video</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <h2>Estudy</h2>
+            </div>
+            <nav class="menu">
+                <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                <a href="courses.html" class="active"><i class="fa-regular fa-file-lines"></i> Course</a>
+                <a href="#"><i class="fa-regular fa-bookmark"></i> Resources</a>
+                <a href="chat.html"><i class="fa-regular fa-comment-dots"></i> Chat</a>
+                <a href="schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
+                <a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <a href="javascript:history.back()" class="back-button"><i class="fa-solid fa-arrow-left"></i></a>
+                <h1>My Course</h1>
+            </header>
+
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <i class="fa-solid fa-circle-play play-btn"></i>
+                    <h2 style="margin-top:20px;">Introduction Digital Marketing</h2>
+                </div>
+            </div>
+
+            <h2 style="margin-bottom:10px;">Introduction Figma Basic to Advance</h2>
+            <p style="color:#888; font-size:12px; margin-bottom:20px;">William Joe | Figma | + Follow</p>
+
+            <div class="course-tabs">
+                <span class="active">Overview</span>
+                <span>FAQ</span>
+                <span>Discussion</span>
+                <span>Reviews</span>
+            </div>
+
+            <div class="tab-content">
+                <h3 style="font-size:16px; margin-bottom:10px;">Course Description</h3>
+                <p style="font-size:13px; color:#666; line-height:1.6;">
+                    Progressively synthesize clicks-and-mortar infrastructures for impactful quality vectors. Seamlessly innovate corporate best practices via standardized models.
+                </p>
+            </div>
+        </main>
+
+        <aside class="right-panel">
+            <div class="profile-header">
+                <i class="fa-regular fa-bell"></i>
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Martin">
+                    <span>Martin nel</span>
+                </div>
+            </div>
+
+            <div class="module-list">
+                <h3>Course Content</h3>
+                <p style="font-size:11px; color:#999; margin-bottom:20px;">Lecture (15) Total (5.5 hrs)</p>
+
+                <div class="module-item">
+                    <div class="module-title">Module 1 - Introduction</div>
+                    <div class="lesson-item">
+                         <i class="fa-solid fa-circle-check check-icon"></i> Introduction
+                    </div>
+                </div>
+
+                <div class="module-item">
+                    <div class="module-title" style="color:var(--primary-color);">Module 2 - Basics</div>
+                    <div class="lesson-item">
+                         <i class="fa-solid fa-circle-check check-icon"></i> Getting started
+                    </div>
+                    <div class="lesson-item active">
+                         <i class="fa-solid fa-circle-play"></i> Overview about tools (Running)
+                    </div>
+                    <div class="lesson-item">
+                         <i class="fa-regular fa-circle"></i> Visual design using tools
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

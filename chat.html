@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudy - Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="chat-page"> <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <h2>Estudy</h2>
+            </div>
+            <nav class="menu">
+                <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                <a href="courses.html"><i class="fa-regular fa-file-lines"></i> Course</a>
+                <a href="#"><i class="fa-regular fa-bookmark"></i> Resources</a>
+                <a href="chat.html" class="active"><i class="fa-regular fa-comment-dots"></i> Chat</a>
+                <a href="schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
+                <a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a>
+            </nav>
+        </aside>
+
+        <aside class="chat-sidebar">
+            <h2>Chat</h2>
+            <div class="chat-search">
+                <input type="text" placeholder="Search...">
+            </div>
+            
+            <div class="user-list">
+                <div class="user-item active">
+                    <img src="https://via.placeholder.com/45" class="user-avatar" alt="User">
+                    <div class="user-details">
+                        <h4>Nathael Roy</h4>
+                        <p>Good Morning!</p>
+                    </div>
+                    <div class="msg-count">2</div>
+                </div>
+
+                <div class="user-item">
+                    <img src="https://via.placeholder.com/45" class="user-avatar" alt="User">
+                    <div class="user-details">
+                        <h4>Paris Liana</h4>
+                        <p>Let me check that!</p>
+                    </div>
+                    <div class="msg-count">3</div>
+                </div>
+                
+                <div class="user-item">
+                    <img src="https://via.placeholder.com/45" class="user-avatar" alt="User">
+                    <div class="user-details">
+                        <h4>Ellise Remmi</h4>
+                        <p>I will come tomorrow</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <div class="chat-header">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40" style="border-radius:50%; margin-right:10px;">
+                    <div>
+                        <h4>Nathael Roy</h4>
+                        <span style="font-size:11px; color:#41D185;">Online</span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <i class="fa-solid fa-phone" style="margin-right:15px; color:#999; cursor:pointer;"></i>
+                    <i class="fa-solid fa-video" style="color:#999; cursor:pointer;"></i>
+                </div>
+            </div>
+
+            <div class="messages-box">
+                <div class="message received">
+                    <p>Hi Mashok,</p>
+                </div>
+                <div class="message received">
+                    <p>I love the work you did on the cleaning service landing page. Are you available for hire at the moment?</p>
+                    <span class="message-time">5 min ago</span>
+                </div>
+
+                <div class="message sent">
+                    <p>Hello, <br>Thank you for your reply. The landing page I am looking for is for a mobile application which I am launching soon.</p>
+                    <span class="message-time">10 min ago</span>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <i class="fa-solid fa-paperclip" style="color:#999; cursor:pointer;"></i>
+                <input type="text" placeholder="Type a message...">
+                <i class="fa-solid fa-paper-plane" style="color:var(--primary-color); cursor:pointer;"></i>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

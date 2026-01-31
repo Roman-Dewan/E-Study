@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudy - Schedule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <h2>Estudy</h2>
+            </div>
+            <nav class="menu">
+                <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                <a href="courses.html"><i class="fa-regular fa-file-lines"></i> Course</a>
+                <a href="#"><i class="fa-regular fa-bookmark"></i> Resources</a>
+                <a href="chat.html"><i class="fa-regular fa-comment-dots"></i> Chat</a>
+                <a href="schedule.html" class="active"><i class="fa-regular fa-calendar"></i> Schedule</a>
+                <a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Schedule</h1>
+            </header>
+
+            <div class="schedule-toolbar">
+                <h2>July 2020</h2>
+                <div>
+                    <button style="padding:5px 10px; border:1px solid #eee; background:white; border-radius:5px;">Monthly</button>
+                    <i class="fa-solid fa-grid-2"></i>
+                </div>
+            </div>
+
+            <div class="calendar-large">
+                <div class="week-days-row">
+                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+                <div class="days-grid">
+                    <span>29</span><span>30</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                    <span>6</span><span>7</span><span>8</span><span>9</span>
+                    <span>10<div class="event-label green">Figma Prototype</div></span>
+                    <span>11</span><span>12</span>
+                    
+                    <span>13</span><span>14</span><span>15</span><span>16</span>
+                    <span>17<span class="active-day-circle">17</span></span>
+                    <span>18</span><span>19</span>
+
+                    <span>20</span><span>21</span><span>22</span>
+                    <span>23<div class="event-label orange">Sketch Learning</div></span>
+                    <span>24</span><span>25</span><span>26</span>
+                </div>
+            </div>
+        </main>
+
+        <aside class="right-panel">
+            <div class="profile-header">
+                <i class="fa-regular fa-bell"></i>
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40" alt="Martin">
+                    <span>Martin nel</span>
+                </div>
+            </div>
+
+            <button style="width:100%; padding:15px; background:var(--primary-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-bottom:30px;">
+                + Add New Task
+            </button>
+
+            <h3>Reminders</h3>
+            <div class="task-card" style="margin-top:15px; background:white;">
+                <div class="task-icon orange"><i class="fa-regular fa-envelope"></i></div>
+                <div class="task-detail">
+                    <h4>Web design test notice</h4>
+                    <p>08:00 AM</p>
+                </div>
+            </div>
+             <div class="task-card" style="margin-top:10px; background:white;">
+                <div class="task-icon green"><i class="fa-solid fa-wallet"></i></div>
+                <div class="task-detail">
+                    <h4>Subscription Expires</h4>
+                    <p>15:00 PM</p>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+</body>
+</html>
