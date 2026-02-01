@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="app-container">
@@ -41,6 +43,7 @@
             <header class="top-header">
                 <h1>Dashboard</h1>
                 <div class="search-bar">
+                    <input type="text" placeholder="Search...">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </header>
@@ -59,7 +62,10 @@
                 <div class="card stats-card">
                     <div class="card-header">
                         <h3>Learning Time</h3>
-                        <select><option>Today</option></select>
+                        <select>
+                            <option>Daily</option>
+                            <option>Weekly</option>
+                        </select>
                     </div>
                     <div class="chart-circle">
                         <div class="circle-inner">
@@ -75,11 +81,15 @@
                 <div class="card stats-card wide">
                     <div class="card-header">
                         <h3>My Activity</h3>
-                        <select><option>Weekly</option></select>
+                        <select>
+                            <option>Weekly</option>
+                            <option>Daily</option>
+                        </select>
                     </div>
                     <div class="graph-placeholder">
                         <svg viewBox="0 0 300 100" class="wave-chart">
-                            <path d="M0,80 Q30,70 50,40 T100,50 T150,30 T200,60 T250,20 T300,10" fill="none" stroke="#41D185" stroke-width="3"/>
+                            <path d="M0,80 Q30,70 50,40 T100,50 T150,30 T200,60 T250,20 T300,10" fill="none"
+                                stroke="#41D185" stroke-width="3" />
                         </svg>
                     </div>
                 </div>
@@ -104,7 +114,9 @@
                         </div>
                         <div class="progress-wrapper">
                             <span>25%</span>
-                            <div class="progress-bar"><div class="fill" style="width: 25%"></div></div>
+                            <div class="progress-bar">
+                                <div class="fill" style="width: 25%"></div>
+                            </div>
                         </div>
                         <div class="rating">★ 4.3</div>
                         <button class="btn-view">View Course</button>
@@ -118,7 +130,9 @@
                         </div>
                         <div class="progress-wrapper">
                             <span>25%</span>
-                            <div class="progress-bar"><div class="fill" style="width: 25%"></div></div>
+                            <div class="progress-bar">
+                                <div class="fill" style="width: 25%"></div>
+                            </div>
                         </div>
                         <div class="rating">★ 4.3</div>
                         <button class="btn-view">View Course</button>
@@ -146,8 +160,10 @@
                 </div>
                 <div class="calendar-grid">
                     <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-                    <span class="faded">27</span><span class="faded">28</span><span class="faded">29</span><span class="faded">30</span><span class="faded">31</span><span>1</span><span>2</span>
-                    <span>3</span><span>4</span><span class="active-date">5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                    <span class="faded">27</span><span class="faded">28</span><span class="faded">29</span><span
+                        class="faded">30</span><span class="faded">31</span><span>1</span><span>2</span>
+                    <span>3</span><span>4</span><span
+                        class="active-date">5</span><span>6</span><span>7</span><span>8</span><span>9</span>
                     <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
                 </div>
             </div>
@@ -157,7 +173,7 @@
                     <h3>Upcoming Task</h3>
                     <a href="#">See all</a>
                 </div>
-                
+
                 <div class="task-card">
                     <div class="task-icon purple"><i class="fa-solid fa-layer-group"></i></div>
                     <div class="task-detail">
@@ -193,5 +209,5 @@
     </div>
 
 </body>
+
 </html>
-<!-- commit from darul -->
