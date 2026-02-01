@@ -952,7 +952,7 @@ body.full-width-page .main-content {
     padding: 15px 0;
 }
 
-.days-grid span {
+.days-grid>span {
     height: 80px;
     border-top: 1px solid #f0f0f0;
     padding: 10px;
