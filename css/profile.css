@@ -1,0 +1,117 @@
+/* --- PAGE: PROFILE --- */
+.profile-card-col {
+    background: var(--white);
+    padding: 30px;
+    text-align: center;
+    border-right: 1px solid #EEE;
+}
+
+.profile-avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.stat-item h3 {
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.stat-item span {
+    font-size: 11px;
+    color: var(--text-grey);
+}
+
+.settings-form-area {
+    padding: 40px;
+    background: var(--white);
+    margin: 30px;
+    border-radius: 20px;
+}
+
+.form-section-nav {
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+.form-section-nav .active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-grey);
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-dark);
+}
+
+.btn-save {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-cancel {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 12px 30px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+.vip-badge {
+    background: orange;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+}
+
+.profile-card-col .profile-avatar-section {
+    margin-top: 40px;
+}
+
+.profile-card-col .menu {
+    margin-top: 40px;
+    text-align: left;
+}
