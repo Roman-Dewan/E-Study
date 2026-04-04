@@ -6,13 +6,17 @@
     <title>Estudy - Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/profile.css">
 </head>
-<body class="profile-page"> <div class="app-container">
+<body class="profile-page">
+    <div class="app-container">
+        <!-- Sidebar Navigation (Same as current) -->
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon">E</div>
                 <h2>Estudy</h2>
+                <p>Learn From Home</p>
             </div>
             <nav class="menu">
                 <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
@@ -25,86 +29,210 @@
             </nav>
         </aside>
 
+        <!-- Profile Summary Column -->
         <aside class="profile-card-col">
             <h2>Profile</h2>
-            <div class="profile-avatar-section">
-                <img src="https://via.placeholder.com/100" class="profile-avatar-large">
-                <h3>Martin Nel</h3>
-                <span class="vip-badge">VIP</span>
-            </div>
-
-            <div class="profile-stats">
-                <div class="stat-item">
-                    <h3>08</h3>
-                    <span>In Progress</span>
+            <div class="profile-card-content">
+                <div class="profile-main">
+                    <img src="https://via.placeholder.com/100/A27B7B/white" class="profile-avatar-large">
+                    <h3>Roman Dewan</h3>
                 </div>
-                <div class="stat-item">
-                    <h3>23</h3>
-                    <span>Completed</span>
-                </div>
-            </div>
 
-            <div class="menu">
-                <a href="#"><i class="fa-regular fa-user"></i> Become a Mentor</a>
-                <a href="#"><i class="fa-solid fa-life-ring"></i> Support</a>
-                <a href="#"><i class="fa-solid fa-user-plus"></i> Invite Friend</a>
+                <div class="status-summary">
+                    <div class="status-badge progress">
+                        <span class="count">08</span>
+                        <span class="label">Course in Progress</span>
+                    </div>
+                    <div class="status-badge complete">
+                        <span class="count">23</span>
+                        <span class="label">Course Complete</span>
+                    </div>
+                </div>
+
+                <div class="achievement-section">
+                    <h4>Last Achievement</h4>
+                    <div class="achievement-grid">
+                        <div class="achievement-circle"></div>
+                        <div class="achievement-circle"></div>
+                        <div class="achievement-circle"></div>
+                        <div class="achievement-circle"></div>
+                    </div>
+                </div>
+
+                <div class="support-section">
+                    <h4>Support</h4>
+                    <nav class="support-menu">
+                        <a href="#"><i class="fa-regular fa-user"></i> Become a Mentor</a>
+                        <a href="#"><i class="fa-solid fa-headphones"></i> Support</a>
+                        <a href="#"><i class="fa-solid fa-user-plus"></i> Invite Friend</a>
+                        <a href="#"><i class="fa-regular fa-trash-can"></i> Delete Account</a>
+                    </nav>
+                </div>
             </div>
         </aside>
 
+        <!-- Profile Settings Column -->
         <main class="main-content">
             <header class="top-header">
-                <h1>Profile Setting</h1>
-                <div class="user-info">
-                     <img src="https://via.placeholder.com/40">
-                     Martin Nel
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <i class="fa-regular fa-bell"></i>
+                    <div class="user-header">
+                        <img src="https://via.placeholder.com/40/A27B7B/white" class="user-avatar-small">
+                        <span>Roman Dewan</span>
+                    </div>
                 </div>
             </header>
 
-            <div class="settings-form-area">
-                <div class="form-section-nav">
-                    <span class="active">Personal Details</span>
-                    <span>Notification</span>
-                    <span>Privacy</span>
-                    <span>Payment</span>
+            <section class="settings-container">
+                <h2>Profile Setting</h2>
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="personal">Personal Details</button>
+                    <button class="tab-btn" data-tab="notification">Notification</button>
+                    <button class="tab-btn" data-tab="privacy">Privacy</button>
                 </div>
 
-                <form>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" value="Mashok khan">
+                <div class="tab-content-area">
+                    <!-- Tab: Personal Details -->
+                    <div class="tab-pane active" id="personal">
+                        <div class="avatar-edit">
+                            <img src="https://via.placeholder.com/80/A27B7B/white" class="profile-avatar-medium">
+                            <label for="avatar-upload" class="edit-btn">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
                         </div>
-                         <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" value="hellopixency@gmail.com">
+                        <form class="settings-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" value="Roman Dewan">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" value="roman.dewan18@gmail.com">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Address</label>
+                                    <input type="text" value="120F, Joydevpur, Gazipur">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" value="Gazipur">
+                                </div>
+                                <div class="form-group">
+                                    <label>State/Province</label>
+                                    <input type="text" value="Gazipur">
+                                </div>
+                                <div class="form-group">
+                                    <label>Zip Code</label>
+                                    <input type="text" value="1700">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <select>
+                                        <option>Bangladesh</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">Submit</button>
+                                <button type="button" class="btn-cancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tab: Notification -->
+                    <div class="tab-pane" id="notification">
+                        <div class="settings-group">
+                            <h4>Email Notifications</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Receive Email updates</span>
+                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>New Messages</span>
+                                    <label class="toggle"><input type="checkbox"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h4>Push Notifications</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Course Announcements</span>
+                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>Progress Report</span>
+                                    <label class="toggle"><input type="checkbox"><span class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>Lesson Reminders</span>
+                                    <label class="toggle"><input type="checkbox"><span class="slider"></span></label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" value="127 Gobadia chittagong, Bangladesh">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>City</label>
-                            <input type="text" value="Chittagong">
+                    <!-- Tab: Privacy -->
+                    <div class="tab-pane" id="privacy">
+                        <div class="settings-group">
+                            <h4>Account Privacy</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Keep my profile private</span>
+                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>Active Status</span>
+                                    <label class="toggle"><input type="checkbox"><span class="slider"></span></label>
+                                </div>
+                            </div>
                         </div>
-                         <div class="form-group">
-                            <label>Country</label>
-                            <select><option>Bangladesh</option></select>
+                        <div class="settings-group">
+                            <h4>Privacy and Data</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Messages</span>
+                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h4>Data and Personalization</h4>
+                            <button class="btn-action-outline">Download My Data</button>
+                        </div>
+                        <div class="settings-group">
+                            <h4>Delete Accounts</h4>
+                            <button class="btn-action-danger">Initial Account Deletion<br><small>Learn More....</small></button>
                         </div>
                     </div>
-
-                    <div class="form-row">
-                         <div class="form-group">
-                            <button type="button" class="btn-save">Save Profile</button>
-                            <button type="button" class="btn-cancel">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </section>
         </main>
     </div>
+
+    <!-- Simple JS for tabs -->
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Switch button state
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Switch content state
+                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
