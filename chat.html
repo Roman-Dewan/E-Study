@@ -28,73 +28,118 @@
 
         <aside class="chat-sidebar">
             <h2>Chat</h2>
-            <div class="chat-search">
-                <input type="text" placeholder="Search...">
+            <div class="chat-search-wrapper">
+                <input type="text" placeholder="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            
+            <div class="chat-tabs">
+                <button class="chat-tab active">Instructors</button>
+                <button class="chat-tab">Peers</button>
             </div>
             
             <div class="user-list">
                 <div class="user-item active">
-                    <img src="https://via.placeholder.com/45" class="user-avatar" alt="User">
-                    <div class="user-details">
-                        <h4>Nathael Roy</h4>
-                        <p>Good Morning!</p>
+                    <div class="user-info-left">
+                        <img src="https://ui-avatars.com/api/?name=Roman+Dewan&background=f0f0f0&color=333" class="user-avatar" alt="Roman Dewan">
+                        <span class="user-name">Roman Dewan</span>
                     </div>
-                    <div class="msg-count">2</div>
+                    <span class="user-time">10:30</span>
                 </div>
 
                 <div class="user-item">
-                    <img src="https://via.placeholder.com/45" class="user-avatar" alt="User">
-                    <div class="user-details">
-                        <h4>Paris Liana</h4>
-                        <p>Let me check that!</p>
+                    <div class="user-info-left">
+                        <img src="https://ui-avatars.com/api/?name=Rifat+Hasan&background=f0f0f0&color=333" class="user-avatar" alt="Rifat Hasan">
+                        <span class="user-name">Rifat Hasan</span>
                     </div>
-                    <div class="msg-count">3</div>
+                    <span class="user-time">9:30</span>
                 </div>
                 
                 <div class="user-item">
-                    <img src="https://via.placeholder.com/45" class="user-avatar" alt="User">
-                    <div class="user-details">
-                        <h4>Ellise Remmi</h4>
-                        <p>I will come tomorrow</p>
+                    <div class="user-info-left">
+                        <img src="https://ui-avatars.com/api/?name=Akash&background=f0f0f0&color=333" class="user-avatar" alt="Akash">
+                        <span class="user-name">Akash</span>
                     </div>
+                    <span class="user-time">7:00</span>
+                </div>
+
+                <div class="user-item">
+                    <div class="user-info-left">
+                        <img src="https://ui-avatars.com/api/?name=Rashid&background=f0f0f0&color=333" class="user-avatar" alt="Rashid">
+                        <span class="user-name">Rashid</span>
+                    </div>
+                    <span class="user-time">4:30</span>
                 </div>
             </div>
+            
+            <button class="fab-btn">
+                <i class="fa-solid fa-plus"></i>
+            </button>
         </aside>
 
         <main class="chat-area">
             <div class="chat-header">
-                <div class="user-info">
-                    <img src="https://via.placeholder.com/40" style="border-radius:50%; margin-right:10px;">
-                    <div>
-                        <h4>Nathael Roy</h4>
-                        <span style="font-size:11px; color:#41D185;">Online</span>
+                <div class="chat-header-user">
+                    <div class="avatar-container">
+                        <span class="status-dot"></span>
+                        <img src="https://ui-avatars.com/api/?name=Roman+Dewan&background=f0f0f0&color=333" class="header-avatar" alt="Roman Dewan">
                     </div>
+                    <h4>Roman Dewan</h4>
                 </div>
                 <div class="chat-actions">
-                    <i class="fa-solid fa-phone" style="margin-right:15px; color:#999; cursor:pointer;"></i>
-                    <i class="fa-solid fa-video" style="color:#999; cursor:pointer;"></i>
+                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-solid fa-video"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
             </div>
 
             <div class="messages-box">
-                <div class="message received">
-                    <p>Hi Mashok,</p>
-                </div>
-                <div class="message received">
-                    <p>I love the work you did on the cleaning service landing page. Are you available for hire at the moment?</p>
-                    <span class="message-time">5 min ago</span>
+                <!-- Received Message -->
+                <div class="msg-container received">
+                    <img src="https://ui-avatars.com/api/?name=Roman+Dewan&background=f0f0f0&color=333" class="msg-avatar" alt="User">
+                    <div class="msg-content-wrapper">
+                        <div class="msg-bubble">
+                            <p>Hi.</p>
+                        </div>
+                        <span class="msg-time">30 mins ago</span>
+                    </div>
+                    <i class="fa-solid fa-ellipsis msg-menu"></i>
                 </div>
 
-                <div class="message sent">
-                    <p>Hello, <br>Thank you for your reply. The landing page I am looking for is for a mobile application which I am launching soon.</p>
-                    <span class="message-time">10 min ago</span>
+                <!-- Sent Message -->
+                <div class="msg-container sent">
+                    <i class="fa-solid fa-ellipsis msg-menu"></i>
+                    <div class="msg-content-wrapper">
+                        <div class="msg-bubble">
+                            <p>Hello.</p>
+                        </div>
+                        <span class="msg-time">25 mins ago</span>
+                    </div>
+                    <img src="https://ui-avatars.com/api/?name=Me&background=41D185&color=fff" class="msg-avatar" alt="Me">
+                </div>
+
+                <!-- Received Message -->
+                <div class="msg-container received">
+                    <img src="https://ui-avatars.com/api/?name=Roman+Dewan&background=f0f0f0&color=333" class="msg-avatar" alt="User">
+                    <div class="msg-content-wrapper">
+                        <div class="msg-bubble">
+                            <p>How are you?</p>
+                        </div>
+                        <span class="msg-time">20 mins ago</span>
+                    </div>
+                    <i class="fa-solid fa-ellipsis msg-menu"></i>
                 </div>
             </div>
 
             <div class="chat-input-area">
-                <i class="fa-solid fa-paperclip" style="color:#999; cursor:pointer;"></i>
-                <input type="text" placeholder="Type a message...">
-                <i class="fa-solid fa-paper-plane" style="color:var(--primary-color); cursor:pointer;"></i>
+                <i class="fa-solid fa-ellipsis-vertical side-menu-icon" style="color: #666; font-size: 18px;"></i>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-face-smile emoji-icon" style="color: #FF5A96;"></i>
+                    <input type="text" placeholder="Type a message">
+                    <button class="send-btn">
+                        <i class="fa-solid fa-paper-plane" style="color: #8C82FE;"></i>
+                    </button>
+                </div>
             </div>
         </main>
     </div>

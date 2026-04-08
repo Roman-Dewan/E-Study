@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/resources.css">
 </head>
 <body>
 
@@ -39,15 +40,93 @@
 
         <main class="main-content">
             <header class="top-header">
-                <h1>Resources</h1>
-                <div class="search-bar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                <div style="display:flex; align-items:center; gap:20px;">
+                    <h2 style="font-size: 24px; font-weight: 600; color: var(--text-dark);">Resource</h2>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="profile-header" style="margin-bottom:0;">
+                    <i class="fa-regular fa-bell" style="font-size: 20px; color: var(--text-grey); cursor: pointer;"></i>
+                    <div class="user-info">
+                        <img src="https://ui-avatars.com/api/?name=Darul+Islam&background=f0f0f0&color=333" width="40" height="40" alt="Darul Islam">
+                        <span>Darul Islam</span>
+                        <i class="fa-solid fa-caret-down" style="cursor: pointer; margin-left: 5px;"></i>
+                    </div>
                 </div>
             </header>
 
-            <section>
-                <h2>Resources Page</h2>
-                <p>This is the resources page. Content will be added here soon.</p>
+            <section class="resources-card">
+                <div class="rc-header">
+                    <h2>My Resources</h2>
+                    <button class="btn-primary"><i class="fa-solid fa-plus"></i> Add New Category</button>
+                </div>
+                
+                <div class="rc-horizontal-nav">
+                    <button class="nav-btn">Bangla Medium</button>
+                    <button class="nav-btn">English Version</button>
+                    <button class="nav-btn">English Medium</button>
+                    <button class="nav-btn active">Madrasa Medium</button>
+                    <button class="nav-btn">Religious Studies</button>
+                    <button class="nav-btn">Skill Dev... <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></button>
+                </div>
+                
+                <hr class="rc-divider">
+                
+                <div class="rc-drilldown-container">
+                    <!-- Column 1: Classes -->
+                    <div class="drilldown-column">
+                        <button class="dd-btn">Play</button>
+                        <button class="dd-btn">Nursery</button>
+                        <button class="dd-btn">Zero</button>
+                        <button class="dd-btn">Class 1</button>
+                        <button class="dd-btn">Class 2</button>
+                        <button class="dd-btn">Class 3</button>
+                        <button class="dd-btn">Class 4</button>
+                        <button class="dd-btn active">Class 5 <i class="fa-solid fa-caret-right dd-arrow"></i></button>
+                        <button class="dd-btn">Class 6</button>
+                        <button class="dd-btn">Class 7</button>
+                        <button class="dd-btn">Class 8</button>
+                        <button class="dd-btn">Class 9</button>
+                        <button class="dd-btn">Class 10</button>
+                        <button class="dd-btn">Class 11</button>
+                        <button class="dd-btn">Class 12</button>
+                        <button class="dd-btn">University Admission</button>
+                    </div>
+                    
+                    <!-- Column 2: Subjects -->
+                    <div class="drilldown-column">
+                        <button class="dd-btn">Bangla</button>
+                        <button class="dd-btn">English</button>
+                        <button class="dd-btn active">Mathematics <i class="fa-solid fa-caret-right dd-arrow"></i></button>
+                        <button class="dd-btn">Science</button>
+                        <button class="dd-btn">BDGS</button>
+                        <button class="dd-btn">Religion</button>
+                        <button class="dd-btn">ICT</button>
+                        <div class="scroll-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                    </div>
+                    
+                    <!-- Column 3: Chapters -->
+                    <div class="drilldown-column">
+                        <button class="dd-btn">Chapter 1</button>
+                        <button class="dd-btn">Chapter 2</button>
+                        <button class="dd-btn active">Chapter 3 <i class="fa-solid fa-caret-right dd-arrow"></i></button>
+                        <button class="dd-btn">Chapter 4</button>
+                        <button class="dd-btn">Chapter 5</button>
+                        <button class="dd-btn">Chapter 6</button>
+                        <div class="scroll-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                    </div>
+                    
+                    <!-- Column 4: Links -->
+                    <div class="drilldown-column link-column">
+                        <div class="dd-link-wrapper">
+                            <i class="fa-solid fa-link"></i>
+                            <a href="#" class="dd-link">
+                                https://www.youtube.com/<br>easytechnique/class5/<br>maths/ch3
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
