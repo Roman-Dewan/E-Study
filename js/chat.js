@@ -432,14 +432,304 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Mock click actions for buttons that don't have underlying functionality
-    const alertMock = (actionName) => alert(`Action recognized: ${actionName}`);
+    // --- Dropdowns & Popups Logic ---
+    const headerDropdown = document.getElementById('header-dropdown');
+    const attachDropdown = document.getElementById('attach-dropdown');
+    const emojiPicker = document.getElementById('emoji-picker');
+    const messageDropdown = document.getElementById('message-dropdown');
     
-    document.getElementById('action-phone').addEventListener('click', () => alertMock('Audio Call'));
-    document.getElementById('action-video').addEventListener('click', () => alertMock('Video Call'));
-    document.getElementById('action-menu').addEventListener('click', () => alertMock('Chat Options'));
-    document.getElementById('action-attach').addEventListener('click', () => alertMock('Attachment Menu'));
-    document.getElementById('action-emoji').addEventListener('click', () => alertMock('Emoji Picker'));
+    const actionMenu = document.getElementById('action-menu');
+    const actionAttach = document.getElementById('action-attach');
+    const actionEmoji = document.getElementById('action-emoji');
+    const headerUser = document.querySelector('.chat-header-user');
+    const modalCall = document.getElementById('modal-call');
+    const modalProfile = document.getElementById('modal-profile');
+    const modalPinned = document.getElementById('modal-pinned');
+
+    function closeAllDropdowns() {
+        headerDropdown.style.display = 'none';
+        attachDropdown.style.display = 'none';
+        emojiPicker.style.display = 'none';
+        messageDropdown.style.display = 'none';
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown-menu') &&
+            !e.target.closest('.emoji-picker') &&
+            !e.target.classList.contains('msg-menu') &&
+            e.target.id !== 'action-menu' &&
+            e.target.id !== 'action-attach' &&
+            e.target.id !== 'action-emoji') {
+            closeAllDropdowns();
+        }
+    });
+
+    actionMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAllDropdowns();
+        const rect = actionMenu.getBoundingClientRect();
+        headerDropdown.style.top = `${rect.bottom + 10}px`;
+        headerDropdown.style.right = `${window.innerWidth - rect.right}px`;
+        headerDropdown.style.display = 'block';
+    });
+
+    actionAttach.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAllDropdowns();
+        const rect = actionAttach.getBoundingClientRect();
+        attachDropdown.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+        attachDropdown.style.left = `${rect.left}px`;
+        attachDropdown.style.display = 'block';
+    });
+
+    actionEmoji.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAllDropdowns();
+        const rect = actionEmoji.getBoundingClientRect();
+        emojiPicker.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+        emojiPicker.style.left = `${rect.left}px`;
+        emojiPicker.style.display = 'grid';
+    });
+
+    emojiPicker.addEventListener('click', (e) => {
+        if (e.target.tagName === 'SPAN') {
+            messageInput.value += e.target.textContent;
+            messageInput.focus();
+        }
+    });
+
+    // Message Menu Event Delegation
+    let activeMessageElement = null;
+
+    messagesBox.addEventListener('click', (e) => {
+        if (e.target.classList.contains('msg-menu')) {
+            e.stopPropagation();
+            closeAllDropdowns();
+            activeMessageElement = e.target.closest('.msg-container');
+            const rect = e.target.getBoundingClientRect();
+            messageDropdown.style.display = 'block';
+            
+            // Allow browser to calculate width by displaying first momentarily outside view if we wanted,
+            // or just use approximate left positioning. Using right anchor is safer for sent msgs:
+            if (activeMessageElement.classList.contains('sent')) {
+                messageDropdown.style.top = `${rect.bottom}px`;
+                messageDropdown.style.right = `${window.innerWidth - rect.left}px`;
+                messageDropdown.style.left = 'auto';
+            } else {
+                messageDropdown.style.top = `${rect.bottom}px`;
+                messageDropdown.style.left = `${rect.right}px`;
+                messageDropdown.style.right = 'auto';
+            }
+        }
+    });
+
+    messageDropdown.addEventListener('click', (e) => {
+        const action = e.target.closest('.dropdown-item');
+        if (action && activeMessageElement) {
+            const actionText = action.textContent.trim();
+            const msgTextEl = activeMessageElement.querySelector('.msg-bubble p');
+            const msgText = msgTextEl ? msgTextEl.textContent : '';
+
+            if (actionText === 'Copy') {
+                navigator.clipboard.writeText(msgText).then(() => {
+                    console.log('Copied to clipboard');
+                }).catch(err => {
+                    console.error('Failed to copy', err);
+                });
+            } else if (actionText === 'Remove') {
+                activeMessageElement.style.opacity = '0';
+                setTimeout(() => {
+                    activeMessageElement.remove();
+                }, 300);
+            } else if (actionText === 'Pin') {
+                let user = [...mockData.instructors, ...mockData.batches].find(u => u.id === activeUserId);
+                if (user) {
+                    if (!user.pinnedMessages) user.pinnedMessages = [];
+                    // add if not duplicate
+                    if (!user.pinnedMessages.find(m => m.text === msgText)) {
+                        user.pinnedMessages.push({ text: msgText, time: 'Just now' });
+                    }
+                    alert('Message pinned!');
+                }
+            } else if (actionText === 'Reply') {
+                const hintText = "Replying to: " + (msgText.length > 20 ? msgText.substring(0, 20) + '...' : msgText);
+                messageInput.value = hintText + " \n";
+                messageInput.focus();
+            } else if (actionText === 'Forward') {
+                alert(`Forwarding message: "${msgText}"\n(Forward selection modal would open here)`);
+            }
+            
+            closeAllDropdowns();
+        }
+    });
+
+    // Profile Modal Logic
+    headerUser.addEventListener('click', () => {
+        let user = [...mockData.instructors, ...mockData.batches].find(u => u.id === activeUserId);
+        if(user) {
+            document.getElementById('profile-avatar').src = user.avatar;
+            document.getElementById('profile-name').innerHTML = user.name;
+            document.getElementById('profile-id').innerHTML = user.id;
+            
+            chatModalOverlay.style.display = 'flex';
+            modalInstructor.style.display = 'none';
+            modalBatch.style.display = 'none';
+            modalCall.style.display = 'none';
+            modalProfile.style.display = 'block';
+        }
+    });
+
+    headerDropdown.addEventListener('click', (e) => {
+        const item = e.target.closest('.dropdown-item');
+        if (!item) return;
+
+        const actionText = item.textContent.trim();
+        closeAllDropdowns();
+
+        if (actionText === 'View Profile') {
+            headerUser.click();
+        } else if (actionText === 'Mute' || actionText === 'Unmute') {
+            const icon = item.querySelector('i');
+            if (icon.classList.contains('fa-bell-slash')) {
+                icon.classList.replace('fa-bell-slash', 'fa-bell');
+                item.innerHTML = '<i class="fa-regular fa-bell"></i> Unmute';
+                alert('User notifications muted.');
+            } else {
+                icon.classList.replace('fa-bell', 'fa-bell-slash');
+                item.innerHTML = '<i class="fa-regular fa-bell-slash"></i> Mute';
+                alert('User notifications unmuted.');
+            }
+        } else if (actionText === 'View Pinned Messages') {
+            let user = [...mockData.instructors, ...mockData.batches].find(u => u.id === activeUserId);
+            if (user) {
+                const pinnedList = document.getElementById('modal-pinned-list');
+                pinnedList.innerHTML = '';
+                if (!user.pinnedMessages || user.pinnedMessages.length === 0) {
+                    pinnedList.innerHTML = '<div style="text-align:center; padding: 30px 20px; color:#999;">No pinned messages found.</div>';
+                } else {
+                    user.pinnedMessages.forEach(msg => {
+                        const div = document.createElement('div');
+                        div.className = 'modal-list-item';
+                        div.style.flexDirection = 'column';
+                        div.style.alignItems = 'flex-start';
+                        div.style.gap = '8px';
+                        div.innerHTML = `
+                            <div style="background: #E5E7EB; padding: 10px 15px; border-radius: 8px; font-size: 14px; width: 100%; box-sizing: border-box; color: var(--text-dark);">
+                                ${msg.text}
+                            </div>
+                            <span style="font-size: 11px; color:#6B7280;"><i class="fa-solid fa-thumbtack"></i> Pinned ${msg.time}</span>
+                        `;
+                        pinnedList.appendChild(div);
+                    });
+                }
+                chatModalOverlay.style.display = 'flex';
+                modalInstructor.style.display = 'none';
+                modalBatch.style.display = 'none';
+                modalCall.style.display = 'none';
+                modalProfile.style.display = 'none';
+                document.getElementById('modal-pinned').style.display = 'block';
+            }
+        } else if (actionText === 'Change Theme') {
+            const colors = ['#8C82FE', '#FF5A96', '#41D185', '#0084FF', '#FF9F00'];
+            if (window.themeIndex === undefined) window.themeIndex = 0;
+            window.themeIndex = (window.themeIndex + 1) % colors.length;
+            const newColor = colors[window.themeIndex];
+            
+            document.documentElement.style.setProperty('--primary-color', newColor);
+            
+            const styleId = 'dynamic-theme-style';
+            let styleEl = document.getElementById(styleId);
+            if (!styleEl) {
+                styleEl = document.createElement('style');
+                styleEl.id = styleId;
+                document.head.appendChild(styleEl);
+            }
+            styleEl.innerHTML = `
+                .msg-container.sent .msg-bubble { background: ${newColor} !important; color: white !important; } 
+                .send-btn i { color: ${newColor} !important; } 
+                .chat-tab.active { background: ${newColor} !important; } 
+                .btn-request { background: ${newColor} !important; } 
+                .primary-btn { background: ${newColor} !important; }
+            `;
+        } else if (actionText === 'Edit Nickname') {
+            const currentName = document.getElementById('chat-header-name').textContent;
+            const newName = prompt("Enter new nickname:", currentName);
+            if (newName && newName.trim() !== '') {
+                document.getElementById('chat-header-name').textContent = newName;
+                let user = [...mockData.instructors, ...mockData.batches].find(u => u.id === activeUserId);
+                if (user) user.name = newName;
+                renderUserList();
+            }
+        } else if (actionText === 'Media & Files') {
+            alert('Media & Files for this chat: \\n- Image1.png\\n- Document.pdf\\n- Video.mp4');
+        } else if (actionText === 'Restrict') {
+            if(confirm("Are you sure you want to restrict this user?")) {
+                alert("User restricted.");
+            }
+        } else if (actionText === 'Report') {
+            const reason = prompt("Please provide a reason for reporting:", "Spam or harassment");
+            if (reason) alert("Report submitted.");
+        }
+    });
+
+    // Call Logic
+    function startCall(isVideo) {
+        let user = [...mockData.instructors, ...mockData.batches].find(u => u.id === activeUserId);
+        if(!user) return;
+        
+        document.getElementById('call-avatar').src = user.avatar;
+        document.getElementById('call-name').innerHTML = user.name;
+        document.getElementById('call-status').innerHTML = isVideo ? 'Video calling...' : 'Calling...';
+        
+        // Show/hide video buttons correctly
+        const videoBtns = document.querySelectorAll('.btn-video-only');
+        videoBtns.forEach(btn => {
+            btn.style.display = isVideo ? 'flex' : 'none';
+        });
+
+        chatModalOverlay.style.display = 'flex';
+        modalInstructor.style.display = 'none';
+        modalBatch.style.display = 'none';
+        modalProfile.style.display = 'none';
+        modalCall.style.display = 'block';
+    }
+
+    document.getElementById('action-phone').addEventListener('click', () => startCall(false));
+    document.getElementById('action-video').addEventListener('click', () => startCall(true));
+
+    document.getElementById('btn-end-call').addEventListener('click', () => {
+        chatModalOverlay.style.display = 'none';
+    });
+
+    // Mute / Camera flip logic
+    document.getElementById('btn-mute-audio').addEventListener('click', function() {
+        const icon = this.querySelector('i');
+        if (icon.classList.contains('fa-microphone')) {
+            icon.classList.replace('fa-microphone', 'fa-microphone-slash');
+            icon.style.color = '#EF4444';
+        } else {
+            icon.classList.replace('fa-microphone-slash', 'fa-microphone');
+            icon.style.color = '';
+        }
+    });
+
+    document.getElementById('btn-camera').addEventListener('click', function() {
+        const icon = this.querySelector('i');
+        if (icon.classList.contains('fa-video')) {
+            icon.classList.replace('fa-video', 'fa-video-slash');
+            icon.style.color = '#EF4444';
+        } else {
+            icon.classList.replace('fa-video-slash', 'fa-video');
+            icon.style.color = '';
+        }
+    });
+
+    document.getElementById('btn-camera-flip').addEventListener('click', function() {
+        // Just animate the flip icon to simulate functionality
+        const icon = this.querySelector('i');
+        icon.style.transform = 'rotate(180deg)';
+        setTimeout(() => { icon.style.transform = 'rotate(0deg)'; }, 300);
+    });
 
     // --- Main Initial Render ---
     renderUserList();

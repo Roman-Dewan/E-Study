@@ -471,3 +471,127 @@
     background: #E6F9F0;
     border-color: #41D185;
 }
+
+/* Dropdowns & Popups */
+.dropdown-menu {
+    position: absolute;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 8px 0;
+    min-width: 200px;
+    z-index: 2000;
+    border: 1px solid #EEE;
+}
+.dropdown-item {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.dropdown-item:hover {
+    background: #F9FAFB;
+}
+.dropdown-item i {
+    width: 16px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Emoji Picker */
+.emoji-picker {
+    position: absolute;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    z-index: 2000;
+    border: 1px solid #EEE;
+}
+.emoji-picker span {
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s;
+    user-select: none;
+}
+.emoji-picker span:hover {
+    transform: scale(1.2);
+}
+
+/* Call Modal Styles */
+.call-modal {
+    background: #111;
+    color: white;
+}
+.call-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+.call-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    animation: pulse 2s infinite;
+    object-fit: cover;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(140, 130, 254, 0.6); }
+    70% { box-shadow: 0 0 0 20px rgba(140, 130, 254, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(140, 130, 254, 0); }
+}
+.call-content h3 {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+}
+.call-content p {
+    color: #AAA;
+    margin: 0;
+    font-size: 16px;
+}
+.call-actions {
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+}
+.call-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.btn-end-call {
+    background: #EF4444;
+}
+.btn-end-call:hover {
+    background: #DC2626;
+}
+
+/* Interactive Headers */
+.chat-header-user {
+    cursor: pointer;
+    transition: 0.2s opacity;
+}
+.chat-header-user:hover {
+    opacity: 0.8;
+}
