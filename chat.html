@@ -121,6 +121,88 @@
                 <button class="primary-btn" id="btn-create-group">Create Group</button>
             </div>
         </div>
+
+        <!-- Call Modal -->
+        <div class="chat-modal call-modal" id="modal-call" style="display: none;">
+            <div class="call-content">
+                <img src="" id="call-avatar" class="call-avatar" alt="User">
+                <h3 id="call-name">Name</h3>
+                <p id="call-status">Calling...</p>
+                <div class="call-actions">
+                    <button class="call-btn" id="btn-mute-audio" style="background: #333;"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="call-btn btn-video-only" id="btn-camera" style="background: #333;"><i class="fa-solid fa-video"></i></button>
+                    <button class="call-btn btn-video-only" id="btn-camera-flip" style="background: #333;"><i class="fa-solid fa-camera-rotate"></i></button>
+                    <button class="call-btn btn-end-call" id="btn-end-call"><i class="fa-solid fa-phone-slash"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Modal -->
+        <div class="chat-modal profile-modal" id="modal-profile" style="display: none;">
+            <div class="chat-modal-header">
+                <h3>Profile</h3>
+                <i class="fa-solid fa-xmark close-modal"></i>
+            </div>
+            <div class="chat-modal-body" style="align-items: center; text-align: center;">
+                <img src="" id="profile-avatar" class="profile-avatar" alt="User" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 15px;">
+                <h2 id="profile-name" style="margin: 0; font-size: 20px;">Name</h2>
+                <p id="profile-status" style="color: #6B7280; margin-top: 5px; font-size: 14px;">Active Now</p>
+                <div style="margin-top: 20px; width: 100%; text-align: left; background: #F9FAFB; padding: 15px; border-radius: 8px;">
+                    <div style="padding: 10px 0; border-bottom: 1px solid #E5E7EB; display: flex; justify-content: space-between;">
+                        <strong><i class="fa-solid fa-fingerprint" style="color: #8C82FE;"></i> ID</strong> 
+                        <span id="profile-id" style="color: #6B7280;"></span>
+                    </div>
+                    <div style="padding: 10px 0; display: flex; justify-content: space-between;">
+                        <strong><i class="fa-solid fa-droplet" style="color: #FF5A96;"></i> Theme</strong> 
+                        <span style="color: #6B7280;">Default</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pinned Messages Modal -->
+        <div class="chat-modal" id="modal-pinned" style="display: none;">
+            <div class="chat-modal-header">
+                <h3>Pinned Messages</h3>
+                <i class="fa-solid fa-xmark close-modal"></i>
+            </div>
+            <div class="chat-modal-body" style="padding: 0;">
+                <div class="modal-list" id="modal-pinned-list" style="max-height: 300px; padding: 15px;">
+                    <!-- Pinned messages injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Dropdowns -->
+    <div class="dropdown-menu" id="header-dropdown" style="display: none;">
+        <div class="dropdown-item" id="header-btn-profile"><i class="fa-regular fa-user"></i> View Profile</div>
+        <div class="dropdown-item"><i class="fa-regular fa-bell-slash"></i> Mute</div>
+        <div class="dropdown-item"><i class="fa-solid fa-thumbtack"></i> View Pinned Messages</div>
+        <div class="dropdown-item"><i class="fa-solid fa-palette"></i> Change Theme</div>
+        <div class="dropdown-item"><i class="fa-solid fa-pen"></i> Edit Nickname</div>
+        <div class="dropdown-item"><i class="fa-solid fa-photo-film"></i> Media & Files</div>
+        <div class="dropdown-item" style="color: #EF4444;"><i class="fa-solid fa-circle-minus"></i> Restrict</div>
+        <div class="dropdown-item" style="color: #EF4444;"><i class="fa-regular fa-flag"></i> Report</div>
+    </div>
+
+    <div class="dropdown-menu" id="attach-dropdown" style="display: none;">
+        <div class="dropdown-item"><i class="fa-regular fa-image" style="color: #41D185;"></i> Photo or Video</div>
+        <div class="dropdown-item"><i class="fa-regular fa-file-lines" style="color: #8C82FE;"></i> Document</div>
+    </div>
+
+    <div class="emoji-picker" id="emoji-picker" style="display: none;">
+        <span>😀</span><span>😎</span><span>😍</span><span>😂</span><span>👍</span>
+        <span>❤️</span><span>🎉</span><span>🔥</span><span>😊</span><span>🙌</span>
+        <span>🤔</span><span>😢</span><span>😡</span><span>👏</span><span>✨</span>
+    </div>
+
+    <div class="dropdown-menu" id="message-dropdown" style="display: none;">
+        <div class="dropdown-item"><i class="fa-solid fa-reply"></i> Reply</div>
+        <div class="dropdown-item"><i class="fa-solid fa-thumbtack"></i> Pin</div>
+        <div class="dropdown-item"><i class="fa-regular fa-copy"></i> Copy</div>
+        <div class="dropdown-item"><i class="fa-solid fa-share"></i> Forward</div>
+        <div class="dropdown-item" style="color: #EF4444;"><i class="fa-regular fa-trash-can"></i> Remove</div>
     </div>
 
     <script src="js/chat.js"></script>
