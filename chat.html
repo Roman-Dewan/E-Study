@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/chat.css">
 </head>
-<body class="chat-page"> <div class="app-container">
+
+<body class="chat-page">
+    <div class="app-container">
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon">E</div>
@@ -32,16 +35,16 @@
                 <input type="text" id="chat-search-input" placeholder="Search">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-            
+
             <div class="chat-tabs">
                 <button class="chat-tab active" id="tab-instructors">Instructors</button>
                 <button class="chat-tab" id="tab-batches">Batches</button>
             </div>
-            
+
             <div class="user-list" id="user-list">
                 <!-- Users will be injected here via JS -->
             </div>
-            
+
             <button class="fab-btn" id="fab-new-chat">
                 <i class="fa-solid fa-plus"></i>
             </button>
@@ -52,7 +55,8 @@
                 <div class="chat-header-user">
                     <div class="avatar-container">
                         <span class="status-dot"></span>
-                        <img src="https://ui-avatars.com/api/?name=Roman+Dewan&background=f0f0f0&color=333" class="header-avatar" id="chat-header-avatar" alt="Roman Dewan">
+                        <img src="https://ui-avatars.com/api/?name=Roman+Dewan&background=f0f0f0&color=333"
+                            class="header-avatar" id="chat-header-avatar" alt="Roman Dewan">
                     </div>
                     <h4 id="chat-header-name">Roman Dewan</h4>
                 </div>
@@ -68,7 +72,8 @@
             </div>
 
             <div class="chat-input-area">
-                <i class="fa-solid fa-ellipsis-vertical side-menu-icon" id="action-attach" style="color: #666; font-size: 18px; cursor: pointer;"></i>
+                <i class="fa-solid fa-ellipsis-vertical side-menu-icon" id="action-attach"
+                    style="color: #666; font-size: 18px; cursor: pointer;"></i>
                 <div class="input-wrapper">
                     <i class="fa-regular fa-face-smile emoji-icon" id="action-emoji" style="color: #FF5A96;"></i>
                     <input type="text" id="message-input" placeholder="Type a message">
@@ -106,13 +111,14 @@
                 <i class="fa-solid fa-xmark close-modal"></i>
             </div>
             <div class="chat-modal-body">
-                <input type="text" id="modal-batch-name" class="modal-input" placeholder="Group Name (e.g. Study Group A)">
-                
+                <input type="text" id="modal-batch-name" class="modal-input"
+                    placeholder="Group Name (e.g. Study Group A)">
+
                 <div class="chat-search-wrapper" style="margin: 15px 0;">
                     <input type="text" id="modal-batch-search" placeholder="Search members...">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                
+
                 <div class="modal-list" id="modal-batch-list" style="max-height: 200px;">
                     <!-- Dynamic content -->
                 </div>
@@ -129,10 +135,14 @@
                 <h3 id="call-name">Name</h3>
                 <p id="call-status">Calling...</p>
                 <div class="call-actions">
-                    <button class="call-btn" id="btn-mute-audio" style="background: #333;"><i class="fa-solid fa-microphone"></i></button>
-                    <button class="call-btn btn-video-only" id="btn-camera" style="background: #333;"><i class="fa-solid fa-video"></i></button>
-                    <button class="call-btn btn-video-only" id="btn-camera-flip" style="background: #333;"><i class="fa-solid fa-camera-rotate"></i></button>
-                    <button class="call-btn btn-end-call" id="btn-end-call"><i class="fa-solid fa-phone-slash"></i></button>
+                    <button class="call-btn" id="btn-mute-audio" style="background: #333;"><i
+                            class="fa-solid fa-microphone"></i></button>
+                    <button class="call-btn btn-video-only" id="btn-camera" style="background: #333;"><i
+                            class="fa-solid fa-video"></i></button>
+                    <button class="call-btn btn-video-only" id="btn-camera-flip" style="background: #333;"><i
+                            class="fa-solid fa-camera-rotate"></i></button>
+                    <button class="call-btn btn-end-call" id="btn-end-call"><i
+                            class="fa-solid fa-phone-slash"></i></button>
                 </div>
             </div>
         </div>
@@ -144,16 +154,19 @@
                 <i class="fa-solid fa-xmark close-modal"></i>
             </div>
             <div class="chat-modal-body" style="align-items: center; text-align: center;">
-                <img src="" id="profile-avatar" class="profile-avatar" alt="User" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 15px;">
+                <img src="" id="profile-avatar" class="profile-avatar" alt="User"
+                    style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 15px;">
                 <h2 id="profile-name" style="margin: 0; font-size: 20px;">Name</h2>
                 <p id="profile-status" style="color: #6B7280; margin-top: 5px; font-size: 14px;">Active Now</p>
-                <div style="margin-top: 20px; width: 100%; text-align: left; background: #F9FAFB; padding: 15px; border-radius: 8px;">
-                    <div style="padding: 10px 0; border-bottom: 1px solid #E5E7EB; display: flex; justify-content: space-between;">
-                        <strong><i class="fa-solid fa-fingerprint" style="color: #8C82FE;"></i> ID</strong> 
+                <div
+                    style="margin-top: 20px; width: 100%; text-align: left; background: #F9FAFB; padding: 15px; border-radius: 8px;">
+                    <div
+                        style="padding: 10px 0; border-bottom: 1px solid #E5E7EB; display: flex; justify-content: space-between;">
+                        <strong><i class="fa-solid fa-fingerprint" style="color: #8C82FE;"></i> ID</strong>
                         <span id="profile-id" style="color: #6B7280;"></span>
                     </div>
                     <div style="padding: 10px 0; display: flex; justify-content: space-between;">
-                        <strong><i class="fa-solid fa-droplet" style="color: #FF5A96;"></i> Theme</strong> 
+                        <strong><i class="fa-solid fa-droplet" style="color: #FF5A96;"></i> Theme</strong>
                         <span style="color: #6B7280;">Default</span>
                     </div>
                 </div>
@@ -207,4 +220,5 @@
 
     <script src="js/chat.js"></script>
 </body>
+
 </html>
