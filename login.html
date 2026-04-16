@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In – Estudy</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ── RESET & VARIABLES ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #3DBE7B;
+            --green-dark: #2da066;
+            --green-light: #e8f8f0;
+            --green-glow: rgba(61, 190, 123, 0.25);
+            --bg: #f5f7f2;
+            --white: #ffffff;
+            --text: #1a1a2e;
+            --muted: #6b7280;
+            --border: #e2e8e0;
+            --error: #ef4444;
+            --success: #10b981;
+            --panel-left: #1a2e22;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ── LEFT DECORATIVE PANEL ── */
+        .left-panel {
+            width: 45%;
+            background: var(--panel-left);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 48px;
+            animation: slideInLeft .7s cubic-bezier(.22, 1, .36, 1) both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-60px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* background blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .25;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--green);
+            top: -100px;
+            right: -100px;
+        }
+
+        .blob-2 {
+            width: 300px;
+            height: 300px;
+            background: #0f5f35;
+            bottom: -80px;
+            left: -80px;
+        }
+
+        .blob-3 {
+            width: 200px;
+            height: 200px;
+            background: #38ef7d;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: .1;
+        }
+
+        /* grid pattern overlay */
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(61, 190, 123, .07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(61, 190, 123, .07) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+
+        .panel-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .brand-logo {
+            width: 72px;
+            height: 72px;
+            background: var(--green);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            color: white;
+            font-size: 36px;
+            margin: 0 auto 20px;
+            box-shadow: 0 12px 40px var(--green-glow);
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .brand-tagline {
+            color: rgba(255, 255, 255, .55);
+            font-size: 14px;
+            margin-bottom: 56px;
+        }
+
+        .panel-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: white;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .panel-sub {
+            color: rgba(255, 255, 255, .6);
+            font-size: 14px;
+            line-height: 1.7;
+            max-width: 300px;
+            margin: 0 auto 48px;
+        }
+
+        /* stat pills */
+        .stats-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .stat-pill {
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 50px;
+            padding: 10px 20px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .stat-pill .num {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .stat-pill .lbl {
+            font-size: 11px;
+            color: rgba(255, 255, 255, .5);
+            margin-top: 1px;
+        }
+
+        /* floating course card */
+        .float-card {
+            position: absolute;
+            right: -24px;
+            top: 50%;
+            transform: translateY(-70%);
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 16px;
+            padding: 16px 20px;
+            width: 200px;
+            backdrop-filter: blur(16px);
+            z-index: 3;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+
+            0%,
+            100% {
+                transform: translateY(-70%);
+            }
+
+            50% {
+                transform: translateY(-74%);
+            }
+        }
+
+        .fc-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 8px;
+        }
+
+        .fc-course {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fc-icon-box {
+            width: 36px;
+            height: 36px;
+            background: var(--green);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .fc-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .fc-sub {
+            font-size: 10px;
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .fc-prog {
+            background: rgba(255, 255, 255, .15);
+            border-radius: 4px;
+            height: 3px;
+            margin-top: 12px;
+        }
+
+        .fc-prog-fill {
+            background: var(--green);
+            height: 100%;
+            border-radius: 4px;
+            width: 65%;
+        }
+
+        /* ── RIGHT FORM PANEL ── */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 40px;
+            background: var(--bg);
+            animation: slideInRight .7s cubic-bezier(.22, 1, .36, 1) both;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(60px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 440px;
+            background: var(--white);
+            border-radius: 28px;
+            padding: 44px 44px 36px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .07), 0 4px 16px rgba(0, 0, 0, .04);
+        }
+
+        .form-header {
+            margin-bottom: 32px;
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* social login */
+        .social-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            background: white;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all .2s;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            border-color: var(--green);
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .social-icon {
+            font-size: 18px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 24px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* form fields */
+        .field {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 7px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 16px 13px 46px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            font-size: 14px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: white;
+            transition: all .25s;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px var(--green-glow);
+        }
+
+        .field input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, .1);
+        }
+
+        .field input.valid {
+            border-color: var(--success);
+        }
+
+        .field-icon {
+            position: absolute;
+            left: 15px;
+            bottom: 14px;
+            font-size: 17px;
+            pointer-events: none;
+            color: var(--muted);
+            transition: color .25s;
+        }
+
+        .field input:focus~.field-icon {
+            color: var(--green);
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 14px;
+            bottom: 13px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 17px;
+            color: var(--muted);
+            transition: color .2s;
+            padding: 2px;
+        }
+
+        .toggle-pw:hover {
+            color: var(--green);
+        }
+
+        .field-error {
+            font-size: 11px;
+            color: var(--error);
+            margin-top: 5px;
+            display: none;
+        }
+
+        .field-error.show {
+            display: block;
+        }
+
+        /* remember + forgot */
+        .row-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .check-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--muted);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .check-label input[type=checkbox] {
+            display: none;
+        }
+
+        .custom-check {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            flex-shrink: 0;
+        }
+
+        .check-label input:checked+.custom-check {
+            background: var(--green);
+            border-color: var(--green);
+            color: white;
+            font-size: 11px;
+        }
+
+        .forgot-link {
+            font-size: 13px;
+            color: var(--green);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        /* submit button */
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 14px;
+            background: var(--green);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            transition: all .25s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px var(--green-glow);
+        }
+
+        .btn-submit:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 28px var(--green-glow);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit.loading {
+            pointer-events: none;
+        }
+
+        .btn-submit .btn-text {
+            transition: opacity .2s;
+        }
+
+        .btn-submit.loading .btn-text {
+            opacity: 0;
+        }
+
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 22px;
+            height: 22px;
+            border: 2.5px solid rgba(255, 255, 255, .3);
+            border-top-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity .2s;
+            animation: spin .7s linear infinite;
+        }
+
+        .btn-submit.loading .spinner {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .signup-link a {
+            color: var(--green);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* toast notification */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 9999;
+            background: white;
+            border-radius: 14px;
+            padding: 14px 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+            min-width: 280px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(120%);
+            transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+            border-left: 4px solid var(--green);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            border-left-color: var(--error);
+        }
+
+        .toast-icon {
+            font-size: 22px;
+        }
+
+        .toast-msg {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:768px) {
+            .left-panel {
+                display: none;
+            }
+
+            .right-panel {
+                padding: 32px 20px;
+            }
+
+            .form-box {
+                padding: 32px 24px;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ LEFT PANEL ══ -->
+    <div class="left-panel">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="panel-content">
+            <div class="brand-logo">E</div>
+            <div class="brand-name">Estudy</div>
+            <div class="brand-tagline">Learn from Home</div>
+
+            <div class="panel-headline">Welcome back,<br>keep learning!</div>
+            <p class="panel-sub">Pick up right where you left off. Your courses, progress and certificates are waiting.
+            </p>
+
+            <div class="stats-row">
+                <div class="stat-pill">
+                    <div class="num">500+</div>
+                    <div class="lbl">Courses</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="num">12k</div>
+                    <div class="lbl">Students</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="num">98%</div>
+                    <div class="lbl">Satisfied</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- floating card -->
+        <div class="float-card">
+            <div class="fc-label">Continue learning</div>
+            <div class="fc-course">
+                <div class="fc-icon-box">🎨</div>
+                <div>
+                    <div class="fc-title">Graphic Design</div>
+                    <div class="fc-sub">65% complete</div>
+                </div>
+            </div>
+            <div class="fc-prog">
+                <div class="fc-prog-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ RIGHT PANEL — LOGIN FORM ══ -->
+    <div class="right-panel">
+        <div class="form-box">
+
+            <div class="form-header">
+                <div class="form-title">Log In</div>
+                <p class="form-subtitle">Enter your credentials to access your account.</p>
+            </div>
+
+            <!-- Social Login -->
+            <div class="social-row">
+                <button class="social-btn" id="googleBtn">
+                    <span class="social-icon"></span> Google
+                </button>
+                <button class="social-btn" id="githubBtn">
+                    <span class="social-icon"></span> GitHub
+                </button>
+            </div>
+
+            <div class="divider">or continue with email</div>
+
+            <!-- Form -->
+            <div class="field">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+                <span class="field-icon">✉️</span>
+                <div class="field-error" id="emailErr">Please enter a valid email address.</div>
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+                <span class="field-icon">🔒</span>
+                <button class="toggle-pw" id="togglePw" type="button" aria-label="Toggle password">👁️</button>
+                <div class="field-error" id="passwordErr">Password must be at least 6 characters.</div>
+            </div>
+
+            <div class="row-forgot">
+                <label class="check-label">
+                    <input type="checkbox" id="rememberMe">
+                    <div class="custom-check" id="checkBox"></div>
+                    Remember me
+                </label>
+                <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+            </div>
+
+            <button class="btn-submit" id="loginBtn">
+                <span class="btn-text">Log In</span>
+                <div class="spinner"></div>
+            </button>
+
+            <div class="signup-link">
+                Don't have an account? <a href="signup.html">Create one free</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon">✅</span>
+        <span class="toast-msg" id="toastMsg">Welcome back!</span>
+    </div>
+
+    <!-- ══ FIREBASE AUTH JAVASCRIPT ══ -->
+    <script type="module">
+        import { initializeApp }
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import {
+            getAuth,
+            signInWithEmailAndPassword,
+            signInWithPopup,
+            GoogleAuthProvider,
+            GithubAuthProvider,
+            setPersistence,
+            browserLocalPersistence,
+            browserSessionPersistence
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // ── YOUR FIREBASE CONFIG ──
+        // Replace these with your real values from Firebase Console
+        const firebaseConfig = {
+            apiKey: "API_KEY",
+            authDomain: "PROJECT_ID.firebaseapp.com",
+            projectId: "PROJECT_ID",
+            storageBucket: "PROJECT_ID.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // ── UTILITY HELPERS ──
+        function showToast(msg, isError = false) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            document.getElementById('toastIcon').textContent = isError ? '❌' : '✅';
+            t.classList.toggle('error', isError);
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3500);
+        }
+
+        function setLoading(on) {
+            document.getElementById('loginBtn').classList.toggle('loading', on);
+        }
+
+        function setFieldError(inputId, errId, show) {
+            const inp = document.getElementById(inputId);
+            const err = document.getElementById(errId);
+            inp.classList.toggle('error', show);
+            err.classList.toggle('show', show);
+        }
+
+        function validate() {
+            let ok = true;
+            const email = document.getElementById('email').value.trim();
+            const pw = document.getElementById('password').value;
+            const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRe.test(email)) { setFieldError('email', 'emailErr', true); ok = false; }
+            else { setFieldError('email', 'emailErr', false); }
+            if (pw.length < 6) { setFieldError('password', 'passwordErr', true); ok = false; }
+            else { setFieldError('password', 'passwordErr', false); }
+            return ok;
+        }
+
+        // ── FIREBASE ERROR MESSAGES ──
+        function friendlyError(code) {
+            const map = {
+                'auth/user-not-found': 'No account found with this email.',
+                'auth/wrong-password': 'Incorrect password. Please try again.',
+                'auth/invalid-email': 'That email address is not valid.',
+                'auth/too-many-requests': 'Too many attempts. Please wait a moment.',
+                'auth/network-request-failed': 'Network error. Check your connection.',
+                'auth/popup-closed-by-user': 'Sign-in popup was closed.',
+                'auth/invalid-credential': 'Invalid credentials. Please try again.',
+            };
+            return map[code] || 'Something went wrong. Please try again.';
+        }
+
+        // ── EMAIL / PASSWORD LOGIN ──
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            if (!validate()) return;
+            setLoading(true);
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('rememberMe').checked;
+
+            try {
+                // Set session persistence based on "Remember me"
+                await setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
+
+                await signInWithEmailAndPassword(auth, email, password);
+
+                showToast('Welcome back! Redirecting…');
+                setTimeout(() => window.location.href = '../index.html', 1400);
+            } catch (err) {
+                setLoading(false);
+                showToast(friendlyError(err.code), true);
+            }
+        });
+
+        // ── GOOGLE LOGIN ──
+        document.getElementById('googleBtn').addEventListener('click', async () => {
+            const provider = new GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: 'select_account' });
+            try {
+                await signInWithPopup(auth, provider);
+                showToast('Signed in with Google! Redirecting…');
+                setTimeout(() => window.location.href = '../index.html', 1400);
+            } catch (err) {
+                showToast(friendlyError(err.code), true);
+            }
+        });
+
+        // ── GITHUB LOGIN ──
+        document.getElementById('githubBtn').addEventListener('click', async () => {
+            const provider = new GithubAuthProvider();
+            try {
+                await signInWithPopup(auth, provider);
+                showToast('Signed in with GitHub! Redirecting…');
+                setTimeout(() => window.location.href = '../index.html', 1400);
+            } catch (err) {
+                showToast(friendlyError(err.code), true);
+            }
+        });
+
+        // ── REAL-TIME FIELD VALIDATION ──
+        document.getElementById('email').addEventListener('input', () => {
+            const v = document.getElementById('email').value.trim();
+            const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+            document.getElementById('email').classList.toggle('valid', ok && v.length > 0);
+            if (ok) setFieldError('email', 'emailErr', false);
+        });
+        document.getElementById('password').addEventListener('input', () => {
+            const v = document.getElementById('password').value;
+            document.getElementById('password').classList.toggle('valid', v.length >= 6);
+            if (v.length >= 6) setFieldError('password', 'passwordErr', false);
+        });
+
+        // ── TOGGLE PASSWORD VISIBILITY ──
+        document.getElementById('togglePw').addEventListener('click', () => {
+            const inp = document.getElementById('password');
+            const btn = document.getElementById('togglePw');
+            if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+            else { inp.type = 'password'; btn.textContent = ''; }
+        });
+
+        // ── REMEMBER ME CHECKBOX ──
+        document.getElementById('rememberMe').addEventListener('change', function () {
+            document.getElementById('checkBox').textContent = this.checked ? '✓' : '';
+        });
+
+        // ── ENTER KEY SUBMIT ──
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
+        });
+    </script>
+</body>
+
+</html>
