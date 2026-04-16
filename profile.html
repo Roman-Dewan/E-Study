@@ -21,8 +21,8 @@
                 <p>Learn From Home</p>
             </div>
             <nav class="menu">
-                <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-                <a href="course.html"><i class="fa-regular fa-file-lines"></i> Course</a>
+                <a href="dashboard.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                <a href="courses.html"><i class="fa-regular fa-file-lines"></i> Course</a>
                 <a href="resources.html"><i class="fa-regular fa-bookmark"></i> Resources</a>
                 <a href="chat.html"><i class="fa-regular fa-comment-dots"></i> Chat</a>
                 <a href="schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="header-right">
-                    <i class="fa-regular fa-bell"></i>
+                    <i class="fa-regular fa-bell" id="notification-btn"></i>
                     <div class="user-header">
                         <img src="assets/images/blank-profile-picture-.webp" class="user-avatar-small">
                         <span>Roman Dewan</span>
@@ -344,6 +344,48 @@
                         </div>
                         <button type="submit" class="btn-submit">Send Request</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="notification-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <h3>Notifications</h3>
+                <p>Stay updated with the latest news and activities.</p>
+            </div>
+            <div class="notification-modal-content">
+                <div class="notification-list">
+                    <div class="notification-item unread">
+                        <div class="notification-item-icon"><i class="fa-solid fa-gift"></i></div>
+                        <div class="notification-text">
+                            <h4>Special Offer!</h4>
+                            <p>Get 50% off on all new courses. Limited time only!</p>
+                            <span class="time">2 mins ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="notification-text">
+                            <h4>Course Completed</h4>
+                            <p>You have successfully completed the 'Advanced Web Design' course.</p>
+                            <span class="time">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-regular fa-calendar"></i></div>
+                        <div class="notification-text">
+                            <h4>Upcoming Class</h4>
+                            <p>Your 'React JS Fundamentals' class starts in 30 minutes.</p>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

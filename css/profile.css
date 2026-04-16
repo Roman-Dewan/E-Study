@@ -780,6 +780,79 @@ input:checked+.slider:before {
     min-height: 80px;
 }
 
+/* --- NOTIFICATION MODAL --- */
+.notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 350px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.notification-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: #F8F9FA;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.notification-item.unread {
+    background: #E8F4EC;
+    border-left: 3px solid var(--primary-color);
+}
+
+.notification-item-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+
+.notification-text h4 {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.notification-text p {
+    font-size: 13px;
+    color: var(--text-grey);
+    margin-bottom: 5px;
+}
+
+.notification-text .time {
+    font-size: 11px;
+    color: #A0AEC0;
+}
+
+/* Custom scrollbar for notification list */
+.notification-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notification-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+.notification-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
 /* --- RESPONSIVE DESIGN --- */
 
 /* Tablet Styles (768px - 1024px) */

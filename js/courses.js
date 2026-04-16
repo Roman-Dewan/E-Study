@@ -40,7 +40,7 @@ function renderCourses(list) {
 
   // Make cards clickable
   grid.querySelectorAll('.course-card').forEach(card => {
-    card.addEventListener('click', () => window.location.href = 'course-detail.html');
+    card.addEventListener('click', () => window.location.href = 'courses-detail.html');
   });
 }
 

@@ -851,8 +851,7 @@
 
                 await signInWithEmailAndPassword(auth, email, password);
 
-                showToast('Welcome back! Redirecting…');
-                setTimeout(() => window.location.href = '../index.html', 1400);
+                setTimeout(() => window.location.href = 'dashboard.html', 1400);
             } catch (err) {
                 setLoading(false);
                 showToast(friendlyError(err.code), true);
@@ -866,7 +865,7 @@
             try {
                 await signInWithPopup(auth, provider);
                 showToast('Signed in with Google! Redirecting…');
-                setTimeout(() => window.location.href = '../index.html', 1400);
+                setTimeout(() => window.location.href = 'dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }
@@ -878,7 +877,7 @@
             try {
                 await signInWithPopup(auth, provider);
                 showToast('Signed in with GitHub! Redirecting…');
-                setTimeout(() => window.location.href = '../index.html', 1400);
+                setTimeout(() => window.location.href = 'dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }

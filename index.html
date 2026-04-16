@@ -2,292 +2,288 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard – Estudy</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudy – Learn from Home</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/landing.css">
 </head>
 
 <body>
 
-  <!-- ── SIDEBAR ── -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-box">E</div>
-      <div class="brand">Estudy</div>
-      <div class="tagline">Learn from Home</div>
-    </div>
-    <a href="index.html" class="nav-item active">
-      <span class="nav-icon">⊞</span> DashBoard
-    </a>
-    <a href="courses.html" class="nav-item">
-      <span class="nav-icon">📘</span> Course
-    </a>
-    <a href="resources.html" class="nav-item">
-      <span class="nav-icon">📁</span> Resources
-    </a>
-    <a href="chat.html" class="nav-item">
-      <span class="nav-icon">💬</span> Chat
-    </a>
-    <a href="schedule.html" class="nav-item">
-      <span class="nav-icon">📅</span> Schedule
-    </a>
-    <a href="profile.html" class="nav-item">
-      <span class="nav-icon">👤</span> Profile
-    </a>
-    <a href="setting.html" class="nav-item">
-      <span class="nav-icon">⚙️</span> Setting
-    </a>
-  </aside>
-
-  <!-- ── MAIN ── -->
-  <div class="main">
-
-    <!-- TOP BAR -->
-    <div class="topbar">
-      <div class="page-title">Dashboard</div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search...">
-        <span>🔍</span>
-      </div>
-      <div class="topbar-right">
-        <button class="notif-btn">🔔</button>
-        <div class="user-info">
-          <div class="avatar"></div>
-          <span class="user-name">Rifat Hossan</span>
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-box">E</div>
+            <div class="logo-text">Estudy <span>Learn from Home</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-cta">
+            <a href="login.html" class="btn-ghost">Log In</a>
+            <a href="signup.html" class="btn-solid">Get Started</a>
         </div>
-      </div>
-    </div>
+    </nav>
 
-    <!-- CONTENT -->
-    <div class="content">
-
-      <!-- HERO BANNER -->
-      <div class="hero-banner">
-        <div>
-          <h2>Hi Rifat 👋</h2>
-          <p>You have completed 5 lessons in last day. Start your lesson today</p>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="dot"></span> #1 Online Learning Platform</div>
+            <h1>Learn Skills That <span class="highlight">Shape</span> Your Future</h1>
+            <p>Access thousands of expert-led courses, track your progress, and earn certificates that matter — all from
+                the comfort of home.</p>
+            <div class="hero-actions">
+                <a href="courses.html" class="btn-lg btn-green">Browse Courses</a>
+                <a href="#features" class="btn-lg btn-outline">How it works</a>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-num">12k+</div>
+                    <div class="stat-lbl">Active Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">500+</div>
+                    <div class="stat-lbl">Courses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">98%</div>
+                    <div class="stat-lbl">Satisfaction</div>
+                </div>
+            </div>
         </div>
-        <div class="hero-emoji">📚</div>
-      </div>
-
-      <!-- LEFT COLUMN -->
-      <div class="left-col">
-        <div class="row-2">
-
-          <!-- LEARNING TIME -->
-          <div class="card">
-            <div class="card-header">
-              <span class="card-title">LEARNING TIME</span>
-              <div style="display:flex; align-items:center; gap:8px">
-                <span style="font-size:13px; color:var(--muted)">Today</span>
-                <span style="font-size:16px">📅</span>
-              </div>
+        <div class="hero-visual">
+            <div class="floating-card fc-top">
+                <div class="fc-icon">🏆</div>
+                <div>
+                    <div class="fc-label">Your Rating</div>
+                    <div class="fc-value">4.9 <span class="rating-stars">★★★★★</span></div>
+                </div>
             </div>
-            <div class="donut-wrap">
-              <svg class="donut" width="120" height="120" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#f0f0f0" stroke-width="14" />
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#d4f0e2" stroke-width="14"
-                  stroke-dasharray="115 200" />
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#a8e6c7" stroke-width="14" stroke-dasharray="60 200"
-                  stroke-dashoffset="-115" />
-                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="14"
-                  stroke-dasharray="40 200" stroke-dashoffset="-175" />
-              </svg>
+            <div class="hero-card-main">
+                <div class="course-preview">
+                    <div style="text-align:center; padding:20px; color:white;">
+                        <div style="font-size:48px;margin-bottom:8px">📱</div>
+                        <div style="font-weight:700;font-size:16px">Digital Marketing</div>
+                        <div style="opacity:.8;font-size:13px;margin-top:4px">Basic to Advanced</div>
+                    </div>
+                    <div class="play-overlay" style="position:absolute">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="5,3 19,12 5,21" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="course-info">
+                    <h3>Introduction to Digital Marketing</h3>
+                    <div class="course-meta">
+                        <span>📚 15 Lectures</span>
+                        <span>⏱ 5.5 hours</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted)">
+                        <span>65% complete</span><span style="color:var(--green);font-weight:600">In Progress</span>
+                    </div>
+                </div>
             </div>
-            <div class="donut-labels">
-              <div class="donut-label">
-                <div class="donut-dot" style="background:var(--green)"></div>Reading
-              </div>
-              <div class="donut-label">
-                <div class="donut-dot" style="background:#a8e6c7"></div>Video
-              </div>
-              <div class="donut-label">
-                <div class="donut-dot" style="background:#d4f0e2"></div>Writing
-              </div>
-              <div class="donut-label">
-                <div class="donut-dot" style="background:#f0f0f0"></div>Assignment
-              </div>
+            <div class="floating-card fc-bottom">
+                <div class="fc-label">Students enrolled</div>
+                <div class="fc-value" style="margin-top:4px">+2,400 this week</div>
+                <div style="display:flex;margin-top:8px">
+                    <div
+                        style="width:26px;height:26px;border-radius:50%;background:#f093fb;border:2px solid white;margin-right:-8px">
+                    </div>
+                    <div
+                        style="width:26px;height:26px;border-radius:50%;background:#4facfe;border:2px solid white;margin-right:-8px">
+                    </div>
+                    <div style="width:26px;height:26px;border-radius:50%;background:#43e97b;border:2px solid white">
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <!-- MY ACTIVITY -->
-          <div class="card">
-            <div class="card-header">
-              <span class="card-title">My activity</span>
-              <span class="card-action">weekly</span>
-            </div>
-            <div class="activity-chart">
-              <svg viewBox="0 0 260 100" preserveAspectRatio="none" height="100">
-                <defs>
-                  <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="var(--green)" stop-opacity="0.2" />
-                    <stop offset="100%" stop-color="var(--green)" stop-opacity="0" />
-                  </linearGradient>
-                  <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#667eea" stop-opacity="0.2" />
-                    <stop offset="100%" stop-color="#667eea" stop-opacity="0" />
-                  </linearGradient>
-                </defs>
-                <polyline fill="url(#g2)" stroke="#667eea" stroke-width="2.5" stroke-linejoin="round"
-                  stroke-linecap="round" points="0,80 40,60 80,70 120,40 160,55 200,30 240,20 260,25" />
-                <polyline fill="url(#g1)" stroke="var(--green)" stroke-width="2.5" stroke-linejoin="round"
-                  stroke-linecap="round" points="0,90 40,70 80,85 120,55 160,65 200,45 240,15 260,10" />
-                <circle cx="220" cy="38" r="5" fill="var(--green)" />
-                <text x="218" y="28" text-anchor="middle" fill="var(--green)" font-size="11" font-weight="700">4</text>
-                <text x="218" y="55" text-anchor="middle" fill="var(--muted)" font-size="9">Task</text>
-              </svg>
-              <div
-                style="display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-top:4px; padding:0 4px">
-                <span>Sat</span><span>Sun</span><span>Mon</span><span>Tue</span>
-                <span>Wed</span><span style="color:var(--green); font-weight:700">Thu</span><span>Fri</span>
-              </div>
-            </div>
-          </div>
         </div>
+    </section>
 
-        <!-- MY COURSES -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">My Courses</span>
-          </div>
-          <div class="tabs">
-            <div class="tab active">All</div>
-            <div class="tab">Ongoing</div>
-            <div class="tab">Complete</div>
-          </div>
-          <div class="courses-list">
-            <div class="course-item">
-              <div class="course-thumb-sm" style="background:linear-gradient(135deg,#f5a623,#f76b1c)">🎨</div>
-              <div class="course-info">
-                <h4>History of graphic design</h4>
-                <span>By Shakespeare &nbsp; <span class="stars">★★★★★</span> 4.7</span>
-              </div>
-              <a href="courses-detail.html" class="view-btn">view course</a>
+    <!-- FEATURES -->
+    <section class="section" id="features">
+        <div class="section-tag">Why Estudy</div>
+        <div class="section-title">Everything you need to excel</div>
+        <p class="section-sub">Our platform provides all the tools and resources to make your learning journey smooth,
+            effective, and enjoyable.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feat-icon">🎥</div>
+                <h3>HD Video Lectures</h3>
+                <p>Crystal-clear video content from industry experts, available anytime on any device.</p>
             </div>
-            <div class="course-item">
-              <div class="course-thumb-sm" style="background:linear-gradient(135deg,#6a82fb,#fc5c7d)">📱</div>
-              <div class="course-info">
-                <h4>App Design</h4>
-                <span>By Devdas &nbsp; <span class="stars">★★★★★</span> 4.7</span>
-              </div>
-              <a href="course-detail.html" class="view-btn">view course</a>
+            <div class="feature-card">
+                <div class="feat-icon">📊</div>
+                <h3>Progress Tracking</h3>
+                <p>Visual dashboards that show your learning journey, streaks, and achievements at a glance.</p>
             </div>
-            <div class="course-item">
-              <div class="course-thumb-sm" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">🖌️</div>
-              <div class="course-info">
-                <h4>Digital painting</h4>
-                <span>By Tesla &nbsp; <span class="stars">★★★★★</span> 4.7</span>
-              </div>
-              <a href="courses-detail.html" class="view-btn">view course</a>
+            <div class="feature-card">
+                <div class="feat-icon">🏅</div>
+                <h3>Earn Certificates</h3>
+                <p>Receive industry-recognized certificates upon course completion to boost your career.</p>
             </div>
-          </div>
+            <div class="feature-card">
+                <div class="feat-icon">💬</div>
+                <h3>Live Q&A Chat</h3>
+                <p>Connect with mentors and fellow learners through our real-time chat system.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feat-icon">📅</div>
+                <h3>Schedule Management</h3>
+                <p>Set your own pace with smart scheduling tools and deadline reminders.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feat-icon">📱</div>
+                <h3>Learn Anywhere</h3>
+                <p>Fully responsive design so you can learn from phone, tablet, or desktop seamlessly.</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- RIGHT COLUMN -->
-      <div class="right-col">
-
-        <!-- CALENDAR -->
-        <div class="calendar-card">
-          <div class="cal-header">
-            <button class="cal-nav">‹</button>
-            <div class="cal-selects">
-              <select id="calMonth">
-                <option>Jan</option>
-                <option>Feb</option>
-                <option>Mar</option>
-                <option>Apr</option>
-                <option>May</option>
-                <option>Jun</option>
-                <option>Jul</option>
-                <option>Aug</option>
-                <option selected>Sep</option>
-                <option>Oct</option>
-                <option>Nov</option>
-                <option>Dec</option>
-              </select>
-              <select id="calYear">
-                <option>2024</option>
-                <option selected>2025</option>
-                <option>2026</option>
-              </select>
+    <!-- POPULAR COURSES -->
+    <section class="section courses-section">
+        <div class="courses-header">
+            <div>
+                <div class="section-tag">Popular Courses</div>
+                <div class="section-title">Trending This Month</div>
             </div>
-            <button class="cal-nav">›</button>
-          </div>
-          <div class="cal-grid" id="calGrid">
-            <div class="cal-day-label">Su</div>
-            <div class="cal-day-label">Mo</div>
-            <div class="cal-day-label">Tu</div>
-            <div class="cal-day-label">We</div>
-            <div class="cal-day-label">Th</div>
-            <div class="cal-day-label">Fr</div>
-            <div class="cal-day-label">Sa</div>
-          </div>
+            <a href="courses.html" class="btn-ghost">View All Courses</a>
         </div>
-
-        <!-- UPCOMING TASKS -->
-        <div>
-          <div class="task-header">
-            <h3>Upcoming Task</h3>
-            <a href="#" class="see-all">See All</a>
-          </div>
-          <div class="task-filter">
-            <select>
-              <option>Sep</option>
-              <option>Oct</option>
-            </select>
-            <select>
-              <option>2025</option>
-              <option>2026</option>
-            </select>
-          </div>
-          <div class="task-item">
-            <div class="task-icon">⬡</div>
-            <div class="task-info">
-              <h4>Discussion Algorithm</h4>
-              <span>08:00 AM – 15:00 PM</span>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-thumb thumb-ml">🤖</div>
+                <div class="course-body">
+                    <div class="course-cat">Technology</div>
+                    <h3>Machine Learning Basic to Advanced</h3>
+                    <div class="instructor">
+                        <div class="instr-avatar">M</div>
+                        <span class="instr-name">Monkey D Lufy</span>
+                    </div>
+                    <div class="course-meta" style="margin-bottom:0">
+                        <span>📚 15 Lessons</span><span>⏱ 40 Hours</span>
+                    </div>
+                    <div class="course-footer">
+                        <span class="course-price">$49</span>
+                        <span class="course-rating">⭐ 4.9 (280)</span>
+                    </div>
+                </div>
             </div>
-            <div class="task-dots">···</div>
-          </div>
-          <div class="task-item">
-            <div class="task-icon dark">⊞</div>
-            <div class="task-info">
-              <h4>Simple Home Page Design</h4>
-              <span>08:00 AM – 15:00 PM</span>
+            <div class="course-card">
+                <div class="course-thumb thumb-design">🎨</div>
+                <div class="course-body">
+                    <div class="course-cat">Design</div>
+                    <h3>History of Graphic Design</h3>
+                    <div class="instructor">
+                        <div class="instr-avatar" style="background:#4facfe;">D</div>
+                        <span class="instr-name">Darul Ironborne Joe</span>
+                    </div>
+                    <div class="course-meta" style="margin-bottom:0">
+                        <span>📚 15 Lessons</span><span>⏱ 40 Hours</span>
+                    </div>
+                    <div class="course-footer">
+                        <span class="course-price">$39</span>
+                        <span class="course-rating">⭐ 4.7 (152)</span>
+                    </div>
+                </div>
             </div>
-            <div class="task-dots">···</div>
-          </div>
+            <div class="course-card">
+                <div class="course-thumb thumb-dev">💻</div>
+                <div class="course-body">
+                    <div class="course-cat">Development</div>
+                    <h3>Game Development Basic to Advanced</h3>
+                    <div class="instructor">
+                        <div class="instr-avatar" style="background:#43e97b;color:#1a1a2e;">R</div>
+                        <span class="instr-name">Monkey D Rifat</span>
+                    </div>
+                    <div class="course-meta" style="margin-bottom:0">
+                        <span>📚 15 Lessons</span><span>⏱ 40 Hours</span>
+                    </div>
+                    <div class="course-footer">
+                        <span class="course-price">$59</span>
+                        <span class="course-rating">⭐ 4.8 (319)</span>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- PAYMENT HISTORY -->
-        <div>
-          <div class="task-header">
-            <h3>Payment History</h3>
-            <a href="#" class="see-all">See All</a>
-          </div>
-          <div class="payment-item">
-            <span class="payment-name">Machine Learning:</span>
-            <span class="payment-amount">$ 11</span>
-          </div>
-          <div class="payment-item">
-            <span class="payment-name">Wireframe and Prototype:</span>
-            <span class="payment-amount">$ 19</span>
-          </div>
-          <div class="payment-item">
-            <span class="payment-name">Python basic:</span>
-            <span class="payment-amount">$ 10</span>
-          </div>
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Start Learning Today</h2>
+        <p>Join over 12,000 students already improving their skills with Estudy.</p>
+        <a href="signup.html" class="btn-white">Create Free Account</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-box">E</div>
+                    <div class="logo-text" style="color:white">Estudy <span>Learn from Home</span></div>
+                </div>
+                <p>Empowering learners worldwide with quality education accessible from home.</p>
+            </div>
+            <div>
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="courses.html">Browse Courses</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="chat.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
+        <div class="footer-bottom">
+            <p>© 2025 Estudy. All rights reserved.</p>
+            <p>Made with ❤️ for learners everywhere</p>
+        </div>
+    </footer>
 
-    </div><!-- /.content -->
-  </div><!-- /.main -->
+    <!-- Firebase SDK (configure your project) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-  <script src="js/index.js"></script>
+        const firebaseConfig = {
+            apiKey: "API_KEY",
+            authDomain: "AUTH_DOMAIN",
+            projectId: "PROJECT_ID",
+            storageBucket: "STORAGE_BUCKET",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        window._auth = auth;
+    </script>
 </body>
 
 </html>

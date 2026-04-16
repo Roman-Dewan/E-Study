@@ -911,8 +911,7 @@
                 // 4. Send verification email
                 await sendEmailVerification(user);
 
-                showToast('Account created! Check your email to verify. Redirecting…');
-                setTimeout(() => window.location.href = '../dashboard.html', 2000);
+                setTimeout(() => window.location.href = 'dashboard.html', 2000);
             } catch (err) {
                 setLoading(false);
                 showToast(friendlyError(err.code), true);
@@ -928,7 +927,7 @@
                 const nameParts = (user.displayName || 'New User').split(' ');
                 await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User');
                 showToast('Account created with Google! Redirecting…');
-                setTimeout(() => window.location.href = '../dashboard.html', 1400);
+                setTimeout(() => window.location.href = 'dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }
@@ -942,7 +941,7 @@
                 const nameParts = (user.displayName || 'New User').split(' ');
                 await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User');
                 showToast('Account created with GitHub! Redirecting…');
-                setTimeout(() => window.location.href = '../dashboard.html', 1400);
+                setTimeout(() => window.location.href = 'dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }

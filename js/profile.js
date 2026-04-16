@@ -173,3 +173,27 @@ avatarInput.addEventListener('change', (e) => {
         reader.readAsDataURL(file);
     }
 });
+
+// Notification modal functionality
+const notificationBtn = document.getElementById('notification-btn');
+const notificationModal = document.getElementById('notification-modal');
+const notificationCloseBtn = document.getElementById('notification-modal-close');
+
+if (notificationBtn) {
+    notificationBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        notificationModal.classList.add('active');
+    });
+}
+
+if (notificationCloseBtn) {
+    notificationCloseBtn.addEventListener('click', () => {
+        notificationModal.classList.remove('active');
+    });
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === notificationModal) {
+        notificationModal.classList.remove('active');
+    }
+});
