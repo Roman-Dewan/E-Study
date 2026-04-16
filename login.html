@@ -707,10 +707,21 @@
             <!-- Social Login -->
             <div class="social-row">
                 <button class="social-btn" id="googleBtn">
-                    <span class="social-icon"></span> Google
+                    <span class="social-icon">
+                        <svg viewBox="0 0 48 48" width="20" height="20">
+                            <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                            <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                            <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                            <path fill="#1976D2" d="M43.611,20.083L43.611,20.083L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571 c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+                        </svg>
+                    </span> Google
                 </button>
                 <button class="social-btn" id="githubBtn">
-                    <span class="social-icon"></span> GitHub
+                    <span class="social-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.292 24 17.81 24 12.5 24 5.87 18.63.5 12 .5zm-1.85 18.27c-.028.062-.12.08-.21.044-.085-.037-.132-.11-.096-.175.027-.06.122-.078.21-.043.085.038.132.112.096.174zm-.51.123c-.057.054-.155.033-.21-.05-.055-.08-.027-.188.038-.24.053-.054.158-.035.212.046.054.085.02.193-.04.244zm-.675.166c-.057.087-.174.088-.263.005-.088-.08-.095-.205-.035-.292.058-.087.175-.092.26-.01.088.082.098.204.038.297zm-.78.135c-.038.093-.153.11-.258.04-.105-.065-.138-.192-.1-.286.035-.094.15-.118.258-.048.105.07.138.2.1.294zm-1.018.03c-.012.1-.12.164-.24.147-.123-.015-.213-.107-.202-.21.012-.1.12-.17.242-.148.12.02.213.11.2.21zm-1.14-.07c.003.09-.092.17-.21.18-.116.012-.215-.05-.22-.143-.002-.09.093-.17.21-.18.118-.013.212.052.22.144zm-1.13-.115c.01-.09.117-.145.23-.12.117.03.195.123.187.215-.01.092-.115.15-.23.12-.117-.03-.198-.124-.187-.216z"/>
+                        </svg>
+                    </span> GitHub
                 </button>
             </div>
 
@@ -773,24 +784,32 @@
             GithubAuthProvider,
             setPersistence,
             browserLocalPersistence,
-            browserSessionPersistence
+            browserSessionPersistence,
+            onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         // ── YOUR FIREBASE CONFIG ──
         // Replace these with your real values from Firebase Console
         const firebaseConfig = {
-          apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
-          authDomain: "e-study-97072.firebaseapp.com",
-          projectId: "e-study-97072",
-          storageBucket: "e-study-97072.firebasestorage.app",
-          messagingSenderId: "351324744836",
-          appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
-          measurementId: "G-LQYD0NQMWS"
+            apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
+            authDomain: "e-study-97072.firebaseapp.com",
+            projectId: "e-study-97072",
+            storageBucket: "e-study-97072.firebasestorage.app",
+            messagingSenderId: "351324744836",
+            appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
+            measurementId: "G-LQYD0NQMWS"
         };
 
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const auth = getAuth(app);
+
+        // ── REDIRECT IF ALREADY LOGGED IN ──
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
 
         // ── UTILITY HELPERS ──
         function showToast(msg, isError = false) {
@@ -905,7 +924,7 @@
             const inp = document.getElementById('password');
             const btn = document.getElementById('togglePw');
             if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
-            else { inp.type = 'password'; btn.textContent = ''; }
+            else { inp.type = 'password'; btn.textContent = '👁️'; }
         });
 
         // ── REMEMBER ME CHECKBOX ──
