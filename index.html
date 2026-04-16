@@ -270,17 +270,20 @@
     <!-- Firebase SDK (configure your project) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         const firebaseConfig = {
-            apiKey: "API_KEY",
-            authDomain: "AUTH_DOMAIN",
-            projectId: "PROJECT_ID",
-            storageBucket: "STORAGE_BUCKET",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
+          apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
+          authDomain: "e-study-97072.firebaseapp.com",
+          projectId: "e-study-97072",
+          storageBucket: "e-study-97072.firebasestorage.app",
+          messagingSenderId: "351324744836",
+          appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
+          measurementId: "G-LQYD0NQMWS"
         };
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
         const auth = getAuth(app);
         window._auth = auth;
     </script>

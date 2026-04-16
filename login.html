@@ -763,6 +763,8 @@
     <script type="module">
         import { initializeApp }
             from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics }
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
         import {
             getAuth,
             signInWithEmailAndPassword,
@@ -777,15 +779,17 @@
         // ── YOUR FIREBASE CONFIG ──
         // Replace these with your real values from Firebase Console
         const firebaseConfig = {
-            apiKey: "API_KEY",
-            authDomain: "PROJECT_ID.firebaseapp.com",
-            projectId: "PROJECT_ID",
-            storageBucket: "PROJECT_ID.appspot.com",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
+          apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
+          authDomain: "e-study-97072.firebaseapp.com",
+          projectId: "e-study-97072",
+          storageBucket: "e-study-97072.firebasestorage.app",
+          messagingSenderId: "351324744836",
+          appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
+          measurementId: "G-LQYD0NQMWS"
         };
 
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
         const auth = getAuth(app);
 
         // ── UTILITY HELPERS ──

@@ -1,26 +1,28 @@
-// ── FIREBASE (configure and uncomment when ready) ──────────────────────────
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-// import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-// import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// const firebaseConfig = {
-//   apiKey: "API_KEY",
-//   authDomain: "AUTH_DOMAIN",
-//   projectId: "PROJECT_ID",
-//   storageBucket: "STORAGE_BUCKET",
-//   messagingSenderId: "SENDER_ID",
-//   appId: "APP_ID"
-// };
+const firebaseConfig = {
+  apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
+  authDomain: "e-study-97072.firebaseapp.com",
+  projectId: "e-study-97072",
+  storageBucket: "e-study-97072.firebasestorage.app",
+  messagingSenderId: "351324744836",
+  appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
+  measurementId: "G-LQYD0NQMWS"
+};
 
-// const app  = initializeApp(firebaseConfig);
-// const auth = Auth(app);
-// const db   = Firestore(app);
+const app  = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const db   = getFirestore(app);
 
-// onAuthStateChanged(auth, async (user) => {
-//   if (!user) { window.location.href = 'index.html'; return; }
-//   const snap = await getDoc(doc(db, 'users', user.uid));
-//   if (snap.exists()) { /* populate UI */ }
-// });
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = 'index.html'; return; }
+  const snap = await getDoc(doc(db, 'users', user.uid));
+  if (snap.exists()) { /* populate UI */ }
+});
 
 
 // ── CALENDAR ────────────────────────────────────────────────────────────────
