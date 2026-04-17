@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – Estudy</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-box">E</div>
+      <div class="brand">Estudy</div>
+      <div class="tagline">Learn from Home</div>
+    </div>
+    <a href="dashboard.html" class="nav-item active">
+      <span class="nav-icon">⊞</span> DashBoard
+    </a>
+    <a href="courses.html" class="nav-item">
+      <span class="nav-icon">📘</span> Course
+    </a>
+    <a href="resources.html" class="nav-item">
+      <span class="nav-icon">📁</span> Resources
+    </a>
+    <a href="chat.html" class="nav-item">
+      <span class="nav-icon">💬</span> Chat
+    </a>
+    <a href="schedule.html" class="nav-item">
+      <span class="nav-icon">📅</span> Schedule
+    </a>
+    <a href="profile.html" class="nav-item">
+      <span class="nav-icon">👤</span> Profile
+    </a>
+    <a href="setting.html" class="nav-item">
+      <span class="nav-icon">⚙️</span> Setting
+    </a>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="main">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="page-title">Dashboard</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <span>🔍</span>
+      </div>
+      <div class="topbar-right">
+        <button class="notif-btn">🔔</button>
+        <div class="user-info">
+          <div class="avatar"></div>
+          <span class="user-name">Rifat Hossan</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- HERO BANNER -->
+      <div class="hero-banner">
+        <div>
+          <h2>Hi Rifat 👋</h2>
+          <p>You have completed 5 lessons in last day. Start your lesson today</p>
+        </div>
+        <div class="hero-emoji">📚</div>
+      </div>
+
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+        <div class="row-2">
+
+          <!-- LEARNING TIME -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">LEARNING TIME</span>
+              <div style="display:flex; align-items:center; gap:8px">
+                <span id="learningDateLabel" style="font-size:13px; color:var(--muted)">Today</span>
+                <span style="font-size:16px">📅</span>
+              </div>
+            </div>
+            <div class="donut-wrap">
+              <svg class="donut" width="120" height="120" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#f0f0f0" stroke-width="14" />
+                <circle id="donutWriting" cx="60" cy="60" r="50" fill="none" stroke="#d4f0e2" stroke-width="14"
+                  stroke-dasharray="115 200" />
+                <circle id="donutVideo" cx="60" cy="60" r="50" fill="none" stroke="#a8e6c7" stroke-width="14" stroke-dasharray="60 200"
+                  stroke-dashoffset="-115" />
+                <circle id="donutReading" cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="14"
+                  stroke-dasharray="40 200" stroke-dashoffset="-175" />
+              </svg>
+            </div>
+            <div class="donut-labels">
+              <div class="donut-label">
+                <div class="donut-dot" style="background:var(--green)"></div><span id="labelReading">Reading</span>
+              </div>
+              <div class="donut-label">
+                <div class="donut-dot" style="background:#a8e6c7"></div><span id="labelVideo">Video</span>
+              </div>
+              <div class="donut-label">
+                <div class="donut-dot" style="background:#d4f0e2"></div><span id="labelWriting">Writing</span>
+              </div>
+              <div class="donut-label">
+                <div class="donut-dot" style="background:#f0f0f0"></div><span id="labelAssignment">Assignment</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MY ACTIVITY -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">My activity</span>
+              <span id="activityPeriodLabel" class="card-action">weekly</span>
+            </div>
+            <div class="activity-chart">
+              <svg viewBox="0 0 260 100" preserveAspectRatio="none" height="100">
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="var(--green)" stop-opacity="0.2" />
+                    <stop offset="100%" stop-color="var(--green)" stop-opacity="0" />
+                  </linearGradient>
+                  <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#667eea" stop-opacity="0.2" />
+                    <stop offset="100%" stop-color="#667eea" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <polyline id="activityLine2" fill="url(#g2)" stroke="#667eea" stroke-width="2.5" stroke-linejoin="round"
+                  stroke-linecap="round" points="0,80 40,60 80,70 120,40 160,55 200,30 240,20 260,25" />
+                <polyline id="activityLine1" fill="url(#g1)" stroke="var(--green)" stroke-width="2.5" stroke-linejoin="round"
+                  stroke-linecap="round" points="0,90 40,70 80,85 120,55 160,65 200,45 240,15 260,10" />
+                <circle id="activityDot" cx="220" cy="38" r="5" fill="var(--green)" />
+                <text id="activityDotText" x="218" y="28" text-anchor="middle" fill="var(--green)" font-size="11" font-weight="700">4</text>
+                <text id="activityDotLabel" x="218" y="55" text-anchor="middle" fill="var(--muted)" font-size="9">Task</text>
+              </svg>
+              <div id="activityDayLabels"
+                style="display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-top:4px; padding:0 4px">
+                <span>Sat</span><span>Sun</span><span>Mon</span><span>Tue</span>
+                <span>Wed</span><span style="color:var(--green); font-weight:700">Thu</span><span>Fri</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MY COURSES -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">My Courses</span>
+          </div>
+          <div class="tabs">
+            <div class="tab active">All</div>
+            <div class="tab">Ongoing</div>
+            <div class="tab">Complete</div>
+          </div>
+          <div class="courses-list">
+            <div class="course-item">
+              <div class="course-thumb-sm" style="background:linear-gradient(135deg,#f5a623,#f76b1c)">🎨</div>
+              <div class="course-info">
+                <h4>History of graphic design</h4>
+                <span>By Shakespeare &nbsp; <span class="stars">★★★★★</span> 4.7</span>
+              </div>
+              <a href="courses-detail.html" class="view-btn">view course</a>
+            </div>
+            <div class="course-item">
+              <div class="course-thumb-sm" style="background:linear-gradient(135deg,#6a82fb,#fc5c7d)">📱</div>
+              <div class="course-info">
+                <h4>App Design</h4>
+                <span>By Devdas &nbsp; <span class="stars">★★★★★</span> 4.7</span>
+              </div>
+              <a href="courses-detail.html" class="view-btn">view course</a>
+            </div>
+            <div class="course-item">
+              <div class="course-thumb-sm" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">🖌️</div>
+              <div class="course-info">
+                <h4>Digital painting</h4>
+                <span>By Tesla &nbsp; <span class="stars">★★★★★</span> 4.7</span>
+              </div>
+              <a href="courses-detail.html" class="view-btn">view course</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- CALENDAR -->
+        <div class="calendar-card">
+          <div class="cal-header">
+            <button class="cal-nav">‹</button>
+            <div class="cal-selects">
+              <select id="calMonth">
+                <option>Jan</option>
+                <option>Feb</option>
+                <option>Mar</option>
+                <option>Apr</option>
+                <option>May</option>
+                <option>Jun</option>
+                <option>Jul</option>
+                <option>Aug</option>
+                <option selected>Sep</option>
+                <option>Oct</option>
+                <option>Nov</option>
+                <option>Dec</option>
+              </select>
+              <select id="calYear">
+                <option>2024</option>
+                <option selected>2025</option>
+                <option>2026</option>
+              </select>
+            </div>
+            <button class="cal-nav">›</button>
+          </div>
+          <div class="cal-grid" id="calGrid">
+            <div class="cal-day-label">Su</div>
+            <div class="cal-day-label">Mo</div>
+            <div class="cal-day-label">Tu</div>
+            <div class="cal-day-label">We</div>
+            <div class="cal-day-label">Th</div>
+            <div class="cal-day-label">Fr</div>
+            <div class="cal-day-label">Sa</div>
+          </div>
+        </div>
+
+        <!-- UPCOMING TASKS -->
+        <div>
+          <div class="task-header">
+            <h3>Upcoming Task</h3>
+            <a href="#" class="see-all">See All</a>
+          </div>
+          <div class="task-filter">
+            <select>
+              <option>Sep</option>
+              <option>Oct</option>
+            </select>
+            <select>
+              <option>2025</option>
+              <option>2026</option>
+            </select>
+          </div>
+          <div class="task-item">
+            <div class="task-icon">⬡</div>
+            <div class="task-info">
+              <h4>Discussion Algorithm</h4>
+              <span>08:00 AM – 15:00 PM</span>
+            </div>
+            <div class="task-dots">···</div>
+          </div>
+          <div class="task-item">
+            <div class="task-icon dark">⊞</div>
+            <div class="task-info">
+              <h4>Simple Home Page Design</h4>
+              <span>08:00 AM – 15:00 PM</span>
+            </div>
+            <div class="task-dots">···</div>
+          </div>
+        </div>
+
+        <!-- PAYMENT HISTORY -->
+        <div>
+          <div class="task-header">
+            <h3>Payment History</h3>
+            <a href="#" class="see-all">See All</a>
+          </div>
+          <div class="payment-item">
+            <span class="payment-name">Machine Learning:</span>
+            <span class="payment-amount">$ 11</span>
+          </div>
+          <div class="payment-item">
+            <span class="payment-name">Wireframe and Prototype:</span>
+            <span class="payment-amount">$ 19</span>
+          </div>
+          <div class="payment-item">
+            <span class="payment-name">Python basic:</span>
+            <span class="payment-amount">$ 10</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.content -->
+  </div><!-- /.main -->
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+
+</html>

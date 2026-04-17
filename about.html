@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – Estudy</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --green: #3DBE7B;
+      --green-dark: #2da066;
+      --green-light: #e8f8f0;
+      --bg: #f5f7f2;
+      --white: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-box {
+      width: 44px;
+      height: 44px;
+      background: var(--green);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      color: white;
+      font-size: 22px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .logo-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 15px;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green);
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-ghost {
+      padding: 10px 24px;
+      border: 2px solid var(--green);
+      border-radius: 50px;
+      color: var(--green);
+      font-weight: 600;
+      font-size: 14px;
+      background: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s;
+    }
+
+    .btn-ghost:hover {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-solid {
+      padding: 10px 24px;
+      border: 2px solid var(--green);
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      background: var(--green);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s;
+    }
+
+    .btn-solid:hover {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+    }
+
+    /* HERO */
+    .about-hero {
+      padding: 100px 60px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61, 190, 123, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .about-hero h1 span {
+      color: var(--green);
+    }
+
+    .about-hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+    }
+
+    /* STATS BAND */
+    .stats-band {
+      background: var(--white);
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding: 48px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--green);
+      display: block;
+    }
+
+    .stat-lbl {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* MISSION */
+    .section {
+      padding: 90px 60px;
+    }
+
+    .section-tag {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .mission-visual {
+      background: linear-gradient(135deg, var(--green) 0%, #1a8f56 100%);
+      border-radius: 28px;
+      padding: 52px 44px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-visual::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .mission-visual::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -40px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+    }
+
+    .mission-icon {
+      font-size: 52px;
+      margin-bottom: 24px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-visual h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-visual p {
+      font-size: 15px;
+      opacity: .85;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-content p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .mission-points {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .point {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .point-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .point-text h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .point-text p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* VALUES */
+    .values-section {
+      background: var(--white);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .value-card {
+      border: 2px solid transparent;
+      border-radius: 20px;
+      padding: 36px 28px;
+      background: var(--bg);
+      transition: all .3s;
+      cursor: default;
+    }
+
+    .value-card:hover {
+      border-color: var(--green);
+      background: var(--white);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(61, 190, 123, 0.1);
+    }
+
+    .value-icon {
+      font-size: 36px;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .value-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* TEAM */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .team-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      border: 1.5px solid #f0f0f0;
+      transition: all .3s;
+    }
+
+    .team-card:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      border-color: var(--green);
+    }
+
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: white;
+    }
+
+    .team-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .team-role {
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .team-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* TIMELINE */
+    .timeline-section {
+      background: var(--white);
+    }
+
+    .timeline {
+      margin-top: 56px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--green-light);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 48px;
+      align-items: center;
+    }
+
+    .timeline-item:nth-child(even) .tl-content {
+      order: 2;
+    }
+
+    .timeline-item:nth-child(even) .tl-spacer {
+      order: 1;
+    }
+
+    .tl-content {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 1.5px solid #eee;
+      position: relative;
+    }
+
+    .tl-content::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      background: var(--green);
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px var(--green-light);
+      transform: translateY(-50%);
+    }
+
+    .timeline-item:nth-child(odd) .tl-content::after {
+      right: -38px;
+    }
+
+    .timeline-item:nth-child(even) .tl-content::after {
+      left: -38px;
+    }
+
+    .tl-year {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .tl-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tl-content p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green) 0%, #1a8f56 100%);
+      padding: 90px 60px;
+      text-align: center;
+      color: white;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      opacity: .85;
+      margin-bottom: 36px;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--green);
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all .25s;
+      display: inline-block;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 60px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand p {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    footer h4 {
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer ul li {
+      margin-bottom: 10px;
+    }
+
+    footer ul a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .2s;
+    }
+
+    footer ul a:hover {
+      color: var(--green);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+    }
+
+    .footer-logo-box {
+      width: 44px;
+      height: 44px;
+      background: var(--green);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      color: white;
+      font-size: 22px;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 900px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .about-hero,
+      .section {
+        padding: 60px 24px;
+      }
+
+      .stats-band {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 40px 24px;
+      }
+
+      .mission-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline::before {
+        display: none;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .timeline-item:nth-child(even) .tl-content {
+        order: 1;
+      }
+
+      .tl-content::after {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      footer {
+        padding: 40px 24px;
+      }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .about-hero .hero-tag {
+      animation: fadeUp .5s ease both;
+    }
+
+    .about-hero h1 {
+      animation: fadeUp .6s .1s ease both;
+    }
+
+    .about-hero p {
+      animation: fadeUp .6s .2s ease both;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-box">E</div>
+      <div class="logo-text">Estudy <span>Learn from Home</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn-ghost">Log In</a>
+      <a href="signup.html" class="btn-solid">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="hero-tag">🌱 Our Story</div>
+    <h1>Learning Should Be <span>Accessible</span><br>to Everyone</h1>
+    <p>Estudy was born from a simple belief — that quality education shouldn't be limited by geography, schedule, or
+      budget. We're here to change that.</p>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-band">
+    <div class="stat-item">
+      <span class="stat-num">12k+</span>
+      <div class="stat-lbl">Active Students</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">500+</span>
+      <div class="stat-lbl">Expert Courses</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">120+</span>
+      <div class="stat-lbl">World-Class Instructors</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">98%</span>
+      <div class="stat-lbl">Student Satisfaction</div>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <section class="section">
+    <div class="mission-grid">
+      <div class="mission-visual">
+        <span class="mission-icon">🎯</span>
+        <h3>Our Mission</h3>
+        <p>To democratize education by providing world-class online learning experiences that empower individuals to
+          grow, transform, and succeed — regardless of where they are in the world.</p>
+      </div>
+      <div class="mission-content">
+        <div class="section-tag">What Drives Us</div>
+        <h2 class="section-title">Built for the<br>Modern Learner</h2>
+        <p>We understand that life doesn't pause for learning. That's why Estudy is designed around your schedule, your
+          goals, and your pace — not the other way around.</p>
+        <p>From beginners taking their first steps to professionals sharpening advanced skills, our platform meets every
+          learner exactly where they are.</p>
+        <div class="mission-points">
+          <div class="point">
+            <div class="point-icon">🌍</div>
+            <div class="point-text">
+              <h4>Global Community</h4>
+              <p>Connect with learners and mentors from over 80 countries around the world.</p>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-icon">🏅</div>
+            <div class="point-text">
+              <h4>Recognized Certificates</h4>
+              <p>Earn credentials that are respected by top employers and institutions.</p>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-icon">⚡</div>
+            <div class="point-text">
+              <h4>Always Up to Date</h4>
+              <p>Our courses are continuously updated to reflect the latest industry trends.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="section values-section">
+    <div style="text-align:center; margin-bottom: 8px;">
+      <div class="section-tag" style="display:inline-block;">Our Values</div>
+    </div>
+    <h2 class="section-title" style="text-align:center;">What We Stand For</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">💡</span>
+        <h3>Innovation First</h3>
+        <p>We constantly push boundaries to bring the most effective and engaging learning tools to our students.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🤝</span>
+        <h3>Community Driven</h3>
+        <p>Learning is better together. We foster a supportive environment where students and instructors grow as one.
+        </p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🔓</span>
+        <h3>Open Access</h3>
+        <p>We believe knowledge should be accessible. Flexible pricing and free resources ensure no one is left behind.
+        </p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">⭐</span>
+        <h3>Quality Above All</h3>
+        <p>Every course, every instructor, every feature is held to the highest standard before it reaches our students.
+        </p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🔒</span>
+        <h3>Trust & Transparency</h3>
+        <p>We operate with full transparency — honest pricing, honest reviews, and honest communication always.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">📈</span>
+        <h3>Lifelong Growth</h3>
+        <p>Learning doesn't stop at graduation. We're committed to supporting your journey at every stage of life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section">
+    <div class="section-tag">The People Behind Estudy</div>
+    <div
+      style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:0;">
+      <h2 class="section-title" style="margin-bottom:0;">Meet Our Team</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background: linear-gradient(135deg,#3DBE7B,#1a8f56);">R</div>
+        <h3>Rifat Hossan</h3>
+        <span class="team-role">Founder & CEO</span>
+        <p>Visionary educator with 10+ years building online learning platforms across Southeast Asia.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background: linear-gradient(135deg,#4facfe,#00f2fe);">D</div>
+        <h3>Darul Ironborne</h3>
+        <span class="team-role">Head of Design</span>
+        <p>Award-winning designer passionate about creating experiences that are as beautiful as they are functional.
+        </p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background: linear-gradient(135deg,#f093fb,#f5576c);">M</div>
+        <h3>Monkey D. Lufy</h3>
+        <span class="team-role">Lead Instructor</span>
+        <p>Machine learning expert who believes anyone can master technology with the right guidance.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background: linear-gradient(135deg,#f5a623,#ee0979);">T</div>
+        <h3>Tarek Rahman</h3>
+        <span class="team-role">Head of Content</span>
+        <p>Former professor turned e-learning specialist, curating courses that genuinely transform careers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section timeline-section">
+    <div style="text-align:center;">
+      <div class="section-tag" style="display:inline-block;">Our Journey</div>
+      <h2 class="section-title">How We Got Here</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="tl-year">2020</div>
+          <h3>The Idea Sparks</h3>
+          <p>During the global pandemic, our founders realized how broken traditional education was. Estudy was born in
+            a small apartment with a big dream.</p>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-spacer"></div>
+        <div class="tl-content">
+          <div class="tl-year">2021</div>
+          <h3>First 1,000 Students</h3>
+          <p>We launched our beta with 12 courses and reached our first thousand students in just 3 months — all through
+            word of mouth.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="tl-year">2022</div>
+          <h3>100+ Courses & Seed Funding</h3>
+          <p>We expanded our catalog, brought on world-class instructors, and secured our first round of funding to
+            scale the platform.</p>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-spacer"></div>
+        <div class="tl-content">
+          <div class="tl-year">2025</div>
+          <h3>12,000+ Learners Worldwide</h3>
+          <p>Today, Estudy serves students in over 80 countries with 500+ courses and a thriving community of passionate
+            learners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to Start Learning?</h2>
+    <p>Join over 12,000 students already transforming their lives with Estudy.</p>
+    <a href="signup.html" class="btn-white">Create Free Account</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="footer-logo-box">E</div>
+          <div class="logo-text" style="color:white">Estudy <span>Learn from Home</span></div>
+        </div>
+        <p>Empowering learners worldwide with quality education accessible from home.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="courses.html">Browse Courses</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="resources.html">Resource</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="chat.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Estudy. All rights reserved.</p>
+      <p>Made with ❤️ for learners everywhere</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
