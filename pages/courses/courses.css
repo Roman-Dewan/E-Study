@@ -18,7 +18,7 @@ body {
 }
 .app-container {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: var(--sidebar-width) 1fr;
     min-height: 100vh;
 }
 
@@ -121,7 +121,7 @@ body {
 
 .courses-grid { 
     display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* Forced 3 columns */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
     gap: 25px; 
     width: 100%;
 }
