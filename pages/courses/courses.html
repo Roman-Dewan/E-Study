@@ -8,30 +8,14 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
   <link rel="stylesheet" href="courses.css">
-
 </head>
 
-<body>
-
+  <div class="app-container">
   <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-box">E</div>
-      <div class="brand">Estudy</div>
-      <div class="tagline">Learn from Home</div>
-    </div>
-    <a href="../dashboard/dashboard.html" class="nav-item"><span class="nav-icon">⊞</span> DashBoard</a>
-
-    <a href="courses.html" class="nav-item active"><span class="nav-icon">📘</span> Course</a>
-    <a href="../resources/resources.html" class="nav-item"><span class="nav-icon">📁</span> Resources</a>
-    <a href="../chat/chat.html" class="nav-item"><span class="nav-icon">💬</span> Chat</a>
-    <a href="../schedule/schedule.html" class="nav-item"><span class="nav-icon">📅</span> Schedule</a>
-    <a href="../profile/profile.html" class="nav-item"><span class="nav-icon">👤</span> Profile</a>
-    <a href="../setting/setting.html" class="nav-item"><span class="nav-icon">⚙️</span> Setting</a>
-
-
-  </aside>
+  <div id="sidebar-placeholder"></div>
 
   <div class="main">
     <div class="topbar">
@@ -78,8 +62,6 @@
     </div>
   </div>
 
-
-
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -93,8 +75,9 @@
     };
     // const app = initializeApp(firebaseConfig);
     // const db = getFirestore(app);
-    // Load courses from Firestore: const snap = await getDocs(collection(db, 'courses'));
   </script>
+  </div> <!-- End app-container -->
+  <script src="../../js/sidebar.js"></script>
   <script src="courses.js"></script>
 </body>
 

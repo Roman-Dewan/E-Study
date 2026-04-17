@@ -8,26 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="courses-detail.css">
 </head>
 
 <body>
     <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">E</div>
-                <h2>Estudy</h2>
-            </div>
-            <nav class="menu">
-                <a href="../dashboard/dashboard.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-                <a href="courses.html" class="active"><i class="fa-regular fa-file-lines"></i> Course</a>
-                <a href="../resources/resources.html"><i class="fa-regular fa-bookmark"></i> Resources</a>
-                <a href="../chat/chat.html"><i class="fa-regular fa-comment-dots"></i> Chat</a>
-                <a href="../schedule/schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
-                <a href="../profile/profile.html"><i class="fa-regular fa-user"></i> Profile</a>
-                <a href="../setting/setting.html"><i class="fa-solid fa-gear"></i> Setting</a>
-            </nav>
-        </aside>
+        <div id="sidebar-placeholder"></div>
 
         <main class="main-content">
             <header class="top-header">
@@ -96,6 +83,7 @@
             </div>
         </aside>
     </div>
+    <script src="../../js/sidebar.js"></script>
 </body>
 
 </html>
