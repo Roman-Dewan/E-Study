@@ -21,13 +21,13 @@
         </a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="resources.html">Resources</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="pages/courses/courses.html">Courses</a></li>
+            <li><a href="pages/resources/resources.html">Resources</a></li>
+            <li><a href="pages/about/about.html">About</a></li>
         </ul>
         <div class="nav-cta">
-            <a href="login.html" class="btn-ghost">Log In</a>
-            <a href="signup.html" class="btn-solid">Get Started</a>
+            <a href="features/auth/login.html" class="btn-ghost">Log In</a>
+            <a href="features/auth/signup.html" class="btn-solid">Get Started</a>
         </div>
     </nav>
 
@@ -39,7 +39,7 @@
             <p>Access thousands of expert-led courses, track your progress, and earn certificates that matter — all from
                 the comfort of home.</p>
             <div class="hero-actions">
-                <a href="courses.html" class="btn-lg btn-green">Browse Courses</a>
+                <a href="pages/courses/courses.html" class="btn-lg btn-green">Browse Courses</a>
                 <a href="#features" class="btn-lg btn-outline">How it works</a>
             </div>
             <div class="stats">
@@ -156,7 +156,7 @@
                 <div class="section-tag">Popular Courses</div>
                 <div class="section-title">Trending This Month</div>
             </div>
-            <a href="courses.html" class="btn-ghost">View All Courses</a>
+            <a href="pages/courses/courses.html" class="btn-ghost">View All Courses</a>
         </div>
         <div class="courses-grid">
             <div class="course-card">
@@ -220,7 +220,7 @@
     <section class="cta-section">
         <h2>Start Learning Today</h2>
         <p>Join over 12,000 students already improving their skills with Estudy.</p>
-        <a href="signup.html" class="btn-white">Create Free Account</a>
+        <a href="features/auth/signup.html" class="btn-white">Create Free Account</a>
     </section>
 
     <!-- FOOTER -->
@@ -236,19 +236,19 @@
             <div>
                 <h4>Platform</h4>
                 <ul>
-                    <li><a href="courses.html">Browse Courses</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="pages/courses/courses.html">Browse Courses</a></li>
+                    <li><a href="pages/dashboard/dashboard.html">Dashboard</a></li>
+                    <li><a href="pages/resources/resources.html">Resources</a></li>
+                    <li><a href="pages/schedule/schedule.html">Schedule</a></li>
                 </ul>
             </div>
             <div>
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="pages/about/about.html">About Us</a></li>
                     <li><a href="#">Careers</a></li>
                     <li><a href="#">Blog</a></li>
-                    <li><a href="chat.html">Contact</a></li>
+                    <li><a href="pages/chat/chat.html">Contact</a></li>
                 </ul>
             </div>
             <div>
@@ -290,7 +290,7 @@
         // ── REDIRECT IF ALREADY LOGGED IN ──
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'pages/dashboard/dashboard.html';
             }
         });
     </script>

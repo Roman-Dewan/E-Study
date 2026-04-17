@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In â€“ Estudy</title>
+    <title>Log In GÇô Estudy</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
-        /* â”€â”€ RESET & VARIABLES â”€â”€ */
+        /* GöÇGöÇ RESET & VARIABLES GöÇGöÇ */
         *,
         *::before,
         *::after {
@@ -42,7 +42,7 @@
             overflow: hidden;
         }
 
-        /* â”€â”€ LEFT DECORATIVE PANEL â”€â”€ */
+        /* GöÇGöÇ LEFT DECORATIVE PANEL GöÇGöÇ */
         .left-panel {
             width: 45%;
             background: var(--panel-left);
@@ -271,7 +271,7 @@
             width: 65%;
         }
 
-        /* â”€â”€ RIGHT FORM PANEL â”€â”€ */
+        /* GöÇGöÇ RIGHT FORM PANEL GöÇGöÇ */
         .right-panel {
             flex: 1;
             display: flex;
@@ -628,7 +628,7 @@
             color: var(--text);
         }
 
-        /* â”€â”€ RESPONSIVE â”€â”€ */
+        /* GöÇGöÇ RESPONSIVE GöÇGöÇ */
         @media(max-width:768px) {
             .left-panel {
                 display: none;
@@ -648,7 +648,7 @@
 
 <body>
 
-    <!-- â•â• LEFT PANEL â•â• -->
+    <!-- GòÉGòÉ LEFT PANEL GòÉGòÉ -->
     <div class="left-panel">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -683,7 +683,7 @@
         <div class="float-card">
             <div class="fc-label">Continue learning</div>
             <div class="fc-course">
-                <div class="fc-icon-box">ğŸ¨</div>
+                <div class="fc-icon-box">=ƒÄ¿</div>
                 <div>
                     <div class="fc-title">Graphic Design</div>
                     <div class="fc-sub">65% complete</div>
@@ -695,7 +695,7 @@
         </div>
     </div>
 
-    <!-- â•â• RIGHT PANEL â€” LOGIN FORM â•â• -->
+    <!-- GòÉGòÉ RIGHT PANEL GÇö LOGIN FORM GòÉGòÉ -->
     <div class="right-panel">
         <div class="form-box">
 
@@ -731,15 +731,15 @@
             <div class="field">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
-                <span class="field-icon">âœ‰ï¸</span>
+                <span class="field-icon">G£ën+Å</span>
                 <div class="field-error" id="emailErr">Please enter a valid email address.</div>
             </div>
 
             <div class="field">
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
-                <span class="field-icon">ğŸ”’</span>
-                <button class="toggle-pw" id="togglePw" type="button" aria-label="Toggle password">ğŸ‘ï¸</button>
+                <span class="field-icon">=ƒöÆ</span>
+                <button class="toggle-pw" id="togglePw" type="button" aria-label="Toggle password">=ƒæün+Å</button>
                 <div class="field-error" id="passwordErr">Password must be at least 6 characters.</div>
             </div>
 
@@ -766,11 +766,11 @@
 
     <!-- Toast -->
     <div class="toast" id="toast">
-        <span class="toast-icon" id="toastIcon">âœ…</span>
+        <span class="toast-icon" id="toastIcon">G£à</span>
         <span class="toast-msg" id="toastMsg">Welcome back!</span>
     </div>
 
-    <!-- â•â• FIREBASE AUTH JAVASCRIPT â•â• -->
+    <!-- GòÉGòÉ FIREBASE AUTH JAVASCRIPT GòÉGòÉ -->
     <script type="module">
         import { initializeApp }
             from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -788,7 +788,7 @@
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // â”€â”€ YOUR FIREBASE CONFIG â”€â”€
+        // GöÇGöÇ YOUR FIREBASE CONFIG GöÇGöÇ
         // Replace these with your real values from Firebase Console
         const firebaseConfig = {
             apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
@@ -804,18 +804,18 @@
         const analytics = getAnalytics(app);
         const auth = getAuth(app);
 
-        // â”€â”€ REDIRECT IF ALREADY LOGGED IN â”€â”€
+        // GöÇGöÇ REDIRECT IF ALREADY LOGGED IN GöÇGöÇ
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                window.location.href = 'dashboard.html';
+                window.location.href = '../../pages/dashboard/dashboard.html';
             }
         });
 
-        // â”€â”€ UTILITY HELPERS â”€â”€
+        // GöÇGöÇ UTILITY HELPERS GöÇGöÇ
         function showToast(msg, isError = false) {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').textContent = msg;
-            document.getElementById('toastIcon').textContent = isError ? 'âŒ' : 'âœ…';
+            document.getElementById('toastIcon').textContent = isError ? 'G¥î' : 'G£à';
             t.classList.toggle('error', isError);
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3500);
@@ -845,7 +845,7 @@
             return ok;
         }
 
-        // â”€â”€ FIREBASE ERROR MESSAGES â”€â”€
+        // GöÇGöÇ FIREBASE ERROR MESSAGES GöÇGöÇ
         function friendlyError(code) {
             const map = {
                 'auth/user-not-found': 'No account found with this email.',
@@ -859,7 +859,7 @@
             return map[code] || 'Something went wrong. Please try again.';
         }
 
-        // â”€â”€ EMAIL / PASSWORD LOGIN â”€â”€
+        // GöÇGöÇ EMAIL / PASSWORD LOGIN GöÇGöÇ
         document.getElementById('loginBtn').addEventListener('click', async () => {
             if (!validate()) return;
             setLoading(true);
@@ -874,39 +874,39 @@
 
                 await signInWithEmailAndPassword(auth, email, password);
 
-                setTimeout(() => window.location.href = 'dashboard.html', 1400);
+                setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 setLoading(false);
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // â”€â”€ GOOGLE LOGIN â”€â”€
+        // GöÇGöÇ GOOGLE LOGIN GöÇGöÇ
         document.getElementById('googleBtn').addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
             provider.setCustomParameters({ prompt: 'select_account' });
             try {
                 await signInWithPopup(auth, provider);
-                showToast('Signed in with Google! Redirectingâ€¦');
-                setTimeout(() => window.location.href = 'dashboard.html', 1400);
+                showToast('Signed in with Google! RedirectingGÇª');
+                setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // â”€â”€ GITHUB LOGIN â”€â”€
+        // GöÇGöÇ GITHUB LOGIN GöÇGöÇ
         document.getElementById('githubBtn').addEventListener('click', async () => {
             const provider = new GithubAuthProvider();
             try {
                 await signInWithPopup(auth, provider);
-                showToast('Signed in with GitHub! Redirectingâ€¦');
-                setTimeout(() => window.location.href = 'dashboard.html', 1400);
+                showToast('Signed in with GitHub! RedirectingGÇª');
+                setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // â”€â”€ REAL-TIME FIELD VALIDATION â”€â”€
+        // GöÇGöÇ REAL-TIME FIELD VALIDATION GöÇGöÇ
         document.getElementById('email').addEventListener('input', () => {
             const v = document.getElementById('email').value.trim();
             const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -919,20 +919,20 @@
             if (v.length >= 6) setFieldError('password', 'passwordErr', false);
         });
 
-        // â”€â”€ TOGGLE PASSWORD VISIBILITY â”€â”€
+        // GöÇGöÇ TOGGLE PASSWORD VISIBILITY GöÇGöÇ
         document.getElementById('togglePw').addEventListener('click', () => {
             const inp = document.getElementById('password');
             const btn = document.getElementById('togglePw');
-            if (inp.type === 'password') { inp.type = 'text'; btn.textContent = 'ğŸ™ˆ'; }
-            else { inp.type = 'password'; btn.textContent = 'ğŸ‘ï¸'; }
+            if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '=ƒÖê'; }
+            else { inp.type = 'password'; btn.textContent = '=ƒæün+Å'; }
         });
 
-        // â”€â”€ REMEMBER ME CHECKBOX â”€â”€
+        // GöÇGöÇ REMEMBER ME CHECKBOX GöÇGöÇ
         document.getElementById('rememberMe').addEventListener('change', function () {
-            document.getElementById('checkBox').textContent = this.checked ? 'âœ“' : '';
+            document.getElementById('checkBox').textContent = this.checked ? 'G£ô' : '';
         });
 
-        // â”€â”€ ENTER KEY SUBMIT â”€â”€
+        // GöÇGöÇ ENTER KEY SUBMIT GöÇGöÇ
         document.addEventListener('keydown', e => {
             if (e.key === 'Enter') document.getElementById('loginBtn').click();
         });
