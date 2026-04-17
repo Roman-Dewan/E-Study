@@ -24,17 +24,17 @@ function renderCourses(list) {
     <div class="course-card">
       <div class="card-menu">···</div>
       <div class="course-icon-wrap" style="background:${c.grad}">${c.icon}</div>
-      <h3>${c.title}</h3>
+      <h3 class="course-title">${c.title}</h3>
       <div class="instructor">
         <div class="instr-avatar" style="background:${avatarColors[i % avatarColors.length]}">${c.instructor[0]}</div>
         <span class="instr-name">${c.instructor}</span>
       </div>
       <div class="course-meta">
-        <div class="meta-item">📚 ${c.lessons} Lesson</div>
-        <div class="meta-item">⏱ ${c.hours}Hours</div>
+        <span class="meta-item"><i class="fa-solid fa-layer-group" style="color:#A78BFA"></i> ${c.lessons} Lesson</span>
+        <span class="meta-item"><i class="fa-regular fa-clock"></i> ${c.hours}Hours</span>
       </div>
       <div class="progress-bar"><div class="progress-fill" style="width:${c.progress}%"></div></div>
-      ${c.status === 'completed' ? '<div class="status-badge completed">✅ Completed</div>' : ''}
+      ${c.status === 'completed' ? '<div class="status-badge"><i class="fa-solid fa-square-check"></i> Completed</div>' : ''}
     </div>
   `).join('');
 
