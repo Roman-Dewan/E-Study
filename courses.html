@@ -1,102 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudy - My Courses</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/courses.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses – Estudy</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/courses.css">
+
 </head>
-<body class="full-width-page"> <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">E</div>
-                <h2>Estudy</h2>
-            </div>
-            <nav class="menu">
-                <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-                <a href="courses.html" class="active"><i class="fa-regular fa-file-lines"></i> Course</a>
-                <a href="resources.html"><i class="fa-regular fa-bookmark"></i> Resources</a>
-                <a href="chat.html"><i class="fa-regular fa-comment-dots"></i> Chat</a>
-                <a href="schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
-                <a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a>
-                <a href="setting.html"><i class="fa-solid fa-gear"></i> Setting</a>
-            </nav>
-        </aside>
 
-        <main class="main-content">
-            <header class="top-header">
-                <h1>My Courses</h1>
-                <div class="user-info">
-                    <img src="https://via.placeholder.com/40" alt="Profile" style="border-radius: 50%;">
-                </div>
-            </header>
+<body>
 
-            <div class="section-header">
-                <div class="tabs">
-                    <span class="active">All Categories</span>
-                    <span>Design</span>
-                    <span>Development</span>
-                </div>
-                <div><i class="fa-solid fa-bars"></i> <i class="fa-solid fa-grid"></i></div>
-            </div>
-
-            <div class="course-grid">
-                <div class="course-card" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:10px;">
-                        <div class="icon orange"><i class="fa-solid fa-book"></i></div>
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
-                    <h4>History of graphic design</h4>
-                    <p style="font-size:11px; color:#999; margin-bottom:15px;">By William Joe</p>
-                    <div class="progress-wrapper" style="width:100%">
-                        <div class="progress-bar"><div class="fill" style="width: 100%; background:#41D185"></div></div>
-                        <span style="font-size:11px; float:right; margin-top:5px;">Completed</span>
-                    </div>
-                </div>
-
-                <div class="course-card" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:10px;">
-                        <div class="icon blue"><i class="fa-solid fa-pen-nib"></i></div>
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
-                    <h4>Graphic Design</h4>
-                    <p style="font-size:11px; color:#999; margin-bottom:15px;">By William Joe</p>
-                    <div class="progress-wrapper" style="width:100%">
-                        <div class="progress-bar"><div class="fill" style="width: 100%; background:#41D185"></div></div>
-                        <span style="font-size:11px; float:right; margin-top:5px;">Completed</span>
-                    </div>
-                </div>
-
-                <div class="course-card" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:10px;">
-                        <div class="icon" style="background:#9B59B6"><i class="fa-brands fa-figma"></i></div>
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
-                    <h4>Sketching for Designers</h4>
-                    <p style="font-size:11px; color:#999; margin-bottom:15px;">By William Joe</p>
-                    <div class="progress-wrapper" style="width:100%">
-                        <div class="progress-bar"><div class="fill" style="width: 34%;"></div></div>
-                        <span style="font-size:11px; float:right; margin-top:5px;">34%</span>
-                    </div>
-                </div>
-
-                 <div class="course-card" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:10px;">
-                        <div class="icon" style="background:#34495E"><i class="fa-solid fa-mobile-screen"></i></div>
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
-                    <h4>App Design Course</h4>
-                    <p style="font-size:11px; color:#999; margin-bottom:15px;">By William Joe</p>
-                    <div class="progress-wrapper" style="width:100%">
-                        <div class="progress-bar"><div class="fill" style="width: 75%;"></div></div>
-                        <span style="font-size:11px; float:right; margin-top:5px;">75%</span>
-                    </div>
-                </div>
-            </div>
-        </main>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-box">E</div>
+      <div class="brand">Estudy</div>
+      <div class="tagline">Learn from Home</div>
     </div>
+    <a href="dashboard.html" class="nav-item"><span class="nav-icon">⊞</span> DashBoard</a>
+
+    <a href="courses.html" class="nav-item active"><span class="nav-icon">📘</span> Course</a>
+    <a href="resources.html" class="nav-item"><span class="nav-icon">📁</span> Resources</a>
+    <a href="chat.html" class="nav-item"><span class="nav-icon">💬</span> Chat</a>
+    <a href="schedule.html" class="nav-item"><span class="nav-icon">📅</span> Schedule</a>
+    <a href="profile.html" class="nav-item"><span class="nav-icon">👤</span> Profile</a>
+    <a href="setting.html" class="nav-item"><span class="nav-icon">⚙️</span> Setting</a>
+
+
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="page-title">Course</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." id="searchInput">
+        <span>🔍</span>
+      </div>
+      <div class="topbar-right">
+        <button class="notif-btn">🔔</button>
+        <div class="user-info">
+          <div class="avatar"></div>
+          <span class="user-name">Rifat Hossan</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-bar">
+      <button class="filter-btn">⚡ Filter</button>
+      <div class="sort-select">
+        Sort by: <select>
+          <option>All Categories</option>
+          <option>Technology</option>
+          <option>Design</option>
+          <option>Business</option>
+          <option>Science</option>
+        </select>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn" id="listView">☰</button>
+        <button class="view-btn active" id="gridView">⊞</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="courses-grid" id="coursesGrid"></div>
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn" style="letter-spacing:2px;font-size:10px">···</button>
+        <button class="page-btn">67</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="courses.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    const firebaseConfig = {
+      apiKey: "API_KEY",
+      authDomain: "AUTH_DOMAIN",
+      projectId: "PROJECT_ID",
+      storageBucket: "STORAGE_BUCKET",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+    // const app = initializeApp(firebaseConfig);
+    // const db = getFirestore(app);
+    // Load courses from Firestore: const snap = await getDocs(collection(db, 'courses'));
+  </script>
+  <script src="js/courses.js"></script>
 </body>
+
 </html>

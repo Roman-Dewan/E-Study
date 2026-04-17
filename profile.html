@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,24 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/profile.css">
 </head>
+
 <body class="profile-page">
     <div class="app-container">
         <!-- Sidebar Navigation (Same as current) -->
         <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">E</div>
-                <h2>Estudy</h2>
-                <p>Learn From Home</p>
+            <div class="sidebar-logo">
+                <div class="logo-box">E</div>
+                <div class="brand">Estudy</div>
+                <div class="tagline">Learn from Home</div>
             </div>
             <nav class="menu">
-                <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
-                <a href="courses.html"><i class="fa-regular fa-file-lines"></i> Course</a>
-                <a href="resources.html"><i class="fa-regular fa-bookmark"></i> Resources</a>
-                <a href="chat.html"><i class="fa-regular fa-comment-dots"></i> Chat</a>
-                <a href="schedule.html"><i class="fa-regular fa-calendar"></i> Schedule</a>
-                <a href="profile.html" class="active"><i class="fa-regular fa-user"></i> Profile</a>
-                <a href="setting.html"><i class="fa-solid fa-gear"></i> Setting</a>
+                <a href="dashboard.html" class="nav-item"><span class="nav-icon">⊞</span> DashBoard</a>
+                <a href="courses.html" class="nav-item"><span class="nav-icon">📘</span> Course</a>
+                <a href="resources.html" class="nav-item"><span class="nav-icon">📁</span> Resources</a>
+                <a href="chat.html" class="nav-item"><span class="nav-icon">💬</span> Chat</a>
+                <a href="schedule.html" class="nav-item"><span class="nav-icon">📅</span> Schedule</a>
+                <a href="profile.html" class="nav-item active"><span class="nav-icon">👤</span> Profile</a>
+                <a href="setting.html" class="nav-item"><span class="nav-icon">⚙️</span> Setting</a>
             </nav>
         </aside>
 
@@ -34,7 +36,7 @@
             <h2>Profile</h2>
             <div class="profile-card-content">
                 <div class="profile-main">
-                    <img src="https://via.placeholder.com/100/A27B7B/white" class="profile-avatar-large">
+                    <img src="assets/images/blank-profile-picture-.webp" class="profile-avatar-large">
                     <h3>Roman Dewan</h3>
                 </div>
 
@@ -62,10 +64,10 @@
                 <div class="support-section">
                     <h4>Support</h4>
                     <nav class="support-menu">
-                        <a href="#"><i class="fa-regular fa-user"></i> Become a Mentor</a>
-                        <a href="#"><i class="fa-solid fa-headphones"></i> Support</a>
-                        <a href="#"><i class="fa-solid fa-user-plus"></i> Invite Friend</a>
-                        <a href="#"><i class="fa-regular fa-trash-can"></i> Delete Account</a>
+                        <a href="#" id="mentor-link"><i class="fa-regular fa-user"></i> Become a Mentor</a>
+                        <a href="#" id="support-link"><i class="fa-solid fa-headphones"></i> Support</a>
+                        <a href="#" id="invite-friend-link"><i class="fa-solid fa-user-plus"></i> Invite Friend</a>
+                        <a href="#" id="logout-link" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
                     </nav>
                 </div>
             </div>
@@ -81,9 +83,9 @@
                     </div>
                 </div>
                 <div class="header-right">
-                    <i class="fa-regular fa-bell"></i>
+                    <i class="fa-regular fa-bell" id="notification-btn"></i>
                     <div class="user-header">
-                        <img src="https://via.placeholder.com/40/A27B7B/white" class="user-avatar-small">
+                        <img src="assets/images/blank-profile-picture-.webp" class="user-avatar-small">
                         <span>Roman Dewan</span>
                     </div>
                 </div>
@@ -92,16 +94,20 @@
             <section class="settings-container">
                 <h2>Profile Setting</h2>
                 <div class="settings-tabs">
-                    <button class="tab-btn active" data-tab="personal">Personal Details</button>
+                    <button class="tab-btn" data-tab="personal">Personal Details</button>
                     <button class="tab-btn" data-tab="notification">Notification</button>
-                    <button class="tab-btn" data-tab="privacy">Privacy</button>
+                    <button class="tab-btn active" data-tab="privacy">Privacy</button>
                 </div>
 
                 <div class="tab-content-area">
                     <!-- Tab: Personal Details -->
-                    <div class="tab-pane active" id="personal">
+                    <div class="tab-pane" id="personal">
                         <div class="avatar-edit">
-                            <img src="https://via.placeholder.com/80/A27B7B/white" class="profile-avatar-medium">
+                            <label for="avatar-upload">
+                                <img src="assets/images/blank-profile-picture-.webp"
+                                    alt="Profile placeholder" class="profile-avatar-medium">
+                            </label>
+                            <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
                             <label for="avatar-upload" class="edit-btn">
                                 <i class="fa-solid fa-camera"></i>
                             </label>
@@ -153,7 +159,8 @@
                             <div class="settings-list">
                                 <div class="setting-item">
                                     <span>Receive Email updates</span>
-                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                    <label class="toggle"><input type="checkbox" checked><span
+                                            class="slider"></span></label>
                                 </div>
                                 <div class="setting-item">
                                     <span>New Messages</span>
@@ -166,7 +173,8 @@
                             <div class="settings-list">
                                 <div class="setting-item">
                                     <span>Course Announcements</span>
-                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                    <label class="toggle"><input type="checkbox" checked><span
+                                            class="slider"></span></label>
                                 </div>
                                 <div class="setting-item">
                                     <span>Progress Report</span>
@@ -181,13 +189,14 @@
                     </div>
 
                     <!-- Tab: Privacy -->
-                    <div class="tab-pane" id="privacy">
+                    <div class="tab-pane active" id="privacy">
                         <div class="settings-group">
                             <h4>Account Privacy</h4>
                             <div class="settings-list">
                                 <div class="setting-item">
                                     <span>Keep my profile private</span>
-                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                    <label class="toggle"><input type="checkbox" checked><span
+                                            class="slider"></span></label>
                                 </div>
                                 <div class="setting-item">
                                     <span>Active Status</span>
@@ -200,7 +209,8 @@
                             <div class="settings-list">
                                 <div class="setting-item">
                                     <span>Messages</span>
-                                    <label class="toggle"><input type="checkbox" checked><span class="slider"></span></label>
+                                    <label class="toggle"><input type="checkbox" checked><span
+                                            class="slider"></span></label>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +220,8 @@
                         </div>
                         <div class="settings-group">
                             <h4>Delete Accounts</h4>
-                            <button class="btn-action-danger">Initial Account Deletion<br><small>Learn More....</small></button>
+                            <button class="btn-action-danger" id="delete-account-btn">Initial Account
+                                Deletion<br><small>Learn More....</small></button>
                         </div>
                     </div>
                 </div>
@@ -218,21 +229,202 @@
         </main>
     </div>
 
-    <!-- Simple JS for tabs -->
-    <script>
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabId = btn.getAttribute('data-tab');
-                
-                // Switch button state
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Switch content state
-                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-                document.getElementById(tabId).classList.add('active');
+    <!-- Invite Friend Modal -->
+    <div id="invite-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <h3>Invite Your Friends</h3>
+                <p>Share the link below and learn together!</p>
+            </div>
+            <div class="share-link-container">
+                <input type="text" id="share-url" value="https://estudy.com/join/user-roman" readonly>
+                <button id="copy-btn" class="copy-btn">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <div id="copy-toast" class="copy-toast">Link copied to clipboard!</div>
+        </div>
+    </div>
+
+    <!-- Become a Mentor Modal -->
+    <div id="mentor-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="mentor-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <h3>Become a Mentor</h3>
+                <p>Share your knowledge, help learners, and grow as a mentor.</p>
+            </div>
+            <div class="mentor-modal-content">
+                <p>To become a mentor, please send us a request and include your teaching experience or subject
+                    expertise.</p>
+                <button id="mentor-request-btn" class="btn-submit">Send Request</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="delete-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="delete-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-exclamation-triangle"></i>
+                </div>
+                <h3>Delete Account</h3>
+                <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            </div>
+            <div class="modal-actions">
+                <button id="confirm-delete" class="btn-danger">Delete Account</button>
+                <button id="cancel-delete" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Toast -->
+    <div id="delete-toast" class="copy-toast">Account deleted successfully!</div>
+
+    <!-- Support Modal -->
+    <div id="support-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="support-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-headphones"></i>
+                </div>
+                <h3>Get Support</h3>
+                <p>We're here to help! Choose how you'd like to contact us.</p>
+            </div>
+            <div class="support-modal-content">
+                <div class="support-options">
+                    <div class="support-option">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h4>Email Support</h4>
+                            <p>support@estudy.com</p>
+                        </div>
+                    </div>
+                    <div class="support-option">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <h4>Phone Support</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="support-option">
+                        <i class="fa-solid fa-comments"></i>
+                        <div>
+                            <h4>Live Chat</h4>
+                            <p>Available 9 AM - 6 PM EST</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="support-form">
+                    <h4>Quick Support Request</h4>
+                    <form id="support-form">
+                        <div class="form-group">
+                            <label for="support-subject">Subject</label>
+                            <select id="support-subject">
+                                <option value="">Select a topic</option>
+                                <option value="technical">Technical Issue</option>
+                                <option value="account">Account Problem</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="support-message">Message</label>
+                            <textarea id="support-message" placeholder="Describe your issue..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="notification-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <h3>Notifications</h3>
+                <p>Stay updated with the latest news and activities.</p>
+            </div>
+            <div class="notification-modal-content">
+                <div class="notification-list">
+                    <div class="notification-item unread">
+                        <div class="notification-item-icon"><i class="fa-solid fa-gift"></i></div>
+                        <div class="notification-text">
+                            <h4>Special Offer!</h4>
+                            <p>Get 50% off on all new courses. Limited time only!</p>
+                            <span class="time">2 mins ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="notification-text">
+                            <h4>Course Completed</h4>
+                            <p>You have successfully completed the 'Advanced Web Design' course.</p>
+                            <span class="time">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-regular fa-calendar"></i></div>
+                        <div class="notification-text">
+                            <h4>Upcoming Class</h4>
+                            <p>Your 'React JS Fundamentals' class starts in 30 minutes.</p>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple JS for tabs and modal -->
+    <script src="js/profile.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
+            authDomain: "e-study-97072.firebaseapp.com",
+            projectId: "e-study-97072",
+            storageBucket: "e-study-97072.firebasestorage.app",
+            messagingSenderId: "351324744836",
+            appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
+            measurementId: "G-LQYD0NQMWS"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const logoutBtn = document.getElementById('logout-link');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                try {
+                    await signOut(auth);
+                    window.location.href = 'login.html';
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('Error logging out. Please try again.');
+                }
             });
-        });
+        }
     </script>
 </body>
+
 </html>

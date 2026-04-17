@@ -1,0 +1,222 @@
+/* --- RESOURCES PAGE --- */
+.resources-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    min-height: calc(100vh - 150px);
+}
+
+.rc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.rc-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: var(--secondary-color);
+}
+
+.rc-horizontal-nav {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.rc-horizontal-nav::-webkit-scrollbar {
+    height: 4px;
+}
+.rc-horizontal-nav::-webkit-scrollbar-thumb {
+    background: #E5E7EB;
+    border-radius: 4px;
+}
+
+.nav-btn {
+    background: #F3F4F6;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    color: var(--text-dark);
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.nav-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.nav-btn:hover:not(.active) {
+    background: #E5E7EB;
+}
+
+.rc-divider {
+    border: 0;
+    height: 1px;
+    background: #EEE;
+    margin-bottom: 25px;
+}
+
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+.dd-btn {
+    background: var(--white);
+    border: 1px solid #E5E7EB;
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 14px;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.dd-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(65, 209, 133, 0.1);
+}
+
+.dd-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.dd-arrow {
+    font-size: 14px;
+    color: inherit;
+}
+
+/* Modal CSS */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background: var(--white);
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 25px;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.active .modal-box {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    color: var(--text-dark);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-grey);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: var(--text-dark);
+}
+
+.modal-body-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    overflow-y: auto;
+    padding-right: 5px;
+    max-height: 60vh;
+}
+
+.modal-body-grid::-webkit-scrollbar {
+    width: 6px;
+}
+.modal-body-grid::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 10px;
+}
+
+/* For links */
+.lecture-link-box {
+    background: #E8FDF3;
+    border: 1px dashed var(--primary-color);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.lecture-link-box a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-weight: 500;
+    word-break: break-all;
+    display: inline-block;
+    margin-top: 10px;
+}
