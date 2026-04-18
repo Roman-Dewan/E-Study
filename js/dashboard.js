@@ -1,7 +1,7 @@
 import { auth, db } from './js/firebase-config.js';
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc, collection, query, where, getDocs, orderBy, limit, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, getDoc, collection, query, where, getDocs, orderBy, limit, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Initialize analytics if needed (app is already initialized in firebase-config.js)
 // const analytics = getAnalytics(app); 
@@ -14,6 +14,9 @@ onAuthStateChanged(auth, async (user) => {
     const userData = snap.data();
     document.querySelector('.user-name').textContent = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || 'User';
   }
+  
+  // Real-time hook init now that user is logged in
+  updateDashboardForDate(selectedDate.year, selectedDate.month, selectedDate.day);
 });
 
 
@@ -75,6 +78,23 @@ window.seedStats = async (dateStr, data) => {
 const today = new Date();
 let selectedDate = { year: today.getFullYear(), month: today.getMonth(), day: today.getDate() };
 
+function ensureYearOptionExists(year) {
+  const yearSelect = document.getElementById('calYear');
+  let yearOpt = [...yearSelect.options].find(o => parseInt(o.value) === year);
+  if (!yearOpt) {
+    const newOpt = document.createElement('option');
+    newOpt.value = year;
+    newOpt.textContent = year;
+    yearSelect.appendChild(newOpt);
+  }
+}
+
+// Sync HTML Dropdowns to ACTUAL current date before rendering calendar
+const initMonthSelect = document.getElementById('calMonth');
+initMonthSelect.selectedIndex = today.getMonth();
+ensureYearOptionExists(today.getFullYear());
+document.getElementById('calYear').value = today.getFullYear();
+
 function renderCalendar() {
   const month = document.getElementById('calMonth').selectedIndex;
   const year  = parseInt(document.getElementById('calYear').value);
@@ -118,6 +138,7 @@ function renderCalendar() {
 // ── DASHBOARD UPDATE LOGIC ──────────────────────────────────────────────────
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+let currentDayUnsubscribe = null;
 
 async function updateDashboardForDate(year, month, day) {
   if (!auth.currentUser) return;
@@ -127,7 +148,6 @@ async function updateDashboardForDate(year, month, day) {
   // Show a mini loading state if desired (optional)
   document.getElementById('learningDateLabel').textContent = "Loading...";
 
-  const data = await getDayData(uid, dateStr);
   const weekly = await getWeeklyData(uid, { year, month, day });
   
   const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
@@ -135,26 +155,6 @@ async function updateDashboardForDate(year, month, day) {
   // Update Labels
   document.getElementById('learningDateLabel').textContent = isToday ? 'Today' : `${MONTHS[month]} ${day}, ${year}`;
   document.getElementById('activityPeriodLabel').textContent = isToday ? 'weekly' : `week of ${MONTHS[month]} ${day}`;
-
-  // Update Donut
-  const total = (data.reading || 0) + (data.video || 0) + (data.writing || 0) + (data.assignment || 0) || 1; // avoid divide by zero
-  const C = 2 * Math.PI * 50;
-  const wArc = ((data.writing || 0) / total) * C;
-  const vArc = ((data.video || 0) / total) * C;
-  const rArc = ((data.reading || 0) / total) * C;
-
-  document.getElementById('donutWriting').setAttribute('stroke-dasharray', `${wArc + vArc + rArc} ${C}`);
-  const dVideo = document.getElementById('donutVideo');
-  dVideo.setAttribute('stroke-dasharray', `${vArc + rArc} ${C}`);
-  dVideo.setAttribute('stroke-dashoffset', -wArc);
-  const dReading = document.getElementById('donutReading');
-  dReading.setAttribute('stroke-dasharray', `${rArc} ${C}`);
-  dReading.setAttribute('stroke-dashoffset', -(wArc + vArc));
-
-  document.getElementById('labelReading').textContent    = `Reading ${data.reading || 0}m`;
-  document.getElementById('labelVideo').textContent      = `Video ${data.video || 0}m`;
-  document.getElementById('labelWriting').textContent    = `Writing ${data.writing || 0}m`;
-  document.getElementById('labelAssignment').textContent = `Assignment ${data.assignment || 0}m`;
 
   // Update Line Chart
   const xs = 260 / 6;
@@ -183,6 +183,40 @@ async function updateDashboardForDate(year, month, day) {
     labels += `<span ${active ? 'style="color:var(--green);font-weight:700"' : ''}>${DAYS[d.getDay()]}</span>`;
   }
   document.getElementById('activityDayLabels').innerHTML = labels;
+
+  // Clear previous snapshot
+  if (currentDayUnsubscribe) {
+    currentDayUnsubscribe();
+  }
+
+  // Set real-time listener for the active day
+  const docRef = doc(db, 'E-study', uid, 'activity', dateStr);
+  currentDayUnsubscribe = onSnapshot(docRef, (snap) => {
+    let data = { reading: 0, video: 0, writing: 0, assignment: 0, tasks: 0, lessons: 0 };
+    if (snap.exists()) {
+      data = snap.data();
+    }
+  
+    // Update Donut
+    const total = (data.reading || 0) + (data.video || 0) + (data.writing || 0) + (data.assignment || 0) || 1; // avoid divide by zero
+    const C = 2 * Math.PI * 50;
+    const wArc = ((data.writing || 0) / total) * C;
+    const vArc = ((data.video || 0) / total) * C;
+    const rArc = ((data.reading || 0) / total) * C;
+
+    document.getElementById('donutWriting').setAttribute('stroke-dasharray', `${wArc + vArc + rArc} ${C}`);
+    const dVideo = document.getElementById('donutVideo');
+    dVideo.setAttribute('stroke-dasharray', `${vArc + rArc} ${C}`);
+    dVideo.setAttribute('stroke-dashoffset', -wArc);
+    const dReading = document.getElementById('donutReading');
+    dReading.setAttribute('stroke-dasharray', `${rArc} ${C}`);
+    dReading.setAttribute('stroke-dashoffset', -(wArc + vArc));
+
+    document.getElementById('labelReading').textContent    = `Reading ${data.reading || 0}m`;
+    document.getElementById('labelVideo').textContent      = `Video ${data.video || 0}m`;
+    document.getElementById('labelWriting').textContent    = `Writing ${data.writing || 0}m`;
+    document.getElementById('labelAssignment').textContent = `Assignment ${data.assignment || 0}m`;
+  });
 }
 
 
@@ -197,8 +231,8 @@ document.querySelectorAll('.cal-nav').forEach((btn, idx) => {
     if (idx === 0) { month--; if (month < 0) { month = 11; year--; } }
     else           { month++; if (month > 11) { month = 0; year++; } }
     document.getElementById('calMonth').selectedIndex = month;
-    const yearOpt = [...document.getElementById('calYear').options].find(o => parseInt(o.value) === year);
-    if (yearOpt) document.getElementById('calYear').value = year;
+    ensureYearOptionExists(year);
+    document.getElementById('calYear').value = year;
     renderCalendar();
   });
 });
@@ -211,4 +245,4 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 renderCalendar();
-updateDashboardForDate(today.getFullYear(), today.getMonth(), today.getDate());
+// updateDashboardForDate is now initially called inside onAuthStateChanged instead of here
