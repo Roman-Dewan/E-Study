@@ -1,49 +1,74 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { auth, db } from './js/firebase-config.js';
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, getDoc, collection, query, where, getDocs, orderBy, limit, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
-  authDomain: "e-study-97072.firebaseapp.com",
-  projectId: "e-study-97072",
-  storageBucket: "e-study-97072.firebasestorage.app",
-  messagingSenderId: "351324744836",
-  appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
-  measurementId: "G-LQYD0NQMWS"
-};
-
-const app  = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
-const db   = getFirestore(app);
+// Initialize analytics if needed (app is already initialized in firebase-config.js)
+// const analytics = getAnalytics(app); 
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'index.html'; return; }
-  const snap = await getDoc(doc(db, 'users', user.uid));
-  if (snap.exists()) { /* populate UI */ }
+  // Using 'E-study' as the root collection as per your project structure
+  const snap = await getDoc(doc(db, 'E-study', user.uid));
+  if (snap.exists()) {
+    const userData = snap.data();
+    document.querySelector('.user-name').textContent = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || 'User';
+  }
 });
 
 
-// ── DASHBOARD DATA ENGINE (MOCK) ───────────────────────────────────────────
-function seededRandom(seed) {
-  let x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
+// ── DASHBOARD DATA ENGINE (FIREBASE) ─────────────────────────────────────────
+
+/**
+ * Fetches stats for a specific day. If no data exists, returns zeros.
+ */
+async function getDayData(uid, dateStr) {
+  const docRef = doc(db, 'E-study', uid, 'activity', dateStr);
+  const snap = await getDoc(docRef);
+  if (snap.exists()) return snap.data();
+  return { reading: 0, video: 0, writing: 0, assignment: 0, tasks: 0, lessons: 0 };
 }
 
-function getDayData(year, month, day) {
-  const seed = year * 10000 + month * 100 + day;
-  const r = (n) => seededRandom(seed + n);
+/**
+ * Fetches activity for the week surrounding the given date.
+ */
+async function getWeeklyData(uid, centerDate) {
+  const activityRef = collection(db, 'E-study', uid, 'activity');
+  
+  // Calculate the start of the week (last Saturday as per current layout)
+  const base = new Date(centerDate.year, centerDate.month, centerDate.day);
+  const dayOfWeek = base.getDay(); // 0 is Sunday
+  const diffToSat = (dayOfWeek + 1) % 7; 
+  const startDate = new Date(base);
+  startDate.setDate(base.getDate() - diffToSat);
+  
+  const weekData = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(startDate);
+    d.setDate(startDate.getDate() + i);
+    const dStr = d.toISOString().split('T')[0];
+    const data = await getDayData(uid, dStr);
+    weekData.push(data);
+  }
+  
   return {
-    reading:    Math.round(r(1) * 90 + 10),
-    video:      Math.round(r(2) * 70 + 10),
-    writing:    Math.round(r(3) * 60 + 5),
-    assignment: Math.round(r(4) * 40 + 5),
-    weekTasks:   Array.from({ length: 7 }, (_, i) => Math.round(r(10 + i) * 8)),
-    weekLessons: Array.from({ length: 7 }, (_, i) => Math.round(r(20 + i) * 6)),
-    highlightIdx: Math.round(r(30) * 6)
+    weekTasks: weekData.map(d => d.tasks || 0),
+    weekLessons: weekData.map(d => d.lessons || 0),
+    highlightIdx: diffToSat
   };
 }
+
+/**
+ * UTILITY: Call this from the browser console to add sample data!
+ * Example: seedStats('2025-09-11', { reading: 45, video: 30, writing: 20, assignment: 15, tasks: 4, lessons: 3 })
+ */
+window.seedStats = async (dateStr, data) => {
+  if (!auth.currentUser) return console.error("No user logged in");
+  const docRef = doc(db, 'E-study', auth.currentUser.uid, 'activity', dateStr);
+  await setDoc(docRef, data, { merge: true });
+  console.log(`Data seeded for ${dateStr}`);
+  updateDashboardForDate(selectedDate.year, selectedDate.month, selectedDate.day);
+};
 
 
 // ── CALENDAR ────────────────────────────────────────────────────────────────
@@ -94,8 +119,17 @@ function renderCalendar() {
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-function updateDashboardForDate(year, month, day) {
-  const data = getDayData(year, month, day);
+async function updateDashboardForDate(year, month, day) {
+  if (!auth.currentUser) return;
+  const uid = auth.currentUser.uid;
+  const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  
+  // Show a mini loading state if desired (optional)
+  document.getElementById('learningDateLabel').textContent = "Loading...";
+
+  const data = await getDayData(uid, dateStr);
+  const weekly = await getWeeklyData(uid, { year, month, day });
+  
   const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
 
   // Update Labels
@@ -103,11 +137,11 @@ function updateDashboardForDate(year, month, day) {
   document.getElementById('activityPeriodLabel').textContent = isToday ? 'weekly' : `week of ${MONTHS[month]} ${day}`;
 
   // Update Donut
-  const total = data.reading + data.video + data.writing + data.assignment;
+  const total = (data.reading || 0) + (data.video || 0) + (data.writing || 0) + (data.assignment || 0) || 1; // avoid divide by zero
   const C = 2 * Math.PI * 50;
-  const wArc = (data.writing / total) * C;
-  const vArc = (data.video / total) * C;
-  const rArc = (data.reading / total) * C;
+  const wArc = ((data.writing || 0) / total) * C;
+  const vArc = ((data.video || 0) / total) * C;
+  const rArc = ((data.reading || 0) / total) * C;
 
   document.getElementById('donutWriting').setAttribute('stroke-dasharray', `${wArc + vArc + rArc} ${C}`);
   const dVideo = document.getElementById('donutVideo');
@@ -117,25 +151,25 @@ function updateDashboardForDate(year, month, day) {
   dReading.setAttribute('stroke-dasharray', `${rArc} ${C}`);
   dReading.setAttribute('stroke-dashoffset', -(wArc + vArc));
 
-  document.getElementById('labelReading').textContent    = `Reading ${data.reading}m`;
-  document.getElementById('labelVideo').textContent      = `Video ${data.video}m`;
-  document.getElementById('labelWriting').textContent    = `Writing ${data.writing}m`;
-  document.getElementById('labelAssignment').textContent = `Assignment ${data.assignment}m`;
+  document.getElementById('labelReading').textContent    = `Reading ${data.reading || 0}m`;
+  document.getElementById('labelVideo').textContent      = `Video ${data.video || 0}m`;
+  document.getElementById('labelWriting').textContent    = `Writing ${data.writing || 0}m`;
+  document.getElementById('labelAssignment').textContent = `Assignment ${data.assignment || 0}m`;
 
   // Update Line Chart
   const xs = 260 / 6;
-  const pts = (vals, max) => vals.map((v, i) => `${Math.round(i * xs)},${Math.round(95 - (v / max) * 85)}`).join(' ');
-  document.getElementById('activityLine1').setAttribute('points', pts(data.weekTasks, 8));
-  document.getElementById('activityLine2').setAttribute('points', pts(data.weekLessons, 6));
+  const pts = (vals, max) => vals.map((v, i) => `${Math.round(i * xs)},${Math.round(95 - (v / (max || 1)) * 85)}`).join(' ');
+  document.getElementById('activityLine1').setAttribute('points', pts(weekly.weekTasks, 8));
+  document.getElementById('activityLine2').setAttribute('points', pts(weekly.weekLessons, 6));
 
-  const hi = data.highlightIdx;
+  const hi = weekly.highlightIdx;
   const hx = Math.round(hi * xs);
-  const hy = Math.round(95 - (data.weekTasks[hi] / 8) * 85);
+  const hy = Math.round(95 - ((weekly.weekTasks[hi] || 0) / 8) * 85);
   document.getElementById('activityDot').setAttribute('cx', hx);
   document.getElementById('activityDot').setAttribute('cy', hy);
   document.getElementById('activityDotText').setAttribute('x', hx);
   document.getElementById('activityDotText').setAttribute('y', hy - 10);
-  document.getElementById('activityDotText').textContent = data.weekTasks[hi];
+  document.getElementById('activityDotText').textContent = weekly.weekTasks[hi] || 0;
   document.getElementById('activityDotLabel').setAttribute('x', hx);
   document.getElementById('activityDotLabel').setAttribute('y', hy + 18);
 

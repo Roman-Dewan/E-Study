@@ -78,24 +78,7 @@
     </div>
   </div>
 
-  <script src="courses.js"></script>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    const firebaseConfig = {
-      apiKey: "API_KEY",
-      authDomain: "AUTH_DOMAIN",
-      projectId: "PROJECT_ID",
-      storageBucket: "STORAGE_BUCKET",
-      messagingSenderId: "SENDER_ID",
-      appId: "APP_ID"
-    };
-    // const app = initializeApp(firebaseConfig);
-    // const db = getFirestore(app);
-    // Load courses from Firestore: const snap = await getDocs(collection(db, 'courses'));
-  </script>
-  <script src="js/courses.js"></script>
+  <script type="module" src="js/courses.js"></script>
 </body>
 
 </html>
