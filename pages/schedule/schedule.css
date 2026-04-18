@@ -8,72 +8,14 @@ body.schedule-page {
 
 .app-container {
     display: grid;
-    grid-template-columns: minmax(200px, 240px) minmax(400px, 1fr) minmax(250px, 300px);
+    grid-template-columns: var(--sidebar-width) 1fr var(--right-panel-width);
     height: 100vh;
-    padding: 15px;
-    gap: 15px;
     background: transparent;
     box-sizing: border-box;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
-/* Override global sidebar padding/radius */
-.sidebar, .main-content, .right-panel {
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-}
-
-.sidebar {
-    background: var(--white) !important; 
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Logo */
-.logo { text-align: center; margin-bottom: 30px; }
-.logo-icon {
-    width: 60px; height: 60px; background: #45D48B; color: white;
-    font-size: 30px; font-weight: bold; border-radius: 18px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 10px;
-}
-.logo h2 { font-size: 22px; font-weight: 700; color: #333; margin-bottom: 2px;}
-.logo p { font-size: 12px; color: #888; margin: 0;}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.menu a { font-weight: 500; font-size: 15px; color: #A0A0A0; display: flex; align-items: center; gap: 15px; padding: 12px 15px; border-radius: 12px; transition: 0.3s;}
-.menu a i { width: 20px; text-align: center; font-size: 18px;}
-.menu a.active {
-    background-color: transparent;
-    color: #45D48B;
-    border-left: 3px solid #45D48B;
-    border-radius: 0;
-    font-weight: 600;
-}
-.menu a:hover {
-    color: #45D48B;
-}
-
-.sidebar-footer {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    margin-top: auto; padding: 0 10px;
-}
-.upgrade-card { background: transparent; padding: 0; margin-bottom: 10px; text-align: center;}
-.upgrade-img { width: 120px; margin-bottom: -10px;}
-.upgrade-card p { font-size: 12px; color: #888; margin-bottom: 10px; line-height: 1.4;}
-.btn-upgrade {
-    background: #45D48B; padding: 15px; width: 100%; border-radius: 12px; color: white; border: none; font-weight: 600;
-    font-size: 14px; box-shadow: 0 6px 15px rgba(69, 212, 139, 0.3); cursor: pointer;
-}
+/* No overrides needed for .sidebar as it now uses global sidebar.css defaults */
 
 /* Main Content */
 .main-content {

@@ -7,36 +7,22 @@
     <title>Estudy - Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="profile.css">
 </head>
 
 <body class="profile-page">
     <div class="app-container">
-        <!-- Sidebar Navigation (Same as current) -->
-        <aside class="sidebar">
-            <div class="sidebar-logo">
-                <div class="logo-box">E</div>
-                <div class="brand">Estudy</div>
-                <div class="tagline">Learn from Home</div>
-            </div>
-            <nav class="menu">
-                <a href="dashboard.html" class="nav-item"><span class="nav-icon">⊞</span> DashBoard</a>
-                <a href="courses.html" class="nav-item"><span class="nav-icon">📘</span> Course</a>
-                <a href="resources.html" class="nav-item"><span class="nav-icon">📁</span> Resources</a>
-                <a href="chat.html" class="nav-item"><span class="nav-icon">💬</span> Chat</a>
-                <a href="schedule.html" class="nav-item"><span class="nav-icon">📅</span> Schedule</a>
-                <a href="profile.html" class="nav-item active"><span class="nav-icon">👤</span> Profile</a>
-                <a href="setting.html" class="nav-item"><span class="nav-icon">⚙️</span> Setting</a>
-            </nav>
-        </aside>
+        <!-- Sidebar placeholder for dynamic loading -->
+        <div id="sidebar-placeholder"></div>
 
         <!-- Profile Summary Column -->
         <aside class="profile-card-col">
             <h2>Profile</h2>
             <div class="profile-card-content">
                 <div class="profile-main">
-                    <img src="assets/images/blank-profile-picture-.webp" class="profile-avatar-large">
+                    <img src="../../assets/images/blank-profile-picture-.webp" class="profile-avatar-large">
                     <h3>Roman Dewan</h3>
                 </div>
 
@@ -61,15 +47,7 @@
                     </div>
                 </div>
 
-                <div class="support-section">
-                    <h4>Support</h4>
-                    <nav class="support-menu">
-                        <a href="#" id="mentor-link"><i class="fa-regular fa-user"></i> Become a Mentor</a>
-                        <a href="#" id="support-link"><i class="fa-solid fa-headphones"></i> Support</a>
-                        <a href="#" id="invite-friend-link"><i class="fa-solid fa-user-plus"></i> Invite Friend</a>
-                        <a href="#" id="logout-link" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-                    </nav>
-                </div>
+                <!-- Support section removed here as it is now in the sidebar -->
             </div>
         </aside>
 
@@ -85,7 +63,7 @@
                 <div class="header-right">
                     <i class="fa-regular fa-bell" id="notification-btn"></i>
                     <div class="user-header">
-                        <img src="assets/images/blank-profile-picture-.webp" class="user-avatar-small">
+                        <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small">
                         <span>Roman Dewan</span>
                     </div>
                 </div>
@@ -104,8 +82,8 @@
                     <div class="tab-pane" id="personal">
                         <div class="avatar-edit">
                             <label for="avatar-upload">
-                                <img src="assets/images/blank-profile-picture-.webp"
-                                    alt="Profile placeholder" class="profile-avatar-medium">
+                                <img src="../../assets/images/blank-profile-picture-.webp" alt="Profile placeholder"
+                                    class="profile-avatar-medium">
                             </label>
                             <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
                             <label for="avatar-upload" class="edit-btn">
@@ -393,7 +371,8 @@
     </div>
 
     <!-- Simple JS for tabs and modal -->
-    <script src="js/profile.js"></script>
+    <script src="../../js/sidebar.js"></script>
+    <script src="profile.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -407,23 +386,20 @@
             appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
             measurementId: "G-LQYD0NQMWS"
         };
-        
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        const logoutBtn = document.getElementById('logout-link');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
-                    await signOut(auth);
-                    window.location.href = 'login.html';
-                } catch (error) {
-                    console.error('Logout error:', error);
-                    alert('Error logging out. Please try again.');
-                }
-            });
-        }
+        // Standardized logout via custom event from sidebar
+        document.addEventListener('estudy-logout', async (e) => {
+            try {
+                await signOut(auth);
+                window.location.href = '../../features/auth/login.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                alert('Error logging out. Please try again.');
+            }
+        });
     </script>
 </body>
 

@@ -4,44 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard – Estudy</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/dashboard.css">
+  <title>DashBoard – Estudy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 
-<body>
-
-  <!-- ── SIDEBAR ── -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-box">E</div>
-      <div class="brand">Estudy</div>
-      <div class="tagline">Learn from Home</div>
-    </div>
-    <a href="dashboard.html" class="nav-item active">
-      <span class="nav-icon">⊞</span> DashBoard
-    </a>
-    <a href="courses.html" class="nav-item">
-      <span class="nav-icon">📘</span> Course
-    </a>
-    <a href="resources.html" class="nav-item">
-      <span class="nav-icon">📁</span> Resources
-    </a>
-    <a href="chat.html" class="nav-item">
-      <span class="nav-icon">💬</span> Chat
-    </a>
-    <a href="schedule.html" class="nav-item">
-      <span class="nav-icon">📅</span> Schedule
-    </a>
-    <a href="profile.html" class="nav-item">
-      <span class="nav-icon">👤</span> Profile
-    </a>
-    <a href="setting.html" class="nav-item">
-      <span class="nav-icon">⚙️</span> Setting
-    </a>
-  </aside>
+<body class="full-width-page">
+  <div class="app-container">
+    <div id="sidebar-placeholder"></div>
 
   <!-- ── MAIN ── -->
   <div class="main">
@@ -174,7 +146,7 @@
                 <h4>App Design</h4>
                 <span>By Devdas &nbsp; <span class="stars">★★★★★</span> 4.7</span>
               </div>
-              <a href="courses-detail.html" class="view-btn">view course</a>
+              <a href="../courses/courses-detail.html" class="view-btn">view course</a>
             </div>
             <div class="course-item">
               <div class="course-thumb-sm" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">🖌️</div>
@@ -182,7 +154,7 @@
                 <h4>Digital painting</h4>
                 <span>By Tesla &nbsp; <span class="stars">★★★★★</span> 4.7</span>
               </div>
-              <a href="courses-detail.html" class="view-btn">view course</a>
+              <a href="../courses/courses-detail.html" class="view-btn">view course</a>
             </div>
           </div>
         </div>
@@ -246,7 +218,7 @@
             </select>
           </div>
           <div class="task-item">
-            <div class="task-icon">⬡</div>
+            <div class="task-icon">⬇️</div>
             <div class="task-info">
               <h4>Discussion Algorithm</h4>
               <span>08:00 AM – 15:00 PM</span>
@@ -254,7 +226,7 @@
             <div class="task-dots">···</div>
           </div>
           <div class="task-item">
-            <div class="task-icon dark">⊞</div>
+            <div class="task-icon dark">✅</div>
             <div class="task-info">
               <h4>Simple Home Page Design</h4>
               <span>08:00 AM – 15:00 PM</span>
@@ -286,8 +258,10 @@
 
     </div><!-- /.content -->
   </div><!-- /.main -->
+  </div><!-- /.app-container -->
 
-  <script type="module" src="js/dashboard.js"></script>
+  <script src="../../js/sidebar.js"></script>
+  <script type="module" src="dashboard.js"></script>
 </body>
 
 </html>

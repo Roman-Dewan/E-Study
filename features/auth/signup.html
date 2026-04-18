@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started – Estudy</title>
+    <title>Log In – Estudy</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ── RESET & VARIABLES ── */
         *,
@@ -44,7 +45,8 @@
 
         /* ── LEFT DECORATIVE PANEL ── */
         .left-panel {
-            width: 42%;
+            width: calc(42% + 1px);
+            margin-left: -1px;
             background: var(--panel-left);
             position: relative;
             overflow: hidden;
@@ -623,7 +625,7 @@
 
 <body>
 
-    <!-- ══ LEFT PANEL ══ -->
+    <!-- ── LEFT PANEL ── -->
     <div class="left-panel">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -639,30 +641,30 @@
 
             <div class="feature-list">
                 <div class="feat-item">
-                    <div class="feat-check">✓</div>
+                    <div class="feat-check">✅</div>
                     <div class="feat-text">500+ expert-led courses</div>
                 </div>
                 <div class="feat-item">
-                    <div class="feat-check">✓</div>
+                    <div class="feat-check">✅</div>
                     <div class="feat-text">Track progress & earn certificates</div>
                 </div>
                 <div class="feat-item">
-                    <div class="feat-check">✓</div>
+                    <div class="feat-check">✅</div>
                     <div class="feat-text">Learn at your own pace, anytime</div>
                 </div>
                 <div class="feat-item">
-                    <div class="feat-check">✓</div>
+                    <div class="feat-check">✅</div>
                     <div class="feat-text">Chat with mentors & community</div>
                 </div>
                 <div class="feat-item">
-                    <div class="feat-check">✓</div>
+                    <div class="feat-check">✅</div>
                     <div class="feat-text">Free account — no credit card needed</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ══ RIGHT PANEL — SIGNUP FORM ══ -->
+    <!-- ── RIGHT PANEL — SIGNUP FORM ── -->
     <div class="right-panel">
         <div class="form-box">
 
@@ -676,17 +678,22 @@
                 <button class="social-btn" id="googleBtn">
                     <span class="social-icon">
                         <svg viewBox="0 0 48 48" width="20" height="20">
-                            <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
-                            <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
-                            <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
-                            <path fill="#1976D2" d="M43.611,20.083L43.611,20.083L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571 c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+                            <path fill="#FFC107"
+                                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                            <path fill="#FF3D00"
+                                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                            <path fill="#4CAF50"
+                                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                            <path fill="#1976D2"
+                                d="M43.611,20.083L43.611,20.083L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571 c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
                         </svg>
                     </span> Google
                 </button>
                 <button class="social-btn" id="githubBtn">
                     <span class="social-icon">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.292 24 17.81 24 12.5 24 5.87 18.63.5 12 .5zm-1.85 18.27c-.028.062-.12.08-.21.044-.085-.037-.132-.11-.096-.175.027-.06.122-.078.21-.043.085.038.132.112.096.174zm-.51.123c-.057.054-.155.033-.21-.05-.055-.08-.027-.188.038-.24.053-.054.158-.035.212.046.054.085.02.193-.04.244zm-.675.166c-.057.087-.174.088-.263.005-.088-.08-.095-.205-.035-.292.058-.087.175-.092.26-.01.088.082.098.204.038.297zm-.78.135c-.038.093-.153.11-.258.04-.105-.065-.138-.192-.1-.286.035-.094.15-.118.258-.048.105.07.138.2.1.294zm-1.018.03c-.012.1-.12.164-.24.147-.123-.015-.213-.107-.202-.21.012-.1.12-.17.242-.148.12.02.213.11.2.21zm-1.14-.07c.003.09-.092.17-.21.18-.116.012-.215-.05-.22-.143-.002-.09.093-.17.21-.18.118-.013.212.052.22.144zm-1.13-.115c.01-.09.117-.145.23-.12.117.03.195.123.187.215-.01.092-.115.15-.23.12-.117-.03-.198-.124-.187-.216z"/>
+                            <path
+                                d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.292 24 17.81 24 12.5 24 5.87 18.63.5 12 .5zm-1.85 18.27c-.028.062-.12.08-.21.044-.085-.037-.132-.11-.096-.175.027-.06.122-.078.21-.043.085.038.132.112.096.174zm-.51.123c-.057.054-.155.033-.21-.05-.055-.08-.027-.188.038-.24.053-.054.158-.035.212.046.054.085.02.193-.04.244zm-.675.166c-.057.087-.174.088-.263.005-.088-.08-.095-.205-.035-.292.058-.087.175-.092.26-.01.088.082.098.204.038.297zm-.78.135c-.038.093-.153.11-.258.04-.105-.065-.138-.192-.1-.286.035-.094.15-.118.258-.048.105.07.138.2.1.294zm-1.018.03c-.012.1-.12.164-.24.147-.123-.015-.213-.107-.202-.21.012-.1.12-.17.242-.148.12.02.213.11.2.21zm-1.14-.07c.003.09-.092.17-.21.18-.116.012-.215-.05-.22-.143-.002-.09.093-.17.21-.18.118-.013.212.052.22.144zm-1.13-.115c.01-.09.117-.145.23-.12.117.03.195.123.187.215-.01.092-.115.15-.23.12-.117-.03-.198-.124-.187-.216z" />
                         </svg>
                     </span> GitHub
                 </button>
@@ -771,49 +778,22 @@
         <span class="toast-msg" id="toastMsg">Account created!</span>
     </div>
 
-    <!-- ══ FIREBASE AUTH JAVASCRIPT ══ -->
+    <!-- ── FIREBASE AUTH JAVASCRIPT ── -->
     <script type="module">
-        import { initializeApp }
-            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAnalytics }
-            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { auth, db } from "../../js/firebase-config.js";
         import {
-            getAuth,
+            onAuthStateChanged,
             createUserWithEmailAndPassword,
             updateProfile,
-            signInWithPopup,
             GoogleAuthProvider,
             GithubAuthProvider,
-            sendEmailVerification,
-            onAuthStateChanged
+            signInWithPopup
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import {
-            getFirestore,
-            doc,
-            setDoc,
-            serverTimestamp
-        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        // ── YOUR FIREBASE CONFIG ──
-        const firebaseConfig = {
-          apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
-          authDomain: "e-study-97072.firebaseapp.com",
-          projectId: "e-study-97072",
-          storageBucket: "e-study-97072.firebasestorage.app",
-          messagingSenderId: "351324744836",
-          appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
-          measurementId: "G-LQYD0NQMWS"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
 
         // ── REDIRECT IF ALREADY LOGGED IN ──
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                window.location.href = 'dashboard.html';
+                window.location.href = '../../pages/dashboard/dashboard.html';
             }
         });
 
@@ -832,11 +812,11 @@
             });
         }
 
-        // ── UTILITIES ──
+        // GöÇGöÇ UTILITIES GöÇGöÇ
         function showToast(msg, isError = false) {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').textContent = msg;
-            document.getElementById('toastIcon').textContent = isError ? '❌' : '✅';
+            document.getElementById('toastIcon').textContent = isError ? 'G¥î' : 'G£à';
             t.classList.toggle('error', isError);
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3800);
@@ -864,7 +844,7 @@
             return map[code] || 'Something went wrong. Please try again.';
         }
 
-        // ── PASSWORD STRENGTH ──
+        // GöÇGöÇ PASSWORD STRENGTH GöÇGöÇ
         document.getElementById('password').addEventListener('input', function () {
             const pw = this.value;
             const segs = [document.getElementById('seg1'), document.getElementById('seg2'),
@@ -888,7 +868,7 @@
             document.getElementById('password').classList.toggle('valid', score >= 3);
         });
 
-        // ── VALIDATE ALL FIELDS ──
+        // GöÇGöÇ VALIDATE ALL FIELDS GöÇGöÇ
         function validate() {
             let ok = true;
             const fn = document.getElementById('firstName').value.trim();
@@ -911,7 +891,7 @@
             return ok;
         }
 
-        // ── EMAIL / PASSWORD SIGNUP ──
+        // GöÇGöÇ EMAIL / PASSWORD SIGNUP GöÇGöÇ
         document.getElementById('signupBtn').addEventListener('click', async () => {
             if (!validate()) return;
             setLoading(true);
@@ -934,14 +914,14 @@
                 // 4. Send verification email
                 await sendEmailVerification(user);
 
-                setTimeout(() => window.location.href = 'dashboard.html', 2000);
+                setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 2000);
             } catch (err) {
                 setLoading(false);
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // ── GOOGLE SIGNUP ──
+        // GöÇGöÇ GOOGLE SIGNUP GöÇGöÇ
         document.getElementById('googleBtn').addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
             provider.setCustomParameters({ prompt: 'select_account' });
@@ -949,52 +929,52 @@
                 const { user } = await signInWithPopup(auth, provider);
                 const nameParts = (user.displayName || 'New User').split(' ');
                 await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User');
-                showToast('Account created with Google! Redirecting…');
-                setTimeout(() => window.location.href = 'dashboard.html', 1400);
+                showToast('Account created with Google! RedirectingGÇª');
+                setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // ── GITHUB SIGNUP ──
+        // GöÇGöÇ GITHUB SIGNUP GöÇGöÇ
         document.getElementById('githubBtn').addEventListener('click', async () => {
             const provider = new GithubAuthProvider();
             try {
                 const { user } = await signInWithPopup(auth, provider);
                 const nameParts = (user.displayName || 'New User').split(' ');
                 await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User');
-                showToast('Account created with GitHub! Redirecting…');
-                setTimeout(() => window.location.href = 'dashboard.html', 1400);
+                showToast('Account created with GitHub! RedirectingGÇª');
+                setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // ── TOGGLE PASSWORD VISIBILITY ──
+        // GöÇGöÇ TOGGLE PASSWORD VISIBILITY GöÇGöÇ
         document.getElementById('togglePw').addEventListener('click', () => {
             const inp = document.getElementById('password');
             const btn = document.getElementById('togglePw');
             inp.type = inp.type === 'password' ? 'text' : 'password';
-            btn.textContent = inp.type === 'password' ? '👁️' : '🙈';
+            btn.textContent = inp.type === 'password' ? '=ƒæün+Å' : '=ƒÖê';
         });
         document.getElementById('toggleConfirm').addEventListener('click', () => {
             const inp = document.getElementById('confirmPassword');
             const btn = document.getElementById('toggleConfirm');
             inp.type = inp.type === 'password' ? 'text' : 'password';
-            btn.textContent = inp.type === 'password' ? '👁️' : '🙈';
+            btn.textContent = inp.type === 'password' ? '=ƒæün+Å' : '=ƒÖê';
         });
 
-        // ── TERMS CHECKBOX ──
+        // GöÇGöÇ TERMS CHECKBOX GöÇGöÇ
         document.getElementById('termsBox').addEventListener('click', () => {
             const cb = document.getElementById('termsCheck');
             const box = document.getElementById('termsBox');
             cb.checked = !cb.checked;
             box.classList.toggle('checked', cb.checked);
-            box.textContent = cb.checked ? '✓' : '';
+            box.textContent = cb.checked ? 'G£ô' : '';
             if (cb.checked) document.getElementById('termsErr').classList.remove('show');
         });
 
-        // ── CONFIRM PASSWORD LIVE CHECK ──
+        // GöÇGöÇ CONFIRM PASSWORD LIVE CHECK GöÇGöÇ
         document.getElementById('confirmPassword').addEventListener('input', () => {
             const pw = document.getElementById('password').value;
             const cpw = document.getElementById('confirmPassword').value;
@@ -1004,7 +984,7 @@
             }
         });
 
-        // ── ENTER KEY ──
+        // GöÇGöÇ ENTER KEY GöÇGöÇ
         document.addEventListener('keydown', e => {
             if (e.key === 'Enter') document.getElementById('signupBtn').click();
         });

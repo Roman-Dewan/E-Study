@@ -19,7 +19,7 @@ const auth = getAuth(app);
 const db   = getFirestore(app);
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) { window.location.href = 'index.html'; return; }
+  if (!user) { window.location.href = '../../index.html'; return; }
   const snap = await getDoc(doc(db, 'users', user.uid));
   if (snap.exists()) { /* populate UI */ }
 });

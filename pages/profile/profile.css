@@ -103,31 +103,6 @@
     border-radius: 50%;
 }
 
-/* Support Menu */
-.support-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.support-menu a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--text-dark);
-    padding: 8px 0;
-    transition: 0.2s;
-}
-
-.support-menu a i {
-    width: 20px;
-    color: var(--text-grey);
-}
-
-.support-menu a:hover {
-    color: var(--primary-color);
-}
 
 /* --- RIGHT COLUMN: SETTINGS --- */
 .main-content {
