@@ -178,3 +178,14 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 renderCalendar();
 updateDashboardForDate(today.getFullYear(), today.getMonth(), today.getDate());
+
+// Handle Logout from sidebar
+document.addEventListener('estudy-logout', async () => {
+  try {
+    await auth.signOut();
+    window.location.href = '../../features/auth/login.html';
+  } catch (error) {
+    console.error('Logout error:', error);
+    alert('Error logging out. Please try again.');
+  }
+});
