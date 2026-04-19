@@ -76,18 +76,117 @@ function setupSidebarActions() {
     const logoutBtn = document.getElementById('logout-link');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             // Dispatch a custom event so the page can handle specialized logout if needed
             const event = new CustomEvent('estudy-logout', { 
                 bubbles: true, 
                 detail: { originalEvent: e } 
             });
             document.dispatchEvent(event);
-            
-            // If no one prevented default, fallback to a standard redirect or alert
-            // But usually the page will have a listener
         });
     }
 
-    // Modal triggers (Invite, Mentor etc) if they exist on the page
-    // We can add global handlers here if the modals are also made reusable
+    // --- MODAL HANDLERS ---
+
+    // 1. Invite Friend Modal
+    const inviteBtn = document.getElementById('invite-friend-link');
+    const inviteModal = document.getElementById('invite-modal');
+    const inviteCloseBtn = document.getElementById('modal-close');
+    const copyBtn = document.getElementById('copy-btn');
+    const shareUrl = document.getElementById('share-url');
+    const inviteToast = document.getElementById('copy-toast');
+
+    if (inviteBtn && inviteModal) {
+        // Set dynamic invite URL if needed
+        if (shareUrl) {
+            shareUrl.value = window.location.origin + "/invite/roman-dewan";
+        }
+
+        inviteBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            inviteModal.classList.add('active');
+        });
+
+        inviteCloseBtn?.addEventListener('click', () => {
+            inviteModal.classList.remove('active');
+        });
+
+        // Copy functionality
+        copyBtn?.addEventListener('click', () => {
+            shareUrl.select();
+            navigator.clipboard.writeText(shareUrl.value).then(() => {
+                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copied</span>';
+                copyBtn.classList.add('copied');
+                inviteToast?.classList.add('show');
+
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> <span>Copy</span>';
+                    copyBtn.classList.remove('copied');
+                    inviteToast?.classList.remove('show');
+                }, 2000);
+            });
+        });
+    }
+
+    // 2. Become a Mentor Modal
+    const mentorBtn = document.getElementById('mentor-link');
+    const mentorModal = document.getElementById('mentor-modal');
+    const mentorCloseBtn = document.getElementById('mentor-modal-close');
+    const mentorRequestBtn = document.getElementById('mentor-request-btn');
+
+    if (mentorBtn && mentorModal) {
+        mentorBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            mentorModal.classList.add('active');
+        });
+
+        mentorCloseBtn?.addEventListener('click', () => {
+            mentorModal.classList.remove('active');
+        });
+
+        mentorRequestBtn?.addEventListener('click', () => {
+            mentorModal.classList.remove('active');
+            alert('Your mentor request has been sent!');
+        });
+    }
+
+    // 3. Support Modal
+    const supportBtn = document.getElementById('support-link');
+    const supportModal = document.getElementById('support-modal');
+    const supportCloseBtn = document.getElementById('support-modal-close');
+    const supportForm = document.getElementById('support-form');
+
+    if (supportBtn && supportModal) {
+        supportBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            supportModal.classList.add('active');
+        });
+
+        supportCloseBtn?.addEventListener('click', () => {
+            supportModal.classList.remove('active');
+        });
+
+        supportForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const subject = document.getElementById('support-subject')?.value;
+            const message = document.getElementById('support-message')?.value;
+
+            if (!subject || !message?.trim()) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            supportModal.classList.remove('active');
+            alert('Your support request has been sent! We\'ll get back to you soon.');
+            supportForm.reset();
+        });
+    }
+
+    // Global click-to-close for all modals
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            e.target.classList.remove('active');
+        }
+    });
 }
+

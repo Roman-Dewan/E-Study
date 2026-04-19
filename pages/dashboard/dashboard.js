@@ -19,7 +19,7 @@ onAuthStateChanged(auth, async (user) => {
     const userData = snap.data();
     document.querySelector('.user-name').textContent = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || 'User';
   }
-  
+
   // Load data for the currently selected date once auth is resolved
   updateDashboardForDate(selectedDate.year, selectedDate.month, selectedDate.day);
 });
@@ -201,7 +201,7 @@ document.querySelectorAll('.cal-nav').forEach((btn, idx) => {
     if (idx === 0) { month--; if (month < 0) { month = 11; year--; } }
     else { month++; if (month > 11) { month = 0; year++; } }
     document.getElementById('calMonth').selectedIndex = month;
-    
+
     // Ensure the year exists in dropdown
     const yearSelect = document.getElementById('calYear');
     let yearOpt = [...yearSelect.options].find(o => parseInt(o.value) === year);
@@ -212,7 +212,7 @@ document.querySelectorAll('.cal-nav').forEach((btn, idx) => {
       yearSelect.appendChild(op);
     }
     yearSelect.value = year;
-    
+
     renderCalendar();
   });
 });
@@ -237,3 +237,4 @@ if (!initYearOpt) {
 initYearSelect.value = today.getFullYear();
 
 renderCalendar();
+updateDashboardForDate(today.getFullYear(), today.getMonth(), today.getDate());
