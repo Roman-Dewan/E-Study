@@ -18,49 +18,8 @@
     <div class="app-container">
         <div id="sidebar-placeholder"></div>
 
-        <main class="main-content">
-            <header class="top-header">
-                <a href="javascript:history.back()" class="back-button"><i class="fa-solid fa-arrow-left"></i></a>
-                <h1>My Course</h1>
-            </header>
+        <div class="content-wrap">
 
-            <div class="video-container">
-                <div class="video-placeholder">
-                    <i class="fa-solid fa-circle-play play-btn"></i>
-                    <h2 style="margin-top:20px;">Introduction Digital Marketing</h2>
-                </div>
-            </div>
-
-            <h2 style="margin-bottom:10px;">Introduction Figma Basic to Advance</h2>
-            <p style="color:#888; font-size:12px; margin-bottom:20px;">William Joe | Figma | + Follow</p>
-
-            <div class="course-tabs">
-                <span class="active">Overview</span>
-                <span>FAQ</span>
-                <span>Discussion</span>
-                <span>Reviews</span>
-            </div>
-
-            <div class="tab-content">
-                <h3 style="font-size:16px; margin-bottom:10px;">Course Description</h3>
-                <p style="font-size:13px; color:#666; line-height:1.6;">
-                    Progressively synthesize clicks-and-mortar infrastructures for impactful quality vectors. Seamlessly
-                    innovate corporate best practices via standardized models.
-                </p>
-            </div>
-        </main>
-
-        <aside class="right-panel">
-            <div class="profile-header">
-                <i class="fa-regular fa-bell"></i>
-                <div class="user-info">
-                    <div class="avatar" id="user-avatar"></div>
-                    <span class="user-name" id="user-name">Loading...</span>
-                </div>
-            </div>
-    </div>
-
-    <div class="content-wrap">
         <!-- MAIN VIDEO AREA -->
         <main class="chat-area">
             <div class="video-area">
@@ -163,7 +122,6 @@
                                     including SEO
                                     tools, analytics platforms, and social media management software.</div>
                             </div>
-                            <!-- ... other FAQs -->
                         </div>
                     </div>
 
@@ -177,9 +135,9 @@
                             marketing
                             campaign.</p>
                         <br>
-                        <p><strong>What you'll learn:</strong> SEO & SEM, Social Media Strategy, Content Creation,
+                        <p><strong>What you'll learn:</strong> SEO &amp; SEM, Social Media Strategy, Content Creation,
                             Email
-                            Marketing, Analytics & Reporting</p>
+                            Marketing, Analytics &amp; Reporting</p>
                     </div>
 
                     <!-- NOTES TAB -->
@@ -230,78 +188,75 @@
             </div>
             <button class="fab-btn"><i class="fa-solid fa-plus"></i></button>
         </aside>
-    </div>
-    </div>
-    <<<<<<< HEAD:pages/courses/courses-detail.html <script src="../../js/sidebar.js">
-        </script>
-        =======
+        </div><!-- /.content-wrap -->
+    </div><!-- /.app-container -->
 
-        <!-- SETTINGS PANEL -->
-        <div id="settingsPanel" class="settings-panel">
-            <div class="settings-header">
-                <span>⚙️ Settings</span>
-                <button class="settings-close" id="settingsClose">✕</button>
+    <!-- SETTINGS PANEL -->
+    <div id="settingsPanel" class="settings-panel">
+        <div class="settings-header">
+            <span>⚙️ Settings</span>
+            <button class="settings-close" id="settingsClose">✕</button>
+        </div>
+        <div class="settings-section">
+            <h4>Playback Speed</h4>
+            <div class="speed-options">
+                <button class="speed-btn" data-speed="0.5">0.5x</button>
+                <button class="speed-btn" data-speed="0.75">0.75x</button>
+                <button class="speed-btn active" data-speed="1">1x</button>
+                <button class="speed-btn" data-speed="1.25">1.25x</button>
+                <button class="speed-btn" data-speed="1.5">1.5x</button>
+                <button class="speed-btn" data-speed="2">2x</button>
             </div>
-            <div class="settings-section">
-                <h4>Playback Speed</h4>
-                <div class="speed-options">
-                    <button class="speed-btn" data-speed="0.5">0.5x</button>
-                    <button class="speed-btn" data-speed="0.75">0.75x</button>
-                    <button class="speed-btn active" data-speed="1">1x</button>
-                    <button class="speed-btn" data-speed="1.25">1.25x</button>
-                    <button class="speed-btn" data-speed="1.5">1.5x</button>
-                    <button class="speed-btn" data-speed="2">2x</button>
-                </div>
+        </div>
+        <div class="settings-section">
+            <h4>Quality</h4>
+            <div class="quality-options">
+                <button class="quality-btn" data-quality="auto">Auto</button>
+                <button class="quality-btn active" data-quality="1080p">1080p</button>
+                <button class="quality-btn" data-quality="720p">720p</button>
+                <button class="quality-btn" data-quality="480p">480p</button>
             </div>
-            <div class="settings-section">
-                <h4>Quality</h4>
-                <div class="quality-options">
-                    <button class="quality-btn" data-quality="auto">Auto</button>
-                    <button class="quality-btn active" data-quality="1080p">1080p</button>
-                    <button class="quality-btn" data-quality="720p">720p</button>
-                    <button class="quality-btn" data-quality="480p">480p</button>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION PANEL -->
+    <div id="notificationPanel" class="notification-panel">
+        <div class="notif-header">
+            <span>Notifications</span>
+            <button class="notif-close" id="notif-close">✕</button>
+        </div>
+        <div class="notif-list">
+            <div class="notif-item unread">
+                <div class="notif-icon">🎉</div>
+                <div class="notif-content">
+                    <p>New lesson available!</p>
+                    <span>2 hours ago</span>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- NOTIFICATION PANEL -->
-        <div id="notificationPanel" class="notification-panel">
-            <div class="notif-header">
-                <span>Notifications</span>
-                <button class="notif-close" id="notif-close">✕</button>
-            </div>
-            <div class="notif-list">
-                <div class="notif-item unread">
-                    <div class="notif-icon">🎉</div>
-                    <div class="notif-content">
-                        <p>New lesson available!</p>
-                        <span>2 hours ago</span>
+    <!-- POPUP VIDEO (Preview) -->
+    <div id="popupVideo" class="popup-video">
+        <div class="popup-content">
+            <button class="popup-close" id="popupClose">✕</button>
+            <div class="popup-player">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-content">
+                        <h2>INTRODUCTION TO<br>DIGITAL<br>MARKETING</h2>
+                    </div>
+                    <div class="play-overlay" id="popupPlayBtn">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="5,3 19,12 5,21" />
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- POPUP VIDEO (Preview) -->
-        <div id="popupVideo" class="popup-video">
-            <div class="popup-content">
-                <button class="popup-close" id="popupClose">✕</button>
-                <div class="popup-player">
-                    <div class="video-thumbnail">
-                        <div class="video-thumbnail-content">
-                            <h2>INTRODUCTION TO<br>DIGITAL<br>MARKETING</h2>
-                        </div>
-                        <div class="play-overlay" id="popupPlayBtn">
-                            <svg viewBox="0 0 24 24">
-                                <polygon points="5,3 19,12 5,21" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script type="module" src="js/courses-detail.js"></script>
-        >>>>>>> 691b3c63a3fb28877c23044e238cac29edc1a44a:courses-detail.html
+    <script src="../../js/sidebar.js"></script>
+    <script type="module" src="../../js/courses-detail.js"></script>
 </body>
 
 </html>

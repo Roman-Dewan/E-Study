@@ -1,12 +1,18 @@
 import { auth, db } from './firebase-config.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { courses } from './courses.js';
+import { courses } from '../pages/courses/courses.js';
 import { updateDailyStat, startTimeTracking } from './tracker.js';
 
 // ── SETUP & AUTH ──
+// Logout handler
+document.addEventListener('estudy-logout', async () => {
+    try { await signOut(auth); window.location.href = '../index.html'; }
+    catch (e) { console.error(e); }
+});
+
 onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = 'login.html'; return; }
+    if (!user) { window.location.href = '../index.html'; return; }
     
     // Initialize Tracker & Common UI
     startTimeTracking();

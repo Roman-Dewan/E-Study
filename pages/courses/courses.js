@@ -1,3 +1,24 @@
+// ── AUTH GUARD & LOGOUT ───────────────────────────────────────────────────────
+import { auth, db } from '../../js/firebase-config.js';
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = '../../index.html'; return; }
+  const snap = await getDoc(doc(db, 'E-study', user.uid));
+  if (snap.exists()) {
+    const d = snap.data();
+    const name = `${d.first_name || ''} ${d.last_name || ''}`.trim() || 'User';
+    const el = document.querySelector('.user-name');
+    if (el) el.textContent = name;
+  }
+});
+
+document.addEventListener('estudy-logout', async () => {
+  try { await signOut(auth); window.location.href = '../../index.html'; }
+  catch (e) { console.error(e); }
+});
+
 export const courses = [
   { icon: '🤖', grad: 'linear-gradient(135deg,#f093fb,#f5576c)', title: 'Machine Learning Basic to advanced', instructor: 'Monkey D Lufy', lessons: 15, hours: 40, progress: 100, status: 'completed' },
   { icon: '⚓', grad: 'linear-gradient(135deg,#4facfe,#00f2fe)', title: 'western trades 101', instructor: 'Jack sparrow', lessons: 15, hours: 40, progress: 100, status: 'completed' },

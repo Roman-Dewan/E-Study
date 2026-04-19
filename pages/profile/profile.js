@@ -48,7 +48,7 @@ document.querySelectorAll('.btn-cancel').forEach(btn => {
 // --- FIREBASE INTEGRATION ---
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
-        window.location.href = '../../features/auth/login.html';
+        window.location.href = '../../index.html';
         return;
     }
 
@@ -187,7 +187,7 @@ setupToggleAutoSave('priv-messages', 'privacy.messages');
 document.addEventListener('estudy-logout', async () => {
     try {
         await signOut(auth);
-        window.location.href = '../../features/auth/login.html';
+        window.location.href = '../../index.html';
     } catch (error) {
         console.error('Logout error:', error);
         alert('Error logging out.');

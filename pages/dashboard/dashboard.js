@@ -1,27 +1,38 @@
 import { auth, db } from '../../js/firebase-config.js';
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc, collection, query, where, getDocs, orderBy, limit, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, getDoc, collection, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const today = new Date();
 let selectedDate = { year: today.getFullYear(), month: today.getMonth(), day: today.getDate() };
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-// Initialize analytics if needed (app is already initialized in firebase-config.js)
-// const analytics = getAnalytics(app); 
-
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = '../../index.html'; return; }
-  // Using 'E-study' as the root collection as per your project structure
   const snap = await getDoc(doc(db, 'E-study', user.uid));
   if (snap.exists()) {
     const userData = snap.data();
-    document.querySelector('.user-name').textContent = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || 'User';
+    const firstName = userData.first_name || '';
+    const fullName = `${firstName} ${userData.last_name || ''}`.trim() || 'User';
+    // Update topbar name
+    const nameEl = document.querySelector('.user-name');
+    if (nameEl) nameEl.textContent = fullName;
+    // Update hero banner greeting
+    const heroH2 = document.querySelector('.hero-banner h2');
+    if (heroH2) heroH2.textContent = `Hi ${firstName || fullName} \uD83D\uDC4B`;
   }
-
-  // Load data for the currently selected date once auth is resolved
   updateDashboardForDate(selectedDate.year, selectedDate.month, selectedDate.day);
+});
+
+
+// Logout handler (triggered by sidebar logout link)
+document.addEventListener('estudy-logout', async () => {
+  try {
+    await signOut(auth);
+    window.location.href = '../../index.html';
+  } catch (err) {
+    console.error('Logout error:', err);
+  }
 });
 
 
@@ -237,4 +248,3 @@ if (!initYearOpt) {
 initYearSelect.value = today.getFullYear();
 
 renderCalendar();
-updateDashboardForDate(today.getFullYear(), today.getMonth(), today.getDate());
