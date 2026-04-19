@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudy - Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Course Detail – Estudy</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
@@ -52,38 +54,254 @@
             <div class="profile-header">
                 <i class="fa-regular fa-bell"></i>
                 <div class="user-info">
-                    <img src="https://via.placeholder.com/40" alt="Martin">
-                    <span>Martin nel</span>
+                    <div class="avatar" id="user-avatar"></div>
+                    <span class="user-name" id="user-name">Loading...</span>
                 </div>
             </div>
+    </div>
 
-            <div class="module-list">
-                <h3>Course Content</h3>
-                <p style="font-size:11px; color:#999; margin-bottom:20px;">Lecture (15) Total (5.5 hrs)</p>
-
-                <div class="module-item">
-                    <div class="module-title">Module 1 - Introduction</div>
-                    <div class="lesson-item">
-                        <i class="fa-solid fa-circle-check check-icon"></i> Introduction
+    <div class="content-wrap">
+        <!-- MAIN VIDEO AREA -->
+        <main class="chat-area">
+            <div class="video-area">
+                <!-- Video Player -->
+                <div class="video-player">
+                    <div class="video-thumbnail" id="videoThumbnail">
+                        <div class="video-thumbnail-content">
+                            <h2 id="videoBannerTitle">INTRODUCTION TO<br>DIGITAL<br>MARKETING<br>BASIC TO
+                                ADVANCE<br>BY DEVDAS</h2>
+                        </div>
+                        <div class="thumb-emoji">👨‍💻</div>
+                        <div class="play-overlay" id="playBtnLarge">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="video-controls">
+                        <div class="controls-left">
+                            <button class="ctrl-btn">⏮</button>
+                            <button class="ctrl-btn" id="playPauseBtn">▶</button>
+                            <button class="ctrl-btn">⏭</button>
+                            <button class="ctrl-btn">🔊</button>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="time-bar" id="timeBar">
+                                <div class="time-fill" id="timeFill"></div>
+                            </div>
+                            <div class="time-labels">
+                                <span id="currentTime">00:00</span>
+                                <span id="duration">1:00:00</span>
+                            </div>
+                        </div>
+                        <div class="ctrl-extra">
+                            <button class="ctrl-btn" id="minimizeBtn" title="Picture in Picture"
+                                style="font-size:16px">📉</button>
+                            <button class="ctrl-btn" id="settingsBtn" style="font-size:16px">⚙️</button>
+                            <button class="ctrl-btn" id="likeBtn" style="font-size:16px">❤️</button>
+                            <button class="ctrl-btn" id="fullscreenBtn" style="font-size:16px">⛶</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="module-item">
-                    <div class="module-title" style="color:var(--primary-color);">Module 2 - Basics</div>
-                    <div class="lesson-item">
-                        <i class="fa-solid fa-circle-check check-icon"></i> Getting started
+                <!-- Course Info Card -->
+                <div class="course-info-card">
+                    <div class="course-title-row">
+                        <h1 id="courseTitle">Introduction of Digital Marketing</h1>
+                        <div class="course-tags">
+                            <a href="#" class="tag-link" id="courseInstructor">Devdas</a>
+                            <span class="sep">|</span>
+                            <a href="#" class="tag-link">Figma</a>
+                            <span class="sep">|</span>
+                            <a href="#" class="follow-btn">+ follow</a>
+                        </div>
                     </div>
-                    <div class="lesson-item active">
-                        <i class="fa-solid fa-circle-play"></i> Overview about tools (Running)
+                    <div class="course-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="statsProgress">08</div>
+                            <div class="stat-label">In Progress</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" style="color:var(--green)" id="statsComplete">23</div>
+                            <div class="stat-label">Completed</div>
+                        </div>
                     </div>
-                    <div class="lesson-item">
-                        <i class="fa-regular fa-circle"></i> Visual design using tools
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs-row">
+                    <div style="display:flex">
+                        <div class="tab" data-target="tab-overview">Overview</div>
+                        <div class="tab active" data-target="tab-faq">FAQ</div>
+                        <div class="tab" data-target="tab-notes">Notes</div>
+                        <div class="tab" data-target="tab-reviews">Reviews</div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT -->
+                <div class="tab-content-container">
+                    <!-- FAQ CONTENT -->
+                    <div id="tab-faq" class="tab-pane active">
+                        <div class="faq-list">
+                            <div class="faq-item open">
+                                <div class="faq-question">
+                                    01. Marketing instructions
+                                    <div class="faq-toggle minus">−</div>
+                                </div>
+                                <div class="faq-answer">
+                                    Progressively synthesis clicks-and-mortar infrastructures for impactful quality
+                                    vectors.
+                                    Seamlessly innovative corporate best practices via standard models.
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    Marketing tool
+                                    <div class="faq-toggle plus">+</div>
+                                </div>
+                                <div class="faq-answer">Learn the essential tools used in modern digital marketing
+                                    including SEO
+                                    tools, analytics platforms, and social media management software.</div>
+                            </div>
+                            <!-- ... other FAQs -->
+                        </div>
+                    </div>
+
+                    <!-- OVERVIEW CONTENT -->
+                    <div id="tab-overview" class="tab-pane" style="color:var(--muted);font-size:15px;line-height:1.8">
+                        <p id="courseDescriptionText">This comprehensive course on Digital Marketing covers
+                            everything from the fundamentals to advanced
+                            strategies. You'll learn SEO, social media marketing, content marketing, email
+                            campaigns, and paid
+                            advertising. By the end, you'll have the skills to plan and execute successful digital
+                            marketing
+                            campaign.</p>
+                        <br>
+                        <p><strong>What you'll learn:</strong> SEO & SEM, Social Media Strategy, Content Creation,
+                            Email
+                            Marketing, Analytics & Reporting</p>
+                    </div>
+
+                    <!-- NOTES TAB -->
+                    <div id="tab-notes" class="tab-pane">
+                        <div class="notes-section">
+                            <h3>📝 Your Notes</h3>
+                            <textarea class="notes-input" id="notesArea" placeholder="Take notes while watching..."
+                                rows="6"></textarea>
+                            <div style="display:flex; justify-content: flex-end; margin-top: 10px;">
+                                <button class="save-notes-btn" id="saveNotesBtn">Save Notes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REVIEWS TAB -->
+                    <div id="tab-reviews" class="tab-pane">
+                        <div class="reviews-section">
+                            <div class="rating-summary">
+                                <div class="rating-big">4.8</div>
+                                <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                                <div class="rating-count">Based on 128 reviews</div>
+                            </div>
+                            <div class="review-form">
+                                <textarea placeholder="Write your review..." rows="3" id="reviewText"></textarea>
+                                <button class="submit-review-btn" id="submitReviewBtn">Submit Review</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </main>
+
+        <!-- COURSE CONTENTS PANEL -->
+        <aside class="chat-sidebar">
+            <div class="chat-sidebar-header">
+                <h2>Course Contents</h2>
+                <div class="chat-search-wrapper">
+                    <input type="text" placeholder="Search lectures..." id="lectureSearch">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div class="chat-tabs">
+                <button class="chat-tab active" data-tab="lectures">Lectures</button>
+                <button class="chat-tab" data-tab="resources">Resources</button>
+            </div>
+            <div class="user-list" id="moduleList">
+                <!-- Modules will be injected here -->
+            </div>
+            <button class="fab-btn"><i class="fa-solid fa-plus"></i></button>
         </aside>
     </div>
-    <script src="../../js/sidebar.js"></script>
+    </div>
+    <<<<<<< HEAD:pages/courses/courses-detail.html <script src="../../js/sidebar.js">
+        </script>
+        =======
+
+        <!-- SETTINGS PANEL -->
+        <div id="settingsPanel" class="settings-panel">
+            <div class="settings-header">
+                <span>⚙️ Settings</span>
+                <button class="settings-close" id="settingsClose">✕</button>
+            </div>
+            <div class="settings-section">
+                <h4>Playback Speed</h4>
+                <div class="speed-options">
+                    <button class="speed-btn" data-speed="0.5">0.5x</button>
+                    <button class="speed-btn" data-speed="0.75">0.75x</button>
+                    <button class="speed-btn active" data-speed="1">1x</button>
+                    <button class="speed-btn" data-speed="1.25">1.25x</button>
+                    <button class="speed-btn" data-speed="1.5">1.5x</button>
+                    <button class="speed-btn" data-speed="2">2x</button>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4>Quality</h4>
+                <div class="quality-options">
+                    <button class="quality-btn" data-quality="auto">Auto</button>
+                    <button class="quality-btn active" data-quality="1080p">1080p</button>
+                    <button class="quality-btn" data-quality="720p">720p</button>
+                    <button class="quality-btn" data-quality="480p">480p</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOTIFICATION PANEL -->
+        <div id="notificationPanel" class="notification-panel">
+            <div class="notif-header">
+                <span>Notifications</span>
+                <button class="notif-close" id="notif-close">✕</button>
+            </div>
+            <div class="notif-list">
+                <div class="notif-item unread">
+                    <div class="notif-icon">🎉</div>
+                    <div class="notif-content">
+                        <p>New lesson available!</p>
+                        <span>2 hours ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- POPUP VIDEO (Preview) -->
+        <div id="popupVideo" class="popup-video">
+            <div class="popup-content">
+                <button class="popup-close" id="popupClose">✕</button>
+                <div class="popup-player">
+                    <div class="video-thumbnail">
+                        <div class="video-thumbnail-content">
+                            <h2>INTRODUCTION TO<br>DIGITAL<br>MARKETING</h2>
+                        </div>
+                        <div class="play-overlay" id="popupPlayBtn">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="js/courses-detail.js"></script>
+        >>>>>>> 691b3c63a3fb28877c23044e238cac29edc1a44a:courses-detail.html
 </body>
 
 </html>

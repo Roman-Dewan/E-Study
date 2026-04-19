@@ -1,4 +1,4 @@
-const courses = [
+export const courses = [
   { icon: '🤖', grad: 'linear-gradient(135deg,#f093fb,#f5576c)', title: 'Machine Learning Basic to advanced', instructor: 'Monkey D Lufy', lessons: 15, hours: 40, progress: 100, status: 'completed' },
   { icon: '⚓', grad: 'linear-gradient(135deg,#4facfe,#00f2fe)', title: 'western trades 101', instructor: 'Jack sparrow', lessons: 15, hours: 40, progress: 100, status: 'completed' },
   { icon: '⌘', grad: 'linear-gradient(135deg,#f5a623,#f76b1c)', title: 'Classical Chines martial arts', instructor: 'Yang kai', lessons: 15, hours: 40, progress: 30, status: 'ongoing' },
@@ -20,6 +20,7 @@ const avatarColors = ['#3DBE7B', '#f093fb', '#4facfe', '#f5a623', '#667eea', '#f
 
 function renderCourses(list) {
   const grid = document.getElementById('coursesGrid');
+  if (!grid) return;
   grid.innerHTML = list.map((c, i) => `
     <div class="course-card">
       <div class="card-menu">···</div>
@@ -39,20 +40,23 @@ function renderCourses(list) {
   `).join('');
 
   // Make cards clickable
-  grid.querySelectorAll('.course-card').forEach(card => {
-    card.addEventListener('click', () => window.location.href = 'courses-detail.html');
+  grid.querySelectorAll('.course-card').forEach((card, i) => {
+    card.addEventListener('click', () => window.location.href = `courses-detail.html?id=${i}`);
   });
 }
 
 renderCourses(courses);
 
 // Search filter
-document.getElementById('searchInput').addEventListener('input', e => {
-  const q = e.target.value.toLowerCase();
-  renderCourses(courses.filter(c =>
-    c.title.toLowerCase().includes(q) || c.instructor.toLowerCase().includes(q)
-  ));
-});
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+  searchInput.addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    renderCourses(courses.filter(c =>
+      c.title.toLowerCase().includes(q) || c.instructor.toLowerCase().includes(q)
+    ));
+  });
+}
 
 // Pagination
 document.querySelectorAll('.page-btn').forEach(btn => {
@@ -63,13 +67,19 @@ document.querySelectorAll('.page-btn').forEach(btn => {
 });
 
 // View toggle
-document.getElementById('listView').addEventListener('click', function () {
-  this.classList.add('active');
-  document.getElementById('gridView').classList.remove('active');
-  document.getElementById('coursesGrid').style.gridTemplateColumns = '1fr';
-});
-document.getElementById('gridView').addEventListener('click', function () {
-  this.classList.add('active');
-  document.getElementById('listView').classList.remove('active');
-  document.getElementById('coursesGrid').style.gridTemplateColumns = 'repeat(3,1fr)';
-});
+const listView = document.getElementById('listView');
+const gridView = document.getElementById('gridView');
+const coursesGrid = document.getElementById('coursesGrid');
+
+if (listView && gridView && coursesGrid) {
+  listView.addEventListener('click', function () {
+    this.classList.add('active');
+    gridView.classList.remove('active');
+    coursesGrid.style.gridTemplateColumns = '1fr';
+  });
+  gridView.addEventListener('click', function () {
+    this.classList.add('active');
+    listView.classList.remove('active');
+    coursesGrid.style.gridTemplateColumns = 'repeat(3,1fr)';
+  });
+}
