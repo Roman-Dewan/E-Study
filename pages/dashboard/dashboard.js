@@ -1,7 +1,12 @@
-import { auth, db } from './js/firebase-config.js';
+import { auth, db } from '../../js/firebase-config.js';
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc, collection, query, where, getDocs, orderBy, limit, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const today = new Date();
+let selectedDate = { year: today.getFullYear(), month: today.getMonth(), day: today.getDate() };
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 // Initialize analytics if needed (app is already initialized in firebase-config.js)
 // const analytics = getAnalytics(app); 
@@ -14,6 +19,9 @@ onAuthStateChanged(auth, async (user) => {
     const userData = snap.data();
     document.querySelector('.user-name').textContent = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || 'User';
   }
+  
+  // Load data for the currently selected date once auth is resolved
+  updateDashboardForDate(selectedDate.year, selectedDate.month, selectedDate.day);
 });
 
 
@@ -34,14 +42,14 @@ async function getDayData(uid, dateStr) {
  */
 async function getWeeklyData(uid, centerDate) {
   const activityRef = collection(db, 'E-study', uid, 'activity');
-  
+
   // Calculate the start of the week (last Saturday as per current layout)
   const base = new Date(centerDate.year, centerDate.month, centerDate.day);
   const dayOfWeek = base.getDay(); // 0 is Sunday
-  const diffToSat = (dayOfWeek + 1) % 7; 
+  const diffToSat = (dayOfWeek + 1) % 7;
   const startDate = new Date(base);
   startDate.setDate(base.getDate() - diffToSat);
-  
+
   const weekData = [];
   for (let i = 0; i < 7; i++) {
     const d = new Date(startDate);
@@ -50,7 +58,7 @@ async function getWeeklyData(uid, centerDate) {
     const data = await getDayData(uid, dStr);
     weekData.push(data);
   }
-  
+
   return {
     weekTasks: weekData.map(d => d.tasks || 0),
     weekLessons: weekData.map(d => d.lessons || 0),
@@ -72,23 +80,21 @@ window.seedStats = async (dateStr, data) => {
 
 
 // ── CALENDAR ────────────────────────────────────────────────────────────────
-const today = new Date();
-let selectedDate = { year: today.getFullYear(), month: today.getMonth(), day: today.getDate() };
 
 function renderCalendar() {
   const month = document.getElementById('calMonth').selectedIndex;
-  const year  = parseInt(document.getElementById('calYear').value);
-  const grid  = document.getElementById('calGrid');
+  const year = parseInt(document.getElementById('calYear').value);
+  const grid = document.getElementById('calGrid');
 
   grid.querySelectorAll('.cal-day').forEach(d => d.remove());
 
-  const firstDay      = new Date(year, month, 1).getDay();
-  const daysInMonth   = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
   const prevMonthDays = new Date(year, month, 0).getDate();
 
   for (let i = 0; i < firstDay; i++) {
     const el = document.createElement('div');
-    el.className   = 'cal-day other-month';
+    el.className = 'cal-day other-month';
     el.textContent = prevMonthDays - firstDay + 1 + i;
     grid.appendChild(el);
   }
@@ -96,14 +102,14 @@ function renderCalendar() {
   for (let d = 1; d <= daysInMonth; d++) {
     const el = document.createElement('div');
     const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-    const isSel   = d === selectedDate.day && month === selectedDate.month && year === selectedDate.year;
+    const isSel = d === selectedDate.day && month === selectedDate.month && year === selectedDate.year;
 
     let cls = 'cal-day';
     if (isToday) cls += ' today';
-    if (isSel)   cls += ' selected';
+    if (isSel) cls += ' selected';
     if (!isToday && !isSel && [3, 9, 13, 22].includes(d)) cls += ' has-event';
 
-    el.className   = cls;
+    el.className = cls;
     el.textContent = d;
     el.addEventListener('click', () => {
       selectedDate = { year, month, day: d };
@@ -116,20 +122,18 @@ function renderCalendar() {
 
 
 // ── DASHBOARD UPDATE LOGIC ──────────────────────────────────────────────────
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 async function updateDashboardForDate(year, month, day) {
   if (!auth.currentUser) return;
   const uid = auth.currentUser.uid;
   const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-  
+
   // Show a mini loading state if desired (optional)
   document.getElementById('learningDateLabel').textContent = "Loading...";
 
   const data = await getDayData(uid, dateStr);
   const weekly = await getWeeklyData(uid, { year, month, day });
-  
+
   const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
 
   // Update Labels
@@ -151,9 +155,9 @@ async function updateDashboardForDate(year, month, day) {
   dReading.setAttribute('stroke-dasharray', `${rArc} ${C}`);
   dReading.setAttribute('stroke-dashoffset', -(wArc + vArc));
 
-  document.getElementById('labelReading').textContent    = `Reading ${data.reading || 0}m`;
-  document.getElementById('labelVideo').textContent      = `Video ${data.video || 0}m`;
-  document.getElementById('labelWriting').textContent    = `Writing ${data.writing || 0}m`;
+  document.getElementById('labelReading').textContent = `Reading ${data.reading || 0}m`;
+  document.getElementById('labelVideo').textContent = `Video ${data.video || 0}m`;
+  document.getElementById('labelWriting').textContent = `Writing ${data.writing || 0}m`;
   document.getElementById('labelAssignment').textContent = `Assignment ${data.assignment || 0}m`;
 
   // Update Line Chart
@@ -177,7 +181,7 @@ async function updateDashboardForDate(year, month, day) {
   const base = new Date(year, month, day);
   const startOffset = (base.getDay() + 1) % 7;
   let labels = '';
-  for(let i=0; i<7; i++) {
+  for (let i = 0; i < 7; i++) {
     const d = new Date(year, month, day - startOffset + i);
     const active = d.getDate() === day && d.getMonth() === month;
     labels += `<span ${active ? 'style="color:var(--green);font-weight:700"' : ''}>${DAYS[d.getDay()]}</span>`;
@@ -193,12 +197,22 @@ document.getElementById('calYear').addEventListener('change', renderCalendar);
 document.querySelectorAll('.cal-nav').forEach((btn, idx) => {
   btn.addEventListener('click', () => {
     let month = document.getElementById('calMonth').selectedIndex;
-    let year  = parseInt(document.getElementById('calYear').value);
+    let year = parseInt(document.getElementById('calYear').value);
     if (idx === 0) { month--; if (month < 0) { month = 11; year--; } }
-    else           { month++; if (month > 11) { month = 0; year++; } }
+    else { month++; if (month > 11) { month = 0; year++; } }
     document.getElementById('calMonth').selectedIndex = month;
-    const yearOpt = [...document.getElementById('calYear').options].find(o => parseInt(o.value) === year);
-    if (yearOpt) document.getElementById('calYear').value = year;
+    
+    // Ensure the year exists in dropdown
+    const yearSelect = document.getElementById('calYear');
+    let yearOpt = [...yearSelect.options].find(o => parseInt(o.value) === year);
+    if (!yearOpt) {
+      const op = document.createElement('option');
+      op.value = year;
+      op.textContent = year;
+      yearSelect.appendChild(op);
+    }
+    yearSelect.value = year;
+    
     renderCalendar();
   });
 });
@@ -210,5 +224,16 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
+// Initialize Calendar Dropdowns to Current Month/Year
+document.getElementById('calMonth').selectedIndex = today.getMonth();
+const initYearSelect = document.getElementById('calYear');
+let initYearOpt = [...initYearSelect.options].find(o => parseInt(o.value) === today.getFullYear());
+if (!initYearOpt) {
+  const op = document.createElement('option');
+  op.value = today.getFullYear();
+  op.textContent = today.getFullYear();
+  initYearSelect.appendChild(op);
+}
+initYearSelect.value = today.getFullYear();
+
 renderCalendar();
-updateDashboardForDate(today.getFullYear(), today.getMonth(), today.getDate());
