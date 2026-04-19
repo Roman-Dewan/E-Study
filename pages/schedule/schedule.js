@@ -1,3 +1,16 @@
+// ── AUTH GUARD & LOGOUT ───────────────────────────────────────────────────────
+import { auth } from '../../js/firebase-config.js';
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) { window.location.href = '../../index.html'; }
+});
+
+document.addEventListener('estudy-logout', async () => {
+  try { await signOut(auth); window.location.href = '../../index.html'; }
+  catch (e) { console.error(e); }
+});
+
 // Setup global state
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [
     // Default seed tasks mapping closer to the UI
