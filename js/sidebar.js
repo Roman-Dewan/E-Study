@@ -1,3 +1,7 @@
+import { auth, db } from './firebase-config.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 /**
  * Reusable Sidebar Loader for E-Study
  * Manages fetching, injecting, active state, and relative paths.
@@ -11,7 +15,6 @@ async function initSidebar() {
     const placeholder = document.getElementById('sidebar-placeholder');
     if (!placeholder) return;
 
-    // Detect root path based on current location
     const rootPath = calculateRootPath();
     
     try {
@@ -19,35 +22,52 @@ async function initSidebar() {
         if (!response.ok) throw new Error('Failed to fetch sidebar');
         
         let html = await response.text();
-        
-        // Inject with dynamic root paths
         placeholder.innerHTML = html.replace(/ROOT\//g, rootPath);
         
-        // Highlight current page
         highlightActiveLink();
-        
-        // Initialize sidebar-specific features
         setupSidebarActions();
-        
-        // Setup global header profile dropdown
         setupGlobalHeader();
+        
+        // Listen for Auth changes after sidebar is loaded
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                await updateSidebarForUser(user.email);
+            }
+        });
         
     } catch (error) {
         console.error('Sidebar Loader Error:', error);
     }
 }
 
+async function updateSidebarForUser(email) {
+    try {
+        const userDocSnap = await getDoc(doc(db, "E-study", email));
+        if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            const role = userData.role || 'student';
+            
+            const mentorNavItem = document.getElementById('mentor-nav-item');
+            const becomeMentorLink = document.getElementById('mentor-link');
+            
+            if (role === 'mentor') {
+                if (mentorNavItem) mentorNavItem.style.display = 'flex';
+                if (becomeMentorLink) becomeMentorLink.style.display = 'none'; // Already a mentor
+            } else {
+                if (mentorNavItem) mentorNavItem.style.display = 'none';
+                if (becomeMentorLink) becomeMentorLink.style.display = 'flex';
+            }
+        }
+    } catch (err) {
+        console.error("Error updating sidebar for user:", err);
+    }
+}
+
 function calculateRootPath() {
-    // Basic logic: check directory depth
-    // Works for pages in /pages/folder/file.html (depth 2)
-    // and pages at root (depth 0)
     const path = window.location.pathname;
-    
-    // If it contains /pages/, we need to go up 2 levels
     if (path.includes('/pages/')) {
         return '../../';
     }
-    // If it's at root (index.html), we stay here
     return './';
 }
 
@@ -60,14 +80,9 @@ function highlightActiveLink() {
         const page = item.getAttribute('data-page');
         if (!href) return;
         
-        // Extract the filename/directory name from href
-        // e.g., ROOT/pages/courses/courses.html -> courses
         const parts = href.split('/');
         const filename = parts[parts.length - 1].split('.')[0].toLowerCase();
         
-        // Match if:
-        // 1. The current pathname contains the data-page attribute (e.g., /courses/ matches data-page="courses")
-        // 2. The current pathname contains the filename (e.g., /courses-detail.html matches courses.html)
         if ((page && currentPath.includes(page)) || currentPath.includes(filename)) {
             item.classList.add('active');
         }
@@ -116,7 +131,6 @@ function setupSidebarActions() {
     const inviteToast = document.getElementById('copy-toast');
 
     if (inviteBtn && inviteModal) {
-        // Set dynamic invite URL if needed
         if (shareUrl) {
             shareUrl.value = window.location.origin + "/invite/roman-dewan";
         }
@@ -130,7 +144,6 @@ function setupSidebarActions() {
             inviteModal.classList.remove('active');
         });
 
-        // Copy functionality
         copyBtn?.addEventListener('click', () => {
             shareUrl.select();
             navigator.clipboard.writeText(shareUrl.value).then(() => {
@@ -147,15 +160,39 @@ function setupSidebarActions() {
         });
     }
 
-    // 2. Become a Mentor Modal
+    // 2. Become a Mentor Modal & Form Handling
     const mentorBtn = document.getElementById('mentor-link');
     const mentorModal = document.getElementById('mentor-modal');
     const mentorCloseBtn = document.getElementById('mentor-modal-close');
-    const mentorRequestBtn = document.getElementById('mentor-request-btn');
+    const mentorForm = document.getElementById('mentor-registration-form');
 
     if (mentorBtn && mentorModal) {
-        mentorBtn.addEventListener('click', (e) => {
+        mentorBtn.addEventListener('click', async (e) => {
             e.preventDefault();
+            
+            // Pre-fill user data if available
+            if (auth.currentUser) {
+                const emailInput = document.getElementById('mentor-email');
+                const nameInput = document.getElementById('mentor-name');
+                
+                if (emailInput) emailInput.value = auth.currentUser.email;
+                
+                // If name is not yet set in input and we can get it from Firestore
+                if (nameInput && !nameInput.value) {
+                    try {
+                        const userDocSnap = await getDoc(doc(db, "E-study", auth.currentUser.email));
+                        if (userDocSnap.exists()) {
+                            const userData = userDocSnap.data();
+                            const firstName = userData.first_name || '';
+                            const lastName = userData.last_name || '';
+                            nameInput.value = (firstName + ' ' + lastName).trim() || auth.currentUser.displayName || '';
+                        }
+                    } catch (err) {
+                        console.log("Could not pre-fill name:", err);
+                        if (auth.currentUser.displayName) nameInput.value = auth.currentUser.displayName;
+                    }
+                }
+            }
             mentorModal.classList.add('active');
         });
 
@@ -163,11 +200,42 @@ function setupSidebarActions() {
             mentorModal.classList.remove('active');
         });
 
-        mentorRequestBtn?.addEventListener('click', () => {
-            mentorModal.classList.remove('active');
-            alert('Your mentor request has been sent!');
+        mentorForm?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('mentor-confirm-btn');
+            const originalText = btn.textContent;
+            
+            try {
+                btn.textContent = 'Processing...';
+                btn.disabled = true;
+
+                const formData = {
+                    role: 'mentor',
+                    'personal_details.phone': document.getElementById('mentor-phone').value,
+                    'personal_details.gender': mentorForm.querySelector('input[name="gender"]:checked').value,
+                    'personal_details.city': document.getElementById('mentor-city').value,
+                    'personal_details.location': document.getElementById('mentor-location').value
+                };
+
+                const userDocRef = doc(db, "E-study", auth.currentUser.email);
+                await updateDoc(userDocRef, formData);
+
+                mentorModal.classList.remove('active');
+                alert('Congratulations! You are now a mentor.');
+                
+                // Refresh sidebar UI
+                await updateSidebarForUser(auth.currentUser.email);
+                
+            } catch (error) {
+                console.error("Mentor Registration Error:", error);
+                alert('Failed to register as mentor. Please try again.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
         });
     }
+
 
     // 3. Support Modal
     const supportBtn = document.getElementById('support-link');
@@ -219,7 +287,6 @@ function setupGlobalHeader() {
             menu.classList.toggle('show');
         });
 
-        // Close when clicking outside
         document.addEventListener('click', (e) => {
             if (!toggle.contains(e.target) && !menu.contains(e.target)) {
                 menu.classList.remove('show');
@@ -227,7 +294,6 @@ function setupGlobalHeader() {
         });
     }
 
-    // Global Notification Modal
     const notifBtn = document.getElementById('notification-btn');
     const notifModal = document.getElementById('notification-modal');
     const notifClose = document.getElementById('notification-modal-close');
@@ -241,8 +307,5 @@ function setupGlobalHeader() {
             notifModal.classList.remove('active');
         });
     }
-
-    // Global logout from dropdown is now handled in setupSidebarActions
-    // because it shares the same modal logic.
 }
 

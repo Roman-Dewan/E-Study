@@ -787,8 +787,10 @@
             updateProfile,
             GoogleAuthProvider,
             GithubAuthProvider,
-            signInWithPopup
+            signInWithPopup,
+            sendEmailVerification
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // ── REDIRECT IF ALREADY LOGGED IN ──
         onAuthStateChanged(auth, (user) => {
@@ -799,16 +801,34 @@
 
         // ── SAVE USER PROFILE TO FIRESTORE ──
         async function saveUserProfile(user, firstName, lastName) {
-            await setDoc(doc(db, 'users', user.uid), {
-                uid: user.uid,
-                firstName: firstName,
-                lastName: lastName,
-                displayName: `${firstName} ${lastName}`,
+            const userDocRef = doc(db, 'E-study', user.email);
+            await setDoc(userDocRef, {
                 email: user.email,
-                photoURL: user.photoURL || '',
-                createdAt: serverTimestamp(),
-                coursesEnrolled: [],
-                role: 'student'
+                first_name: firstName,
+                last_name: lastName,
+                role: 'student',
+                notification: {
+                    course_anouncements: false,
+                    lesson_reminders: false,
+                    new_messages: false,
+                    progress_report: false,
+                    recieve_email_updates: false
+                },
+                personal_details: {
+                    address: "",
+                    city: "",
+                    country: "Bangladesh",
+                    state: "",
+                    zip: "",
+                    phone: "",
+                    gender: "",
+                    location: ""
+                },
+                privacy: {
+                    active_status: false,
+                    profile_private: false,
+                    messages: true
+                }
             });
         }
 

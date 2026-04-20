@@ -31,6 +31,9 @@ export class PersonalDetailsModel {
         this.country = data.country || "Bangladesh";
         this.state = data.state || "";
         this.zip = data.zip || "";
+        this.phone = data.phone || "";
+        this.gender = data.gender || "";
+        this.location = data.location || "";
     }
 
     toFirestore() {
@@ -39,7 +42,10 @@ export class PersonalDetailsModel {
             city: this.city,
             country: this.country,
             state: this.state,
-            zip: this.zip
+            zip: this.zip,
+            phone: this.phone,
+            gender: this.gender,
+            location: this.location
         };
     }
 }
@@ -65,6 +71,7 @@ export class UserModel {
         this.email = data.email || "";
         this.first_name = data.first_name || "";
         this.last_name = data.last_name || "";
+        this.role = data.role || "student";
         this.notification = new NotificationModel(data.notification || {});
         this.personal_details = new PersonalDetailsModel(data.personal_details || {});
         this.privacy = new PrivacyModel(data.privacy || {});
@@ -89,6 +96,7 @@ export class UserModel {
             email: this.email,
             first_name: this.first_name,
             last_name: this.last_name,
+            role: this.role,
             notification: this.notification.toFirestore(),
             personal_details: this.personal_details.toFirestore(),
             privacy: this.privacy.toFirestore()

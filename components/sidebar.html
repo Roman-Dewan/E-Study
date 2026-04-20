@@ -24,6 +24,9 @@
         <a href="ROOT/pages/profile/profile.html" class="nav-item" data-page="profile">
             <span class="nav-icon">👤</span> Profile
         </a>
+        <a href="ROOT/pages/mentor/mentor-dashboard.html" class="nav-item" data-page="mentor" id="mentor-nav-item" style="display: none;">
+            <span class="nav-icon">🎓</span> Mentor
+        </a>
     </nav>
 
     <div class="sidebar-footer">
@@ -75,9 +78,45 @@
                 <p>Share your knowledge, help learners, and grow as a mentor.</p>
             </div>
             <div class="mentor-modal-content">
-                <p>To become a mentor, please send us a request and include your teaching experience or subject
-                    expertise.</p>
-                <button id="mentor-request-btn" class="btn-submit">Send Request</button>
+                <form id="mentor-registration-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mentor-name">Name *</label>
+                            <input type="text" id="mentor-name" placeholder="Rafsan Chowdhury" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender *</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                                <label><input type="radio" name="gender" value="Female"> Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mentor-phone">Phone Number *</label>
+                            <input type="tel" id="mentor-phone" placeholder="01756441122" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mentor-email">Email *</label>
+                            <input type="email" id="mentor-email" placeholder="name@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mentor-city">City *</label>
+                            <input type="text" id="mentor-city" placeholder="Ex: Dhaka" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mentor-location">Location *</label>
+                            <input type="text" id="mentor-location" placeholder="Ex: Dhanmondi" required>
+                        </div>
+                    </div>
+                    <div class="form-group terms">
+                        <label><input type="checkbox" required> I agree to the <a href="#">Terms of Use and Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" id="mentor-confirm-btn" class="btn-confirm">Confirm</button>
+                </form>
             </div>
         </div>
     </div>

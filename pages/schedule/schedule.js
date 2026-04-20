@@ -352,3 +352,16 @@ function triggerNotification(taskTitle, email) {
     }
     */
 }
+
+// ── EXPOSE TO GLOBAL SCOPE (Restore functionality for onclick attributes) ──
+window.toggleMonthPicker = toggleMonthPicker;
+window.scrollDays = scrollDays;
+window.changeMiniMonth = changeMiniMonth;
+window.changeMainMonth = changeMainMonth;
+window.selectDate = selectDate;
+window.openTaskModal = openTaskModal;
+window.closeTaskModal = closeTaskModal;
+window.saveTask = saveTask;
+window.deleteTask = deleteTask;
+window.changePickerYear = changePickerYear;
+window.selectMonthFromPicker = selectMonthFromPicker;
