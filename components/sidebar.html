@@ -140,4 +140,64 @@
             </div>
         </div>
     </div>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="notification-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <h3>Notifications</h3>
+                <p>Stay updated with the latest news and activities.</p>
+            </div>
+            <div class="notification-modal-content">
+                <div class="notification-list">
+                    <div class="notification-item unread">
+                        <div class="notification-item-icon"><i class="fa-solid fa-gift"></i></div>
+                        <div class="notification-text">
+                            <h4>Special Offer!</h4>
+                            <p>Get 50% off on all new courses. Limited time only!</p>
+                            <span class="time">2 mins ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="notification-text">
+                            <h4>Course Completed</h4>
+                            <p>You have successfully completed the 'Advanced Web Design' course.</p>
+                            <span class="time">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-regular fa-calendar"></i></div>
+                        <div class="notification-text">
+                            <h4>Upcoming Class</h4>
+                            <p>Your 'React JS Fundamentals' class starts in 30 minutes.</p>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logout-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="logout-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" style="color: #ef4444; background: #fee2e2;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </div>
+                <h3>Confirm Logout</h3>
+                <p>Are you sure you want to log out of your account?</p>
+            </div>
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <button id="cancel-logout-btn" class="btn-cancel" style="flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #E5E7EB; background: white; color: #374151; font-weight: 500; cursor: pointer; transition: background 0.2s;">Cancel</button>
+                <button id="confirm-logout-btn" class="btn-submit" style="flex: 1; background: #ef4444; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer;">Yes, Log out</button>
+            </div>
+        </div>
+    </div>
 </aside>

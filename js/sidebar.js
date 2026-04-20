@@ -29,6 +29,9 @@ async function initSidebar() {
         // Initialize sidebar-specific features
         setupSidebarActions();
         
+        // Setup global header profile dropdown
+        setupGlobalHeader();
+        
     } catch (error) {
         console.error('Sidebar Loader Error:', error);
     }
@@ -74,10 +77,26 @@ function highlightActiveLink() {
 function setupSidebarActions() {
     // Logout handling
     const logoutBtn = document.getElementById('logout-link');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
+    const logoutDropdownBtns = document.querySelectorAll('.logout-action');
+    const logoutModal = document.getElementById('logout-modal');
+    const confirmLogoutBtn = document.getElementById('confirm-logout-btn');
+    const cancelLogoutBtn = document.getElementById('cancel-logout-btn');
+    const logoutModalClose = document.getElementById('logout-modal-close');
+
+    function openLogoutModal(e) {
+        e.preventDefault();
+        if (logoutModal) logoutModal.classList.add('active');
+    }
+
+    if (logoutBtn) logoutBtn.addEventListener('click', openLogoutModal);
+    logoutDropdownBtns.forEach(btn => btn.addEventListener('click', openLogoutModal));
+
+    if (logoutModal) {
+        cancelLogoutBtn?.addEventListener('click', () => logoutModal.classList.remove('active'));
+        logoutModalClose?.addEventListener('click', () => logoutModal.classList.remove('active'));
+
+        confirmLogoutBtn?.addEventListener('click', (e) => {
             e.preventDefault();
-            // Dispatch a custom event so the page can handle specialized logout if needed
             const event = new CustomEvent('estudy-logout', { 
                 bubbles: true, 
                 detail: { originalEvent: e } 
@@ -188,5 +207,42 @@ function setupSidebarActions() {
             e.target.classList.remove('active');
         }
     });
+}
+
+function setupGlobalHeader() {
+    const toggle = document.getElementById('user-dropdown-toggle');
+    const menu = document.getElementById('user-dropdown-menu');
+
+    if (toggle && menu) {
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('show');
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+    }
+
+    // Global Notification Modal
+    const notifBtn = document.getElementById('notification-btn');
+    const notifModal = document.getElementById('notification-modal');
+    const notifClose = document.getElementById('notification-modal-close');
+
+    if (notifBtn && notifModal) {
+        notifBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            notifModal.classList.add('active');
+        });
+        notifClose?.addEventListener('click', () => {
+            notifModal.classList.remove('active');
+        });
+    }
+
+    // Global logout from dropdown is now handled in setupSidebarActions
+    // because it shares the same modal logic.
 }
 

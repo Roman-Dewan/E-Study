@@ -344,3 +344,86 @@ body.resources-page .app-container {
 body.courses-detail-page .app-container {
     grid-template-columns: var(--sidebar-width) 1fr;
 }
+
+/* --- GLOBAL HEADER RIGHT WIDGET --- */
+.header-right-profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.notification-btn-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-btn-wrapper i {
+    font-size: 20px;
+    color: var(--text-grey);
+}
+
+.user-dropdown-container {
+    position: relative;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.user-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dropdown-icon {
+    font-size: 10px;
+    margin-left: 5px;
+    color: var(--text-grey);
+}
+
+.user-dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 200px;
+    padding: 10px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.user-dropdown-menu.show {
+    display: flex;
+}
+
+.user-dropdown-menu .dropdown-item {
+    padding: 10px 20px;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+}
+
+.user-dropdown-menu .dropdown-item:hover {
+    background: #f5f9fc;
+    color: var(--primary-color);
+}
+
+.user-dropdown-menu .dropdown-item i {
+    width: 16px;
+    text-align: center;
+}

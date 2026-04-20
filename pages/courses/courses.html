@@ -26,12 +26,21 @@
           <input type="text" placeholder="Search..." id="searchInput">
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-        <div class="topbar-right">
-          <button class="notif-btn"><i class="fa-solid fa-bell"></i></button>
-          <div class="user-info">
-            <img src="https://ui-avatars.com/api/?name=Rifat+Hossan&background=f0f0f0&color=333" class="avatar"
-              alt="Rifat Hossan">
-            <span class="user-name">Rifat Hossan</span>
+        <div class="header-right-profile">
+          <div class="notification-btn-wrapper">
+            <i class="fa-regular fa-bell" id="notification-btn"></i>
+          </div>
+          <div class="user-dropdown-container">
+            <div class="user-header" id="user-dropdown-toggle">
+              <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar" alt="Profile">
+              <span id="header-name">rayhan</span>
+              <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="user-dropdown-menu" id="user-dropdown-menu">
+              <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile Details</a>
+              <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
+              <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </div>
           </div>
         </div>
       </div>
@@ -66,7 +75,10 @@
     </div>
 
   </div> <!-- End app-container -->
+  <!-- Common Sidebar Logic -->
   <script src="../../js/sidebar.js"></script>
+  <script type="module" src="../../js/header-sync.js"></script>
+  <!-- Page Specific Logic -->
   <script type="module" src="courses.js"></script>
 </body>
 

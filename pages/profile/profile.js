@@ -35,7 +35,6 @@ const setupModal = (btnId, modalId, closeId) => {
     }
 };
 
-setupModal('delete-account-btn', 'delete-modal', 'delete-modal-close');
 setupModal('notification-btn', 'notification-modal', 'notification-modal-close');
 
 // Cancel buttons
