@@ -205,51 +205,70 @@ function setupSidebarActions() {
             const btn = document.getElementById('mentor-confirm-btn');
             const originalText = btn.textContent;
             
+            if (!auth.currentUser) {
+                alert('You must be logged in to register.');
+                return;
+            }
+
             try {
                 btn.textContent = 'Processing...';
                 btn.disabled = true;
 
-                const formData = {
+                // 1. Generate Instructor ID (Sequential if possible, fallback to Timestamp)
+                let nextId = "0001";
+                try {
+                    const mentorsQuery = query(
+                        collection(db, "E-study"),
+                        where("role", "==", "mentor"),
+                        orderBy("instructor_id", "desc"),
+                        limit(1)
+                    );
+                    
+                    const querySnapshot = await getDocs(mentorsQuery);
+                    if (!querySnapshot.empty) {
+                        const lastMentor = querySnapshot.docs[0].data();
+                        if (lastMentor.instructor_id) {
+                            const lastIdNum = parseInt(lastMentor.instructor_id);
+                            if (!isNaN(lastIdNum)) {
+                                nextId = String(lastIdNum + 1).padStart(4, '0');
+                            }
+                        }
+                    }
+                } catch (queryErr) {
+                    console.warn("Could not fetch last mentor ID (possibly missing index):", queryErr);
+                    // Fallback to a timestamp-based ID to ensure registration proceeds
+                    nextId = "M" + Date.now().toString().slice(-4); 
+                }
+
+                // 2. Prepare Update Data
+                const updateData = {
                     role: 'mentor',
+                    instructor_id: nextId,
                     'personal_details.phone': document.getElementById('mentor-phone').value,
                     'personal_details.gender': mentorForm.querySelector('input[name="gender"]:checked').value,
                     'personal_details.city': document.getElementById('mentor-city').value,
                     'personal_details.location': document.getElementById('mentor-location').value
                 };
 
-                // Generate Sequential Instructor ID
-                const mentorsQuery = query(
-                    collection(db, "E-study"),
-                    where("role", "==", "mentor"),
-                    orderBy("instructor_id", "desc"),
-                    limit(1)
-                );
-                
-                const querySnapshot = await getDocs(mentorsQuery);
-                let nextId = "0001";
-                
-                if (!querySnapshot.empty) {
-                    const lastMentor = querySnapshot.docs[0].data();
-                    if (lastMentor.instructor_id) {
-                        const lastIdNum = parseInt(lastMentor.instructor_id);
-                        nextId = String(lastIdNum + 1).padStart(4, '0');
-                    }
-                }
-                
-                formData.instructor_id = nextId;
-
+                // 3. Update User Document
                 const userDocRef = doc(db, "E-study", auth.currentUser.email);
-                await updateDoc(userDocRef, formData);
+                
+                await updateDoc(userDocRef, updateData);
 
                 mentorModal.classList.remove('active');
-                alert('Congratulations! You are now a mentor.');
+                alert('Congratulations! You are now a mentor. Your Instructor ID is: ' + nextId);
                 
                 // Refresh sidebar UI
                 await updateSidebarForUser(auth.currentUser.email);
                 
             } catch (error) {
                 console.error("Mentor Registration Error:", error);
-                alert('Failed to register as mentor. Please try again.');
+                
+                if (error.code === 'not-found') {
+                    alert('User profile not found. Please contact support.');
+                } else {
+                    alert('Failed to register as mentor: ' + (error.message || 'Please try again.'));
+                }
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;

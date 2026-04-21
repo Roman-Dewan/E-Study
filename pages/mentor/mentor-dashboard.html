@@ -17,10 +17,7 @@
             <!-- TOP BAR -->
             <header class="topbar">
                 <div class="page-title">Mentor Dashboard</div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search resources or courses...">
-                    <span>🔍</span>
-                </div>
+                
                 <div class="header-right-profile">
                     <div class="notification-btn-wrapper">
                         <i class="fa-regular fa-bell" id="notification-btn"></i>
@@ -71,8 +68,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="res-url">URL</label>
-                                    <input type="url" id="res-url" placeholder="https://example.com/resource" required>
+                                    <label for="res-url">URL / Embed Code</label>
+                                    <input type="text" id="res-url" placeholder="Direct URL or YouTube Embed Code" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="res-thumbnail">Thumbnail URL</label>
@@ -83,14 +80,27 @@
                                     <textarea id="res-description" rows="3" placeholder="Resource details..."></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="res-tags">Tags</label>
-                                    <select id="res-tags">
-                                        <option value="class 6">Class 6</option>
-                                        <option value="class 7">Class 7</option>
-                                        <option value="class 8">Class 8</option>
-                                        <option value="class 9">Class 9</option>
-                                        <option value="class 10">Class 10</option>
+                                    <label for="res-class-name">Class Name</label>
+                                    <select id="res-class-name">
+                                        <option value="class_6">Class 6</option>
+                                        <option value="class_7">Class 7</option>
+                                        <option value="class_8">Class 8</option>
+                                        <option value="class_9">Class 9</option>
+                                        <option value="class_10">Class 10</option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="res-subject-name">Subject Name</label>
+                                    <select id="res-subject-name">
+                                        <option value="bn">Bangla</option>
+                                        <option value="en">English</option>
+                                        <option value="math">Mathematics</option>
+                                        <option value="rel">Religion</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="res-tags">Tags</label>
+                                    <input type="text" id="res-tags" placeholder="e.g. Algebra, Grammar">
                                 </div>
                                 <div class="form-group">
                                     <label for="res-category">Category</label>
