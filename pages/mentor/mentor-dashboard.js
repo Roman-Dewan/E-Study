@@ -89,6 +89,33 @@ async function initMentorDashboard() {
             let collectionName = '';
             let docId = '';
 
+            // Helper to extract or normalize YouTube URLs
+            function processUrl(input) {
+                if (!input) return "";
+                let url = input.trim();
+                
+                // 1. Check if it's an iframe code
+                if (url.includes('<iframe')) {
+                    const srcMatch = url.match(/src=["'](.*?)["']/);
+                    if (srcMatch && srcMatch[1]) {
+                        url = srcMatch[1];
+                    }
+                }
+                
+                // 2. Normalize YouTube URLs to embed format
+                if (url.includes('youtube.com/watch?v=')) {
+                    url = url.replace('watch?v=', 'embed/');
+                    // Remove other params if present
+                    url = url.split('&')[0];
+                } else if (url.includes('youtu.be/')) {
+                    url = url.replace('youtu.be/', 'youtube.com/embed/');
+                    // Remove params
+                    url = url.split('?')[0];
+                }
+                
+                return url;
+            }
+
             const instructorId = currentUserData.instructor_id || "0000";
 
             if (type === 'resource') {
@@ -118,32 +145,6 @@ async function initMentorDashboard() {
 
                 // Helper to normalize IDs
                 const normalizeId = (text) => text.trim().toLowerCase().replace(/\s+/g, '_');
-
-                // Helper to extract or normalize YouTube URLs
-                function processUrl(input) {
-                    let url = input.trim();
-                    
-                    // 1. Check if it's an iframe code
-                    if (url.includes('<iframe')) {
-                        const srcMatch = url.match(/src=["'](.*?)["']/);
-                        if (srcMatch && srcMatch[1]) {
-                            url = srcMatch[1];
-                        }
-                    }
-                    
-                    // 2. Normalize YouTube URLs to embed format
-                    if (url.includes('youtube.com/watch?v=')) {
-                        url = url.replace('watch?v=', 'embed/');
-                        // Remove other params if present
-                        url = url.split('&')[0];
-                    } else if (url.includes('youtu.be/')) {
-                        url = url.replace('youtu.be/', 'youtube.com/embed/');
-                        // Remove params
-                        url = url.split('?')[0];
-                    }
-                    
-                    return url;
-                }
 
                 const rawUrl = document.getElementById('res-url').value;
                 const processedUrl = processUrl(rawUrl);
@@ -185,6 +186,9 @@ async function initMentorDashboard() {
                 docId = `c-${String(nextCourseNum).padStart(4, '0')}`;
 
                 const courseImageInput = document.getElementById('course-image');
+                const rawUrl = document.getElementById('course-url').value;
+                const processedUrl = processUrl(rawUrl);
+                const thumbnailInput = document.getElementById('course-thumbnail');
 
                 data = {
                     course_name: document.getElementById('course-name').value,
@@ -195,6 +199,8 @@ async function initMentorDashboard() {
                     course_price: parseFloat(document.getElementById('course-price').value) || 0,
                     course_description: document.getElementById('course-description').value,
                     lesson: document.getElementById('course-lesson').value,
+                    url: processedUrl,
+                    thumbnail: thumbnailInput ? thumbnailInput.value.trim() : '',
                     instructor_name: instructorNameInput.value,
                     instructor_id: instructorId,
                     createdAt: serverTimestamp()

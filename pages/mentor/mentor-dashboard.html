@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="mentor-dashboard.css">
 </head>
+
 <body class="full-width-page">
     <div class="app-container">
         <div id="sidebar-placeholder"></div>
@@ -17,21 +19,24 @@
             <!-- TOP BAR -->
             <header class="topbar">
                 <div class="page-title"></div>
-                
+
                 <div class="header-right-profile">
                     <div class="notification-btn-wrapper">
                         <i class="fa-regular fa-bell" id="notification-btn"></i>
                     </div>
                     <div class="user-dropdown-container">
                         <div class="user-header" id="user-dropdown-toggle">
-                            <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar" alt="Profile">
+                            <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small"
+                                id="header-avatar" alt="Profile">
                             <span id="header-name">Mentor</span>
                             <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                         </div>
                         <div class="user-dropdown-menu" id="user-dropdown-menu">
-                            <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile Details</a>
+                            <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i>
+                                Profile Details</a>
                             <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
-                            <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                            <a href="#" class="dropdown-item logout-action"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
                         </div>
                     </div>
                 </div>
@@ -69,7 +74,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="res-url">URL / Embed Code</label>
-                                    <input type="text" id="res-url" placeholder="Direct URL or YouTube Embed Code" required>
+                                    <input type="text" id="res-url" placeholder="Direct URL or YouTube Embed Code"
+                                        required>
                                 </div>
                                 <div class="form-group">
                                     <label for="res-thumbnail">Thumbnail URL</label>
@@ -77,15 +83,18 @@
                                 </div>
                                 <div class="form-group full-width">
                                     <label for="res-description">Description</label>
-                                    <textarea id="res-description" rows="3" placeholder="Resource details..."></textarea>
+                                    <textarea id="res-description" rows="3"
+                                        placeholder="Resource details..."></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="res-class-name">Class Name</label>
-                                    <input type="text" id="res-class-name" placeholder="Enter class name (e.g. Class 6)" required>
+                                    <input type="text" id="res-class-name" placeholder="Enter class name (e.g. Class 6)"
+                                        required>
                                 </div>
                                 <div class="form-group">
                                     <label for="res-subject-name">Subject Name</label>
-                                    <input type="text" id="res-subject-name" placeholder="Enter subject name (e.g. Bangla)" required>
+                                    <input type="text" id="res-subject-name"
+                                        placeholder="Enter subject name (e.g. Bangla)" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="res-tags">Tags</label>
@@ -137,7 +146,8 @@
                                 <div class="form-group">
                                     <label for="course-id">Course ID</label>
                                     <div class="input-with-action">
-                                        <input type="text" id="course-id" placeholder="Auto-generated (c-0001...)" readonly>
+                                        <input type="text" id="course-id" placeholder="Auto-generated (c-0001...)"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -150,11 +160,20 @@
                                 </div>
                                 <div class="form-group full-width">
                                     <label for="course-description">Description</label>
-                                    <textarea id="course-description" rows="3" placeholder="Course syllabus and info..."></textarea>
+                                    <textarea id="course-description" rows="3"
+                                        placeholder="Course syllabus and info..."></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="course-lesson">Lesson Info/Count</label>
                                     <input type="text" id="course-lesson" placeholder="e.g. 24 Lessons">
+                                </div>
+                                <div class="form-group">
+                                    <label for="course-url">URL / Embed Code</label>
+                                    <input type="text" id="course-url" placeholder="Direct URL or YouTube Embed Code">
+                                </div>
+                                <div class="form-group">
+                                    <label for="course-thumbnail">Thumbnail URL</label>
+                                    <input type="url" id="course-thumbnail" placeholder="https://example.com/thumb.jpg">
                                 </div>
                                 <div class="form-group">
                                     <label for="instructor-name">Instructor Name</label>
@@ -164,7 +183,8 @@
                         </form>
 
                         <div class="form-actions">
-                            <button type="submit" form="resource-form" id="confirm-btn" class="btn-confirm">Confirm</button>
+                            <button type="submit" form="resource-form" id="confirm-btn"
+                                class="btn-confirm">Confirm</button>
                         </div>
                     </div>
                 </div>
@@ -177,4 +197,5 @@
     <script type="module" src="../../js/header-sync.js"></script>
     <script type="module" src="mentor-dashboard.js"></script>
 </body>
+
 </html>
