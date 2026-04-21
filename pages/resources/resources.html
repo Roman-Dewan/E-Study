@@ -24,7 +24,7 @@
 
             <section class="resources-card">
                 <div class="rc-header">
-                    <h2>Resources Browser</h2>
+                    <h2>My Resources</h2>
                     <div class="header-right-profile" style="margin-bottom:0;">
                         <div class="notification-btn-wrapper">
                             <i class="fa-regular fa-bell" id="notification-btn"></i>
@@ -44,70 +44,34 @@
                     </div>
                 </div>
 
-                <!-- Medium Navigation removed as requested -->
+                <!-- Medium Navigation Tabs -->
+                <div class="medium-tabs" id="mediumTabs">
+                    <button class="medium-tab active" data-medium="Bangla Medium">Bangla Medium</button>
+                    <button class="medium-tab" data-medium="English Version">English Version</button>
+                    <button class="medium-tab" data-medium="English Medium">English Medium</button>
+                    <button class="medium-tab" data-medium="Madrasa Medium">Madrasa Medium</button>
+                    <button class="medium-tab" data-medium="Skill Development">Skill Development</button>
+                </div>
 
-                <div class="resource-browser">
-                    <!-- Classes Column -->
-                    <div class="browser-column classes-column">
-                        <div class="column-header">Classes</div>
-                        <div class="column-content" id="classesList">
-                            <!-- Injected -->
-                        </div>
-                    </div>
-
-                    <!-- Subjects Column -->
-                    <div class="browser-column subjects-column">
-                        <div class="column-header">Subjects</div>
-                        <div class="column-content" id="subjectsList">
-                            <div class="empty-state">Select a class first</div>
-                        </div>
-                    </div>
-
-                    <!-- Resources Area -->
-                    <div class="resources-display">
-                        <div class="display-header">
-                            <div id="displayTitle">Resources</div>
-                            <div class="search-mini">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text" id="resSearch" placeholder="Search in this section...">
-                            </div>
-                        </div>
-                        <div class="resources-grid" id="resourcesGrid">
-                            <div class="empty-state-large">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                                <p>Select a class and subject to view resources</p>
-                            </div>
-                        </div>
+                <div class="resource-container">
+                    <!-- Classes Grid -->
+                    <div class="classes-grid" id="classesGrid">
+                        <!-- Class cards will be injected here -->
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Video Overlay -->
-    <div class="video-overlay" id="videoOverlay">
-        <div class="overlay-backdrop"></div>
-        <div class="video-container">
-            <button class="close-video" id="closeVideo"><i class="fa-solid fa-xmark"></i></button>
-            <div class="video-wrapper">
-                <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="video-info">
-                <h3 id="videoTitle">Video Title</h3>
-                <p id="videoDesc">Description goes here</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add Category Modal (Keep existing functionality) -->
-    <div class="modal-overlay" id="popModal">
+    <!-- Reusable Modal (For Subjects, Chapters, and Video) -->
+    <div class="modal-overlay" id="resourceModal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3 id="modalTitle">Title</h3>
-                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="modalTitle">Modal Title</h3>
+                <button class="close-modal" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body-grid" id="modalBodyGrid">
-                <!-- Content injected here -->
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content (Grid of buttons or Video player) -->
             </div>
         </div>
     </div>

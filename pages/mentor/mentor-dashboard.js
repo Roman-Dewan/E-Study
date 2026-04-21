@@ -112,9 +112,12 @@ async function initMentorDashboard() {
                     if (counter > 100) break; // Safety break
                 }
 
-                const classSelect = document.getElementById('res-class-name');
-                const subjectSelect = document.getElementById('res-subject-name');
+                const classInput = document.getElementById('res-class-name');
+                const subjectInput = document.getElementById('res-subject-name');
                 const instructorName = `${currentUserData.first_name || ''} ${currentUserData.last_name || ''}`.trim() || auth.currentUser.displayName || 'Mentor';
+
+                // Helper to normalize IDs
+                const normalizeId = (text) => text.trim().toLowerCase().replace(/\s+/g, '_');
 
                 // Helper to extract or normalize YouTube URLs
                 function processUrl(input) {
@@ -152,10 +155,10 @@ async function initMentorDashboard() {
                     url: processedUrl,
                     thumbnail: thumbnailInput ? thumbnailInput.value.trim() : '',
                     description: document.getElementById('res-description').value,
-                    class_id: classSelect.value,
-                    class_name: classSelect.options[classSelect.selectedIndex].text,
-                    subject_id: subjectSelect.value,
-                    subject_name: subjectSelect.options[subjectSelect.selectedIndex].text,
+                    class_id: normalizeId(classInput.value),
+                    class_name: classInput.value.trim(),
+                    subject_id: normalizeId(subjectInput.value),
+                    subject_name: subjectInput.value.trim(),
                     tags: document.getElementById('res-tags').value,
                     category: document.getElementById('res-category').value,
                     medium: document.getElementById('res-medium').value,
