@@ -729,7 +729,9 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="At least 8 characters" autocomplete="new-password">
                 <span class="field-icon">🔒</span>
-                <button class="toggle-pw" id="togglePw" type="button">👁️</button>
+                <button class="toggle-pw" id="togglePw" type="button">
+                    <i class="fa-regular fa-eye-slash"></i>
+                </button>
                 <div class="field-error" id="passwordErr">Password must be at least 8 characters.</div>
                 <div class="strength-wrap">
                     <div class="strength-bar">
@@ -748,7 +750,9 @@
                 <input type="password" id="confirmPassword" placeholder="Repeat your password"
                     autocomplete="new-password">
                 <span class="field-icon">🔒</span>
-                <button class="toggle-pw" id="toggleConfirm" type="button">👁️</button>
+                <button class="toggle-pw" id="toggleConfirm" type="button">
+                    <i class="fa-regular fa-eye-slash"></i>
+                </button>
                 <div class="field-error" id="confirmErr">Passwords do not match.</div>
             </div>
 
@@ -1020,15 +1024,29 @@
         // ── TOGGLE PASSWORD VISIBILITY ──
         document.getElementById('togglePw').addEventListener('click', () => {
             const inp = document.getElementById('password');
-            const btn = document.getElementById('togglePw');
-            inp.type = inp.type === 'password' ? 'text' : 'password';
-            btn.textContent = inp.type === 'password' ? '👁️' : '🔒';
+            const icon = document.querySelector('#togglePw i');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                inp.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
         });
         document.getElementById('toggleConfirm').addEventListener('click', () => {
             const inp = document.getElementById('confirmPassword');
-            const btn = document.getElementById('toggleConfirm');
-            inp.type = inp.type === 'password' ? 'text' : 'password';
-            btn.textContent = inp.type === 'password' ? '👁️' : '🔒';
+            const icon = document.querySelector('#toggleConfirm i');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                inp.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
         });
 
         // ── TERMS CHECKBOX ──

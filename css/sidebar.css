@@ -509,6 +509,31 @@
     cursor: not-allowed;
 }
 
+#change-password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#password-modal .modal-card {
+    max-width: 450px;
+}
+
+#password-modal .modal-header p {
+    margin-bottom: 20px;
+}
+
+#password-modal .btn-confirm {
+    margin-top: 10px;
+}
+
+#password-error {
+    background: #fef2f2;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 4px solid #ef4444;
+}
+
 @media (max-width: 600px) {
     .modal-card {
         padding: 30px 20px;
@@ -517,4 +542,42 @@
         grid-template-columns: 1fr;
         gap: 15px;
     }
+}
+
+/* Password Toggle Styling */
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-wrapper input {
+    width: 100% !important;
+    padding-right: 45px !important; /* Make room for the eye icon */
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-grey);
+    font-size: 16px;
+    transition: all 0.25s ease;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.toggle-password-btn:hover {
+    color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.toggle-password-btn:active {
+    transform: translateY(-50%) scale(0.95);
 }

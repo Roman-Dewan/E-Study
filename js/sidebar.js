@@ -1,5 +1,5 @@
 import { auth, db } from './firebase-config.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { onAuthStateChanged, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc, updateDoc, collection, query, where, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 /**
@@ -277,7 +277,91 @@ function setupSidebarActions() {
     }
 
 
-    // 3. Support Modal
+    // 3. Change Password Modal
+    const passwordModal = document.getElementById('password-modal');
+    const passwordCloseBtn = document.getElementById('password-modal-close');
+    const passwordForm = document.getElementById('change-password-form');
+    const passwordError = document.getElementById('password-error');
+
+    if (passwordModal) {
+        passwordCloseBtn?.addEventListener('click', () => {
+            passwordModal.classList.remove('active');
+            passwordForm?.reset();
+            if (passwordError) passwordError.style.display = 'none';
+        });
+
+        passwordForm?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-new-password').value;
+            const btn = document.getElementById('password-confirm-btn');
+            
+            if (newPassword !== confirmPassword) {
+                if (passwordError) {
+                    passwordError.textContent = "New passwords do not match!";
+                    passwordError.style.display = 'block';
+                }
+                return;
+            }
+
+            if (!auth.currentUser) {
+                alert('You must be logged in to change your password.');
+                return;
+            }
+
+            try {
+                btn.textContent = 'Updating...';
+                btn.disabled = true;
+                if (passwordError) passwordError.style.display = 'none';
+
+                // 1. Re-authenticate
+                const credential = EmailAuthProvider.credential(auth.currentUser.email, currentPassword);
+                await reauthenticateWithCredential(auth.currentUser, credential);
+
+                // 2. Update Password
+                await updatePassword(auth.currentUser, newPassword);
+
+                alert('Password updated successfully!');
+                passwordModal.classList.remove('active');
+                passwordForm.reset();
+            } catch (error) {
+                console.error("Change Password Error:", error);
+                if (passwordError) {
+                    let msg = "Failed to update password.";
+                    if (error.code === 'auth/wrong-password') msg = "Incorrect current password.";
+                    else if (error.code === 'auth/weak-password') msg = "New password is too weak.";
+                    passwordError.textContent = msg;
+                    passwordError.style.display = 'block';
+                }
+            } finally {
+                btn.textContent = 'Update Password';
+                btn.disabled = false;
+            }
+        });
+
+        // Initialize Visibility Toggles
+        const toggleButtons = passwordModal.querySelectorAll('.toggle-password-btn');
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                const icon = button.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                }
+            });
+        });
+    }
+
+    // 4. Support Modal
     const supportBtn = document.getElementById('support-link');
     const supportModal = document.getElementById('support-modal');
     const supportCloseBtn = document.getElementById('support-modal-close');
@@ -347,5 +431,18 @@ function setupGlobalHeader() {
             notifModal.classList.remove('active');
         });
     }
+    const changePassDropdownBtns = document.querySelectorAll('.user-dropdown-menu .dropdown-item');
+    changePassDropdownBtns.forEach(btn => {
+        if (btn.textContent.includes('Change Password')) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const menu = document.getElementById('user-dropdown-menu');
+                if (menu) menu.classList.remove('show');
+                const modal = document.getElementById('password-modal');
+                if (modal) modal.classList.add('active');
+            });
+        }
+    });
+
 }
 

@@ -8,6 +8,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ── RESET & VARIABLES ── */
         *,
@@ -744,7 +745,9 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
                 <span class="field-icon">🔒</span>
-                <button class="toggle-pw" id="togglePw" type="button" aria-label="Toggle password">👁️</button>
+                <button class="toggle-pw" id="togglePw" type="button" aria-label="Toggle password">
+                    <i class="fa-regular fa-eye-slash"></i>
+                </button>
                 <div class="field-error" id="passwordErr">Password must be at least 6 characters.</div>
             </div>
 
@@ -952,9 +955,16 @@
         // GöÇGöÇ TOGGLE PASSWORD VISIBILITY GöÇGöÇ
         document.getElementById('togglePw').addEventListener('click', () => {
             const inp = document.getElementById('password');
-            const btn = document.getElementById('togglePw');
-            if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🔒'; }
-            else { inp.type = 'password'; btn.textContent = '👁️'; }
+            const icon = document.querySelector('#togglePw i');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                inp.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
         });
 
         // GöÇGöÇ REMEMBER ME CHECKBOX GöÇGöÇ
