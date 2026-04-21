@@ -792,6 +792,7 @@
             browserSessionPersistence,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // ── YOUR FIREBASE CONFIG ──
         // Replace these with your real values from Firebase Console
@@ -808,6 +809,7 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         // GöÇGöÇ REDIRECT IF ALREADY LOGGED IN GöÇGöÇ
         onAuthStateChanged(auth, (user) => {
@@ -820,7 +822,7 @@
         function showToast(msg, isError = false) {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').textContent = msg;
-            document.getElementById('toastIcon').textContent = isError ? 'G¥î' : 'G£à';
+            document.getElementById('toastIcon').textContent = isError ? '❌' : '✅';
             t.classList.toggle('error', isError);
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3500);
@@ -879,6 +881,19 @@
 
                 await signInWithEmailAndPassword(auth, email, password);
 
+                // Fetch and Cache user name to prevent blink on dashboard
+                try {
+                    const docSnap = await getDoc(doc(db, "E-study", email));
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        const fullName = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || user.displayName || "User";
+                        localStorage.setItem('estudy_user_name', fullName);
+                        if (userData.avatar_url) localStorage.setItem('estudy_user_avatar', userData.avatar_url);
+                    }
+                } catch (e) {
+                    console.error("Cache pre-fill failed:", e);
+                }
+
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 setLoading(false);
@@ -891,8 +906,13 @@
             const provider = new GoogleAuthProvider();
             provider.setCustomParameters({ prompt: 'select_account' });
             try {
-                await signInWithPopup(auth, provider);
-                showToast('Signed in with Google! RedirectingGÇª');
+                const { user } = await signInWithPopup(auth, provider);
+                
+                // Cache immediately
+                localStorage.setItem('estudy_user_name', user.displayName || "User");
+                if (user.photoURL) localStorage.setItem('estudy_user_avatar', user.photoURL);
+
+                showToast('Signed in with Google! Redirecting...');
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
@@ -903,8 +923,13 @@
         document.getElementById('githubBtn').addEventListener('click', async () => {
             const provider = new GithubAuthProvider();
             try {
-                await signInWithPopup(auth, provider);
-                showToast('Signed in with GitHub! RedirectingGÇª');
+                const { user } = await signInWithPopup(auth, provider);
+                
+                // Cache immediately
+                localStorage.setItem('estudy_user_name', user.displayName || "User");
+                if (user.photoURL) localStorage.setItem('estudy_user_avatar', user.photoURL);
+
+                showToast('Signed in with GitHub! Redirecting...');
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 showToast(friendlyError(err.code), true);
@@ -928,13 +953,13 @@
         document.getElementById('togglePw').addEventListener('click', () => {
             const inp = document.getElementById('password');
             const btn = document.getElementById('togglePw');
-            if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '=ƒÖê'; }
-            else { inp.type = 'password'; btn.textContent = '=ƒæün+Å'; }
+            if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🔒'; }
+            else { inp.type = 'password'; btn.textContent = '👁️'; }
         });
 
         // GöÇGöÇ REMEMBER ME CHECKBOX GöÇGöÇ
         document.getElementById('rememberMe').addEventListener('change', function () {
-            document.getElementById('checkBox').textContent = this.checked ? 'G£ô' : '';
+            document.getElementById('checkBox').textContent = this.checked ? '✅' : '';
         });
 
         // GöÇGöÇ ENTER KEY SUBMIT GöÇGöÇ

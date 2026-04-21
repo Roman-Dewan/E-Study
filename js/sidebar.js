@@ -1,6 +1,6 @@
 import { auth, db } from './firebase-config.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, getDoc, updateDoc, collection, query, where, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 /**
  * Reusable Sidebar Loader for E-Study
@@ -216,6 +216,27 @@ function setupSidebarActions() {
                     'personal_details.city': document.getElementById('mentor-city').value,
                     'personal_details.location': document.getElementById('mentor-location').value
                 };
+
+                // Generate Sequential Instructor ID
+                const mentorsQuery = query(
+                    collection(db, "E-study"),
+                    where("role", "==", "mentor"),
+                    orderBy("instructor_id", "desc"),
+                    limit(1)
+                );
+                
+                const querySnapshot = await getDocs(mentorsQuery);
+                let nextId = "0001";
+                
+                if (!querySnapshot.empty) {
+                    const lastMentor = querySnapshot.docs[0].data();
+                    if (lastMentor.instructor_id) {
+                        const lastIdNum = parseInt(lastMentor.instructor_id);
+                        nextId = String(lastIdNum + 1).padStart(4, '0');
+                    }
+                }
+                
+                formData.instructor_id = nextId;
 
                 const userDocRef = doc(db, "E-study", auth.currentUser.email);
                 await updateDoc(userDocRef, formData);

@@ -83,12 +83,23 @@
                                     <textarea id="res-description" rows="3" placeholder="Resource details..."></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="res-tags">Tags (comma separated)</label>
-                                    <input type="text" id="res-tags" placeholder="class1, math, algebra">
+                                    <label for="res-tags">Tags</label>
+                                    <select id="res-tags">
+                                        <option value="class 6">Class 6</option>
+                                        <option value="class 7">Class 7</option>
+                                        <option value="class 8">Class 8</option>
+                                        <option value="class 9">Class 9</option>
+                                        <option value="class 10">Class 10</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="res-category">Category</label>
-                                    <input type="text" id="res-category" placeholder="e.g. Science">
+                                    <select id="res-category">
+                                        <option value="Academic">Academic</option>
+                                        <option value="AI">AI</option>
+                                        <option value="ML">ML</option>
+                                        <option value="others">Others</option>
+                                    </select>
                                 </div>
                             </div>
                         </form>
@@ -103,7 +114,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="course-category">Category</label>
-                                    <input type="text" id="course-category" placeholder="e.g. Design">
+                                    <select id="course-category">
+                                        <option value="Academic">Academic</option>
+                                        <option value="AI">AI</option>
+                                        <option value="ML">ML</option>
+                                        <option value="others">Others</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="course-duration">Duration</label>
@@ -112,8 +128,7 @@
                                 <div class="form-group">
                                     <label for="course-id">Course ID</label>
                                     <div class="input-with-action">
-                                        <input type="text" id="course-id" placeholder="C-12345">
-                                        <button type="button" id="gen-course-id" class="btn-small">Gen</button>
+                                        <input type="text" id="course-id" placeholder="Auto-generated (c-0001...)" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">

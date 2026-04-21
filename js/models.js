@@ -79,8 +79,9 @@ export class UserModel {
 
     // Helper to get full name for UI
     get fullName() {
-        if (!this.first_name && !this.last_name) return "";
-        return `${this.first_name} ${this.last_name}`.trim();
+        const combined = `${this.first_name || ''} ${this.last_name || ''}`.trim();
+        // Prevent returning empty string when both names are missing in DB
+        return combined.length > 0 ? combined : undefined; // Return undefined so it can fallback naturally
     }
 
     // Static helper to split name into first and last

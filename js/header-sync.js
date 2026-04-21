@@ -2,36 +2,67 @@ import { auth, db } from './firebase-config.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// 1. Immediate Load from LocalStorage (Zero Delay)
+function applyCachedData() {
+    const cachedName = localStorage.getItem('estudy_user_name');
+    const cachedAvatar = localStorage.getItem('estudy_user_avatar');
+
+    if (cachedName) {
+        updateUI(cachedName, cachedAvatar);
+    }
+}
+
+function updateUI(name, avatar = null) {
+    const headerNameEls = document.querySelectorAll('#header-name, .user-name');
+    headerNameEls.forEach(el => el.textContent = name);
+    
+    if (avatar) {
+        const headerAvatarEls = document.querySelectorAll('#header-avatar');
+        headerAvatarEls.forEach(el => el.src = avatar);
+    }
+}
+
+// Initial pull from cache
+applyCachedData();
+
+// 2. Firebase Auth & Firestore Sync
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        try {
-            // Try reading by UID
-            let userDocSnap = await getDoc(doc(db, "E-study", user.uid));
-            
-            // Fallback: Try reading by email
-            if (!userDocSnap.exists() && user.email) {
-                userDocSnap = await getDoc(doc(db, "E-study", user.email));
-            }
+        // Immediate fallback to Auth DisplayName if cache is empty
+        if (!localStorage.getItem('estudy_user_name') && user.displayName) {
+            updateUI(user.displayName, user.photoURL);
+        }
 
+        try {
+            // Fetch fresh data from Firestore
+            const userDocSnap = await getDoc(doc(db, "E-study", user.email));
+            
             if (userDocSnap.exists()) {
                 const userData = userDocSnap.data();
-                
                 const firstName = userData.first_name || '';
                 const lastName = userData.last_name || '';
-                const fullName = (firstName + (lastName ? ' ' + lastName : '')).trim() || userData.fullName || "User";
-
-                // Update the global header dropdown elements
-                const headerNameEls = document.querySelectorAll('#header-name, .user-name');
-                headerNameEls.forEach(el => el.textContent = fullName);
                 
-                // For avatars if they exist in firestore
-                if (userData.avatar_url) {
-                    const headerAvatarEls = document.querySelectorAll('#header-avatar');
-                    headerAvatarEls.forEach(el => el.src = userData.avatar_url);
+                // If Firestore is empty, use the auth display name (which we know we set during signup)
+                let fullName = `${firstName} ${lastName}`.trim();
+                if (!fullName) {
+                    fullName = user.displayName || "User";
                 }
+                
+                const avatarUrl = userData.avatar_url || user.photoURL;
+
+                // Update UI
+                updateUI(fullName, avatarUrl);
+
+                // Update Cache for next page load
+                localStorage.setItem('estudy_user_name', fullName);
+                if (avatarUrl) localStorage.setItem('estudy_user_avatar', avatarUrl);
             }
         } catch (err) {
             console.error("Error syncing global header:", err);
         }
+    } else {
+        // Clear cache on logout
+        localStorage.removeItem('estudy_user_name');
+        localStorage.removeItem('estudy_user_avatar');
     }
 });

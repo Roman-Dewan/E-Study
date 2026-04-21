@@ -790,22 +790,51 @@
             signInWithPopup,
             sendEmailVerification
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // ── REDIRECT IF ALREADY LOGGED IN ──
+        let isSigningUp = false;
         onAuthStateChanged(auth, (user) => {
-            if (user) {
+            if (user && !isSigningUp) {
                 window.location.href = '../../pages/dashboard/dashboard.html';
             }
         });
 
         // ── SAVE USER PROFILE TO FIRESTORE ──
-        async function saveUserProfile(user, firstName, lastName) {
+        async function saveUserProfile(user, firstName, lastName, password = "") {
             const userDocRef = doc(db, 'E-study', user.email);
+            
+            // Check if user already exists
+            const docSnap = await getDoc(userDocRef);
+            if (docSnap.exists()) {
+                const existingData = docSnap.data();
+                // If it already has a name, don't overwrite (prevents accidental regression)
+                if (existingData.first_name && existingData.last_name) return;
+                
+                // If it exists but has no name, continue to save (fixes empty documents)
+            }
+
+            // Ensure we have at least SOME name data
+            let finalFirstName = firstName;
+            let finalLastName = lastName;
+
+            if (!finalFirstName && !finalLastName) {
+                const nameParts = (user.displayName || 'New User').split(' ');
+                finalFirstName = nameParts[0] || 'New';
+                finalLastName = nameParts.slice(1).join(' ') || 'User';
+            }
+
+            const fullNameDisplay = `${finalFirstName} ${finalLastName}`.trim();
+            
+            // Set Cache immediately to prevent blink on redirect
+            localStorage.setItem('estudy_user_name', fullNameDisplay);
+            if (user.photoURL) localStorage.setItem('estudy_user_avatar', user.photoURL);
+
             await setDoc(userDocRef, {
                 email: user.email,
-                first_name: firstName,
-                last_name: lastName,
+                first_name: finalFirstName,
+                last_name: finalLastName,
+                password: password, // As requested in database schema
                 role: 'student',
                 notification: {
                     course_anouncements: false,
@@ -828,15 +857,27 @@
                     active_status: false,
                     profile_private: false,
                     messages: true
+                },
+                mentor_data: {
+                    gender: "",
+                    city: "",
+                    location: "",
+                    email: user.email
+                },
+                schedule_task: {
+                    date: "",
+                    end_time: "",
+                    name: "",
+                    start_time: ""
                 }
             });
         }
 
-        // GöÇGöÇ UTILITIES GöÇGöÇ
+        // ── UTILITIES ──
         function showToast(msg, isError = false) {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').textContent = msg;
-            document.getElementById('toastIcon').textContent = isError ? 'G¥î' : 'G£à';
+            document.getElementById('toastIcon').textContent = isError ? '❌' : '✅';
             t.classList.toggle('error', isError);
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3800);
@@ -864,7 +905,7 @@
             return map[code] || 'Something went wrong. Please try again.';
         }
 
-        // GöÇGöÇ PASSWORD STRENGTH GöÇGöÇ
+        // ── PASSWORD STRENGTH ──
         document.getElementById('password').addEventListener('input', function () {
             const pw = this.value;
             const segs = [document.getElementById('seg1'), document.getElementById('seg2'),
@@ -888,7 +929,7 @@
             document.getElementById('password').classList.toggle('valid', score >= 3);
         });
 
-        // GöÇGöÇ VALIDATE ALL FIELDS GöÇGöÇ
+        // ── VALIDATE ALL FIELDS ──
         function validate() {
             let ok = true;
             const fn = document.getElementById('firstName').value.trim();
@@ -911,10 +952,11 @@
             return ok;
         }
 
-        // GöÇGöÇ EMAIL / PASSWORD SIGNUP GöÇGöÇ
+        // ── EMAIL / PASSWORD SIGNUP ──
         document.getElementById('signupBtn').addEventListener('click', async () => {
             if (!validate()) return;
             setLoading(true);
+            isSigningUp = true;
 
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
@@ -929,7 +971,7 @@
                 await updateProfile(user, { displayName: `${firstName} ${lastName}` });
 
                 // 3. Save full profile to Firestore
-                await saveUserProfile(user, firstName, lastName);
+                await saveUserProfile(user, firstName, lastName, password);
 
                 // 4. Send verification email
                 await sendEmailVerification(user);
@@ -937,64 +979,69 @@
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 2000);
             } catch (err) {
                 setLoading(false);
+                isSigningUp = false;
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // GöÇGöÇ GOOGLE SIGNUP GöÇGöÇ
+        // ── GOOGLE SIGNUP ──
         document.getElementById('googleBtn').addEventListener('click', async () => {
+            isSigningUp = true;
             const provider = new GoogleAuthProvider();
             provider.setCustomParameters({ prompt: 'select_account' });
             try {
                 const { user } = await signInWithPopup(auth, provider);
                 const nameParts = (user.displayName || 'New User').split(' ');
-                await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User');
-                showToast('Account created with Google! RedirectingGÇª');
+                await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User', "");
+                showToast('Account created with Google! Redirecting...');
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
+                isSigningUp = false;
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // GöÇGöÇ GITHUB SIGNUP GöÇGöÇ
+        // ── GITHUB SIGNUP ──
         document.getElementById('githubBtn').addEventListener('click', async () => {
+            isSigningUp = true;
             const provider = new GithubAuthProvider();
             try {
                 const { user } = await signInWithPopup(auth, provider);
                 const nameParts = (user.displayName || 'New User').split(' ');
-                await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User');
-                showToast('Account created with GitHub! RedirectingGÇª');
+                await saveUserProfile(user, nameParts[0] || 'New', nameParts.slice(1).join(' ') || 'User', "");
+                showToast('Account created with GitHub! Redirecting...');
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
+                isSigningUp = false;
                 showToast(friendlyError(err.code), true);
             }
         });
 
-        // GöÇGöÇ TOGGLE PASSWORD VISIBILITY GöÇGöÇ
+        // ── TOGGLE PASSWORD VISIBILITY ──
         document.getElementById('togglePw').addEventListener('click', () => {
             const inp = document.getElementById('password');
             const btn = document.getElementById('togglePw');
             inp.type = inp.type === 'password' ? 'text' : 'password';
-            btn.textContent = inp.type === 'password' ? '=ƒæün+Å' : '=ƒÖê';
+            btn.textContent = inp.type === 'password' ? '👁️' : '🔒';
         });
         document.getElementById('toggleConfirm').addEventListener('click', () => {
             const inp = document.getElementById('confirmPassword');
             const btn = document.getElementById('toggleConfirm');
             inp.type = inp.type === 'password' ? 'text' : 'password';
-            btn.textContent = inp.type === 'password' ? '=ƒæün+Å' : '=ƒÖê';
+            btn.textContent = inp.type === 'password' ? '👁️' : '🔒';
         });
 
-        // GöÇGöÇ TERMS CHECKBOX GöÇGöÇ
+        // ── TERMS CHECKBOX ──
         document.getElementById('termsBox').addEventListener('click', () => {
             const cb = document.getElementById('termsCheck');
             const box = document.getElementById('termsBox');
             cb.checked = !cb.checked;
             box.classList.toggle('checked', cb.checked);
-            box.textContent = cb.checked ? 'G£ô' : '';
+            box.textContent = cb.checked ? '✅' : '';
             if (cb.checked) document.getElementById('termsErr').classList.remove('show');
         });
 
-        // GöÇGöÇ CONFIRM PASSWORD LIVE CHECK GöÇGöÇ
+        // ── CONFIRM PASSWORD LIVE CHECK ──
         document.getElementById('confirmPassword').addEventListener('input', () => {
             const pw = document.getElementById('password').value;
             const cpw = document.getElementById('confirmPassword').value;
@@ -1004,7 +1051,7 @@
             }
         });
 
-        // GöÇGöÇ ENTER KEY GöÇGöÇ
+        // ── ENTER KEY ──
         document.addEventListener('keydown', e => {
             if (e.key === 'Enter') document.getElementById('signupBtn').click();
         });

@@ -60,13 +60,20 @@ async function loadUserProfile(email) {
         const userDocRef = doc(db, "E-study", email);
         const userDocSnap = await getDoc(userDocRef);
 
+        let data = {};
         if (userDocSnap.exists()) {
-            currentUserModel = new UserModel({ ...userDocSnap.data(), email });
-        } else {
-            // Initialize new user if doesn't exist
-            currentUserModel = new UserModel({ email });
-            await setDoc(userDocRef, currentUserModel.toFirestore());
+            data = userDocSnap.data();
         }
+
+        // If the database document is missing the name, try to recover it from Auth or Cache
+        if (!data.first_name && !data.last_name) {
+            const fallbackName = auth.currentUser?.displayName || localStorage.getItem('estudy_user_name') || "User";
+            const nameParts = fallbackName.split(' ');
+            data.first_name = nameParts[0] || 'New';
+            data.last_name = nameParts.slice(1).join(' ') || 'User';
+        }
+
+        currentUserModel = new UserModel({ ...data, email });
 
         populateForms(currentUserModel);
         updateUIElements(currentUserModel);
@@ -99,9 +106,20 @@ function populateForms(userModel) {
 }
 
 function updateUIElements(userModel) {
-    const name = userModel.fullName || "User";
+    // Fallback order: Database -> Auth -> Local Cache -> Default
+    const name = userModel.fullName || auth.currentUser?.displayName || localStorage.getItem('estudy_user_name') || "User";
+    
     document.getElementById('card-name').textContent = name;
     document.getElementById('header-name').textContent = name;
+    
+    // Auto-update input field if it's currently generic or empty
+    const nameInput = document.getElementById('full-name');
+    if (nameInput && (!nameInput.value || nameInput.value === "User")) {
+        nameInput.value = name;
+    }
+
+    // Sync to localStorage so other pages update immediately
+    localStorage.setItem('estudy_user_name', name);
 }
 
 // --- SAVE ACTIONS ---
@@ -112,14 +130,14 @@ personalForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = personalForm.querySelector('.btn-submit');
     const originalText = submitBtn.textContent;
-    
+
     try {
         submitBtn.textContent = 'Saving...';
         submitBtn.disabled = true;
 
         const fullName = document.getElementById('full-name').value;
         const { first_name, last_name } = UserModel.splitName(fullName);
-        
+
         const updates = {
             first_name,
             last_name,
@@ -132,7 +150,7 @@ personalForm?.addEventListener('submit', async (e) => {
 
         const userDocRef = doc(db, "E-study", auth.currentUser.email);
         await updateDoc(userDocRef, updates);
-        
+
         // Update local model
         currentUserModel.first_name = first_name;
         currentUserModel.last_name = last_name;
