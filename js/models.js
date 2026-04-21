@@ -34,6 +34,7 @@ export class PersonalDetailsModel {
         this.phone = data.phone || "";
         this.gender = data.gender || "";
         this.location = data.location || "";
+        this.image = data.image || "";
     }
 
     toFirestore() {
@@ -45,7 +46,8 @@ export class PersonalDetailsModel {
             zip: this.zip,
             phone: this.phone,
             gender: this.gender,
-            location: this.location
+            location: this.location,
+            image: this.image
         };
     }
 }

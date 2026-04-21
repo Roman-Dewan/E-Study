@@ -118,8 +118,16 @@ function updateUIElements(userModel) {
         nameInput.value = name;
     }
 
+    // Load custom avatar from model or fallback
+    const avatar = userModel.personal_details?.image || auth.currentUser?.photoURL || localStorage.getItem('estudy_user_avatar');
+    if (avatar) {
+        const avatarImgs = document.querySelectorAll('#card-avatar, #header-avatar, .profile-avatar-medium');
+        avatarImgs.forEach(img => { img.src = avatar; });
+    }
+
     // Sync to localStorage so other pages update immediately
     localStorage.setItem('estudy_user_name', name);
+    if (avatar) localStorage.setItem('estudy_user_avatar', avatar);
 }
 
 // --- SAVE ACTIONS ---
@@ -219,8 +227,22 @@ avatarInput?.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
         const reader = new FileReader();
-        reader.onload = (e) => {
-            avatarImgs.forEach(img => { img.src = e.target.result; });
+        reader.onload = async (e) => {
+            const base64Str = e.target.result;
+            avatarImgs.forEach(img => { img.src = base64Str; });
+            
+            // Auto save base64 byte string to Firestore
+            if (auth.currentUser) {
+                try {
+                    const userDocRef = doc(db, "E-study", auth.currentUser.email);
+                    await updateDoc(userDocRef, { "personal_details.image": base64Str });
+                    if (currentUserModel) currentUserModel.personal_details.image = base64Str;
+                    localStorage.setItem('estudy_user_avatar', base64Str);
+                } catch (err) {
+                    console.error("Error saving avatar:", err);
+                    alert("Failed to save profile picture.");
+                }
+            }
         };
         reader.readAsDataURL(file);
     }

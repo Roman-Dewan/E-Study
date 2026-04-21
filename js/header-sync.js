@@ -48,7 +48,8 @@ onAuthStateChanged(auth, async (user) => {
                     fullName = user.displayName || "User";
                 }
                 
-                const avatarUrl = userData.avatar_url || user.photoURL;
+                // Fallback: Check personal_details.image, then avatar_url, then photoURL
+                const avatarUrl = (userData.personal_details && userData.personal_details.image) || userData.avatar_url || user.photoURL;
 
                 // Update UI
                 updateUI(fullName, avatarUrl);

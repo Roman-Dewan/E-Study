@@ -803,14 +803,14 @@
         // ── SAVE USER PROFILE TO FIRESTORE ──
         async function saveUserProfile(user, firstName, lastName, password = "") {
             const userDocRef = doc(db, 'E-study', user.email);
-            
+
             // Check if user already exists
             const docSnap = await getDoc(userDocRef);
             if (docSnap.exists()) {
                 const existingData = docSnap.data();
                 // If it already has a name, don't overwrite (prevents accidental regression)
                 if (existingData.first_name && existingData.last_name) return;
-                
+
                 // If it exists but has no name, continue to save (fixes empty documents)
             }
 
@@ -825,7 +825,7 @@
             }
 
             const fullNameDisplay = `${finalFirstName} ${finalLastName}`.trim();
-            
+
             // Set Cache immediately to prevent blink on redirect
             localStorage.setItem('estudy_user_name', fullNameDisplay);
             if (user.photoURL) localStorage.setItem('estudy_user_avatar', user.photoURL);
