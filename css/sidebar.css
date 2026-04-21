@@ -10,6 +10,23 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: var(--sidebar-width);
+        transform: translateX(-100%);
+        display: flex !important; /* Force flex when shown on mobile */
+        box-shadow: 20px 0 50px rgba(0,0,0,0.1);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
 }
 
 /* Logo Section */
@@ -544,40 +561,63 @@
     }
 }
 
-/* Password Toggle Styling */
-.password-input-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.password-input-wrapper input {
-    width: 100% !important;
-    padding-right: 45px !important; /* Make room for the eye icon */
-}
-
-.toggle-password-btn {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
+/* Mobile Toggle Button (Burger Menu) */
+.mobile-toggle {
+    display: none;
+    background: var(--primary-color);
+    color: white;
     border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     cursor: pointer;
-    color: var(--text-grey);
-    font-size: 16px;
-    transition: all 0.25s ease;
-    padding: 5px;
-    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(65, 209, 133, 0.3);
+    flex-shrink: 0;
 }
 
-.toggle-password-btn:hover {
-    color: var(--primary-color);
-    transform: translateY(-50%) scale(1.1);
+@media (max-width: 1024px) {
+    .mobile-toggle {
+        display: flex;
+    }
 }
 
-.toggle-password-btn:active {
-    transform: translateY(-50%) scale(0.95);
+.sidebar-close {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-grey);
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .sidebar-close {
+        display: block;
+    }
+}
+
+/* Overlay for when sidebar is open on mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
 }

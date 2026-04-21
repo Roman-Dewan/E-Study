@@ -20,20 +20,27 @@
     <div id="sidebar-placeholder"></div>
 
     <div class="main">
-      <div class="topbar">
-        <div class="page-title">Course</div>
-        <div class="search-bar">
-          <input type="text" placeholder="Search..." id="searchInput">
-          <i class="fa-solid fa-magnifying-glass"></i>
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-toggle" id="mobile-sidebar-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="page-title">Course</div>
         </div>
-        <div class="header-right-profile">
+        <div class="search-container">
+          <div class="search-bar">
+            <input type="text" placeholder="Search..." id="searchInput">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </div>
+        <div class="header-right">
           <div class="notification-btn-wrapper">
             <i class="fa-regular fa-bell" id="notification-btn"></i>
           </div>
           <div class="user-dropdown-container">
             <div class="user-header" id="user-dropdown-toggle">
               <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar" alt="Profile">
-              <span id="header-name">rayhan</span>
+              <span id="header-name" class="user-name">rayhan</span>
               <i class="fa-solid fa-chevron-down dropdown-icon"></i>
             </div>
             <div class="user-dropdown-menu" id="user-dropdown-menu">
@@ -43,7 +50,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
       <div class="filters-bar">
         <button class="filter-btn">⚡ Filter</button>

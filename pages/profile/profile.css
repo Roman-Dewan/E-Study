@@ -1,21 +1,23 @@
-/* --- PROFILE PAGE LAYOUT --- */
 .profile-page .app-container {
     grid-template-columns: var(--sidebar-width) 350px 1fr;
     background: #EAF2F8;
-    /* Light blue-grey background from design */
+    min-height: 100vh;
+}
+
+@media (max-width: 1200px) {
+    .profile-page .app-container {
+        grid-template-columns: var(--sidebar-width) 300px 1fr;
+    }
 }
 
 /* --- MIDDLE COLUMN: PROFILE SUMMARY --- */
 .profile-card-col {
     background: #F8F9FA;
-    /* Slightly lighter than the main bg */
     padding: 40px 30px;
     border-right: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     gap: 30px;
-    height: 100vh;
-    overflow-y: auto;
 }
 
 .profile-card-col h2 {
@@ -107,9 +109,7 @@
 /* --- RIGHT COLUMN: SETTINGS --- */
 .main-content {
     background: #EAF2F8;
-    /* Matches design background */
     padding: 40px 50px;
-    overflow-y: auto;
 }
 
 /* Header with Search */
@@ -648,102 +648,49 @@ input:checked+.slider:before {
 }
 
 /* Mobile Styles (up to 768px) */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .profile-page .app-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-    }
-
-    .sidebar {
-        display: none;
-        /* Hide sidebar on mobile, could add hamburger menu later */
+        display: block; /* Stack everything */
     }
 
     .profile-card-col {
-        display: none;
-        /* Hide profile card on mobile for cleaner layout */
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 30px 20px;
     }
 
     .main-content {
         padding: 20px;
-        grid-column: 1 / -1;
-    }
-
-    .top-header {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-        margin-bottom: 30px;
-    }
-
-    .search-container {
         width: 100%;
-    }
-
-    .search-bar {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .search-bar:focus-within {
-        width: 100%;
-    }
-
-    .header-right {
-        width: 100%;
-        justify-content: space-between;
     }
 
     .settings-container {
         padding: 20px;
-        border-radius: 20px;
-        margin: 0 -10px;
+        margin: 0;
     }
+}
 
+@media (max-width: 768px) {
     .settings-tabs {
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 15px;
     }
 
     .tab-btn {
         flex: 1;
-        min-width: 120px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
+        min-width: 100px;
+        font-size: 13px;
+        padding-bottom: 8px;
     }
 
     .form-actions {
         flex-direction: column;
-        gap: 15px;
     }
 
-    .btn-submit,
-    .btn-cancel {
+    .btn-submit, .btn-cancel {
         width: 100%;
-    }
-
-    .settings-group {
-        margin-bottom: 25px;
-    }
-
-    .settings-list {
-        padding: 15px 15px;
-    }
-
-    .modal-card {
-        width: 95%;
-        max-width: 95%;
-        padding: 30px 20px;
-    }
-
-    .support-options {
-        margin-bottom: 25px;
-    }
-
-    .support-option {
-        padding: 12px 0;
     }
 }
 

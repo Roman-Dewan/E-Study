@@ -22,6 +22,12 @@ body {
     min-height: 100vh;
 }
 
+@media (max-width: 1024px) {
+    .app-container {
+        display: block;
+    }
+}
+
 /* --- TOPBAR --- */
 .topbar { 
     padding: 30px 40px; 
@@ -115,8 +121,13 @@ body {
 /* --- COURSES GRID --- */
 .content { 
     padding: 0 40px 40px; 
-    height: calc(100vh - 180px);
-    overflow-y: auto;
+    min-height: calc(100vh - 180px);
+}
+
+@media (max-width: 1024px) {
+    .content {
+        padding: 20px;
+    }
 }
 
 .courses-grid { 

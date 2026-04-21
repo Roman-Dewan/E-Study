@@ -106,8 +106,59 @@
 .content {
   padding: 0 40px 40px;
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr minmax(280px, 320px);
   gap: 30px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    padding: 0 20px 20px;
+  }
+  
+  .right-col {
+    order: 2;
+  }
+  
+  .left-col {
+    order: 1;
+  }
+
+  .hero-banner {
+    padding: 30px;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .hero-banner h2 {
+    font-size: 24px;
+  }
+
+  .hero-banner p {
+    margin: 0 auto;
+  }
+
+  .hero-emoji {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .course-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .view-btn {
+    width: 100%;
+  }
 }
 
 /* ── HERO BANNER ── */
