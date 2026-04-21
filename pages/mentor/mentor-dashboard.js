@@ -158,6 +158,7 @@ async function initMentorDashboard() {
                     subject_name: subjectSelect.options[subjectSelect.selectedIndex].text,
                     tags: document.getElementById('res-tags').value,
                     category: document.getElementById('res-category').value,
+                    medium: document.getElementById('res-medium').value,
                     instrcutor_name: instructorName,
                     instructor_id: instructorId,
                     createdBy: auth.currentUser.email,

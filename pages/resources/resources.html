@@ -18,57 +18,88 @@
         <div id="sidebar-placeholder"></div>
 
         <main class="main-content">
-            <header class="top-header">
-                <div style="display:flex; align-items:center; gap:20px;">
-                    <h2 style="font-size: 24px; font-weight: 600; color: var(--text-dark);">Resource</h2>
-                    <div class="search-bar">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                </div>
-                <div class="header-right-profile" style="margin-bottom:0;">
-                    <div class="notification-btn-wrapper">
-                        <i class="fa-regular fa-bell" id="notification-btn"></i>
-                    </div>
-                    <div class="user-dropdown-container">
-                        <div class="user-header" id="user-dropdown-toggle">
-                            <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar" alt="Profile">
-                            <span id="header-name">rayhan</span>
-                            <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-                        </div>
-                        <div class="user-dropdown-menu" id="user-dropdown-menu">
-                            <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile Details</a>
-                            <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
-                            <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-                        </div>
-                    </div>
-                </div>
+            <header class="top-header" style="justify-content: flex-end;">
+                <!-- Redundant header title and search removed as requested -->
             </header>
 
             <section class="resources-card">
                 <div class="rc-header">
-                    <h2>My Resources</h2>
-                    <button class="btn-primary" id="addCategoryBtn"><i class="fa-solid fa-plus"></i> Add New
-                        Category</button>
+                    <h2>Resources Browser</h2>
+                    <div class="header-right-profile" style="margin-bottom:0;">
+                        <div class="notification-btn-wrapper">
+                            <i class="fa-regular fa-bell" id="notification-btn"></i>
+                        </div>
+                        <div class="user-dropdown-container">
+                            <div class="user-header" id="user-dropdown-toggle">
+                                <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar" alt="Profile">
+                                <span id="header-name">rayhan</span>
+                                <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                            </div>
+                            <div class="user-dropdown-menu" id="user-dropdown-menu">
+                                <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile Details</a>
+                                <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
+                                <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="rc-horizontal-nav" id="mediumNav">
-                    <button class="nav-btn active" data-medium="Bangla Medium">Bangla Medium</button>
-                    <button class="nav-btn" data-medium="English Version">English Version</button>
-                    <button class="nav-btn" data-medium="English Medium">English Medium</button>
-                    <button class="nav-btn" data-medium="Madrasa Medium">Madrasa Medium</button>
-                    <button class="nav-btn" data-medium="Skill Development">Skill Development</button>
-                </div>
+                <!-- Medium Navigation removed as requested -->
 
-                <hr class="rc-divider">
+                <div class="resource-browser">
+                    <!-- Classes Column -->
+                    <div class="browser-column classes-column">
+                        <div class="column-header">Classes</div>
+                        <div class="column-content" id="classesList">
+                            <!-- Injected -->
+                        </div>
+                    </div>
 
-                <div class="classes-grid" id="mainContentGrid">
-                    <!-- Dynamic classes injected here -->
+                    <!-- Subjects Column -->
+                    <div class="browser-column subjects-column">
+                        <div class="column-header">Subjects</div>
+                        <div class="column-content" id="subjectsList">
+                            <div class="empty-state">Select a class first</div>
+                        </div>
+                    </div>
+
+                    <!-- Resources Area -->
+                    <div class="resources-display">
+                        <div class="display-header">
+                            <div id="displayTitle">Resources</div>
+                            <div class="search-mini">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="resSearch" placeholder="Search in this section...">
+                            </div>
+                        </div>
+                        <div class="resources-grid" id="resourcesGrid">
+                            <div class="empty-state-large">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                <p>Select a class and subject to view resources</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Modal for Popups -->
+    <!-- Video Overlay -->
+    <div class="video-overlay" id="videoOverlay">
+        <div class="overlay-backdrop"></div>
+        <div class="video-container">
+            <button class="close-video" id="closeVideo"><i class="fa-solid fa-xmark"></i></button>
+            <div class="video-wrapper">
+                <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h3 id="videoTitle">Video Title</h3>
+                <p id="videoDesc">Description goes here</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Category Modal (Keep existing functionality) -->
     <div class="modal-overlay" id="popModal">
         <div class="modal-box">
             <div class="modal-header">
@@ -81,231 +112,10 @@
         </div>
     </div>
 
-    <script>
-        const classesData = {
-            "Bangla Medium": ["Play", "Nursery", "Zero", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9 & 10", "Class 11 & 12", "University Admission"],
-            "English Version": ["Play", "Nursery", "Zero", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9 & 10", "Class 11 & 12", "University Admission"],
-            "English Medium": ["Zero", "Nursery", "Play", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "O Level", "A Level"],
-            "Madrasa Medium": ["Play", "Nursery", "Zero", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9 & 10", "Class 11 & 12", "University Admission"],
-            "Skill Development": ["Web Development", "Graphic Design", "Digital Marketing", "Spoken English", "Video Editing", "Python Programming"]
-        };
-
-        const standardSubjects = ["Bangla", "English", "Mathematics", "Science", "BDGS", "Religion", "ICT"];
-
-        const generalSubs9_10 = ["Bangla", "English", "General Math", "ICT", "Religions", "BDGS", "Agriculture"];
-        const sciSubs9_10 = ["Physics", "Chemistry", "Biology", "Higher Math", ...generalSubs9_10];
-        const artsSubs9_10 = ["Geography", "History", "Civics", "Economics", ...generalSubs9_10];
-        const comSubs9_10 = ["Accounting", "Finance", "Business Enterprise", ...generalSubs9_10];
-
-        const generalSubs11_12 = ["Bangla 1 & 2", "English 1 & 2", "ICT"];
-        const sciSubs11_12 = ["Physics 1 & 2", "Chemistry 1 & 2", "Biology 1 & 2", "Math 1 & 2", ...generalSubs11_12];
-        const artsSubs11_12 = ["History", "Logic", "Civics", "Economics", "Sociology", ...generalSubs11_12];
-        const comSubs11_12 = ["Accounting", "Business Organization", "Finance", "Economics", ...generalSubs11_12];
-
-        const enMedSecondarySubs = ["Mathematics D", "Additional Mathematics", "Physics", "Chemistry", "Biology", "English Language", "Accounting", "Business Studies", "Economics", "Computer Science"];
-
-        const chaptersList = Array.from({ length: 20 }, (_, i) => `Chapter ${i + 1}`);
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const mediumBtns = document.querySelectorAll('#mediumNav .nav-btn');
-            const mainGrid = document.getElementById('mainContentGrid');
-            const modalOverlay = document.getElementById('popModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBodyGrid');
-            const closeModalBtn = document.querySelector('.close-modal');
-
-            let currentMedium = "Bangla Medium";
-            let currentClass = "";
-            let currentSubject = "";
-            let currentGroup = "";
-
-            function renderClasses() {
-                mainGrid.innerHTML = '';
-                const list = classesData[currentMedium] || [];
-                list.forEach(cls => {
-                    const btn = document.createElement('button');
-                    btn.className = 'dd-btn';
-                    btn.innerHTML = `${cls} <i class="fa-solid fa-caret-right dd-arrow"></i>`;
-
-                    if (currentMedium === "Skill Development") {
-                        btn.onclick = () => openSkillLink(cls);
-                    } else if (["Class 9 & 10", "Class 11 & 12", "University Admission"].includes(cls)) {
-                        btn.onclick = () => openGroupPopup(cls);
-                    } else {
-                        btn.onclick = () => openSubjectsPopup(cls);
-                    }
-
-                    mainGrid.appendChild(btn);
-                });
-            }
-
-            mediumBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    mediumBtns.forEach(b => b.classList.remove('active'));
-                    e.currentTarget.classList.add('active');
-                    currentMedium = e.currentTarget.getAttribute('data-medium');
-                    renderClasses();
-                });
-            });
-
-            function openModal(title, contentHTML, isLink = false) {
-                modalTitle.textContent = title;
-                modalBody.innerHTML = contentHTML;
-                modalBody.style.display = isLink ? 'block' : 'grid';
-                modalOverlay.classList.add('active');
-            }
-
-            closeModalBtn.addEventListener('click', () => {
-                modalOverlay.classList.remove('active');
-            });
-
-            modalOverlay.addEventListener('click', (e) => {
-                if (e.target === modalOverlay) {
-                    modalOverlay.classList.remove('active');
-                }
-            });
-
-            window.openGroupPopup = function (cls) {
-                currentClass = cls;
-                currentGroup = "";
-                const groups = ["Science", "Arts", "Commerce"];
-                let html = '';
-                groups.forEach(g => {
-                    html += `<button class="dd-btn" onclick="openSubjectsPopup('${cls}', '${g}')">${g} <i class="fa-solid fa-caret-right dd-arrow"></i></button>`;
-                });
-                openModal(`Groups for ${cls}`, html);
-            }
-
-            window.openSubjectsPopup = function (cls, group = "") {
-                currentClass = cls;
-                currentGroup = group;
-                let subs = standardSubjects;
-
-                if (group) {
-                    if (cls === "Class 9 & 10") {
-                        if (group === "Science") subs = sciSubs9_10;
-                        if (group === "Arts") subs = artsSubs9_10;
-                        if (group === "Commerce") subs = comSubs9_10;
-                    } else if (cls === "Class 11 & 12" || cls === "University Admission") {
-                        if (group === "Science") subs = sciSubs11_12;
-                        if (group === "Arts") subs = artsSubs11_12;
-                        if (group === "Commerce") subs = comSubs11_12;
-                    }
-                } else if (currentMedium === "English Medium" && ["Level 9", "O Level", "A Level"].includes(cls)) {
-                    subs = enMedSecondarySubs;
-                }
-
-                let html = '';
-                subs.forEach(sub => {
-                    html += `<button class="dd-btn" onclick="openChaptersPopup('${sub}')">${sub} <i class="fa-solid fa-caret-right dd-arrow"></i></button>`;
-                });
-                const titleStr = group ? `${group} Subjects (${cls})` : `Subjects for ${cls}`;
-                openModal(titleStr, html);
-            }
-
-            window.openChaptersPopup = function (sub) {
-                currentSubject = sub;
-                let html = '';
-                chaptersList.forEach(chap => {
-                    html += `<button class="dd-btn" onclick="openLinkPopup('${chap}')">${chap} <i class="fa-solid fa-caret-right dd-arrow"></i></button>`;
-                });
-                openModal(`Chapters for ${sub}`, html);
-            }
-
-            window.openLinkPopup = function (chap) {
-                const safeClass = currentClass.replace(/\s+/g, '').toLowerCase();
-                const safeSub = currentSubject.replace(/\s+/g, '').toLowerCase();
-                const safeChap = chap.replace(/\s+/g, '').toLowerCase();
-                const link = `https://www.youtube.com/easytechnique/${safeClass}/${safeSub}/${safeChap}`;
-
-                const html = `
-                    <div class="lecture-link-box">
-                        <i class="fa-solid fa-link" style="color: var(--primary-color); font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                        <p style="margin-bottom: 5px; font-weight: 500;">Lecture Link for ${chap}</p>
-                        <a href="${link}" target="_blank">${link}</a>
-                    </div>
-                `;
-                openModal(`${chap} - ${currentSubject}`, html, true);
-            }
-
-            window.openSkillLink = function (skill) {
-                const safeSkill = skill.replace(/\s+/g, '').toLowerCase();
-                const link = `https://www.youtube.com/easytechnique/skills/${safeSkill}`;
-                const html = `
-                    <div class="lecture-link-box">
-                        <i class="fa-solid fa-link" style="color: var(--primary-color); font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                        <p style="margin-bottom: 5px; font-weight: 500;">Resources for ${skill}</p>
-                        <a href="${link}" target="_blank">${link}</a>
-                    </div>
-                `;
-                openModal(skill, html, true);
-            }
-
-            const addCategoryBtn = document.getElementById('addCategoryBtn');
-            addCategoryBtn.addEventListener('click', () => {
-                const html = `
-                    <div style="grid-column: 1 / -1; padding-top: 10px;">
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px; color: var(--text-dark);">Category Name</label>
-                            <input type="text" id="newCatName" placeholder="e.g. Vocational Training" style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; outline: none;">
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px; color: var(--text-dark);">Classes / Sub-Categories (comma separated)</label>
-                            <input type="text" id="newCatClasses" placeholder="e.g. Basics, Advanced, Projects" style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; outline: none;">
-                        </div>
-                        <button onclick="saveNewCategory()" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">Save Category</button>
-                    </div>
-                `;
-                openModal('Add New Category', html, true);
-            });
-
-            window.saveNewCategory = function () {
-                const nameInput = document.getElementById('newCatName');
-                const classesInput = document.getElementById('newCatClasses');
-                const catName = nameInput.value.trim();
-
-                if (!catName) {
-                    nameInput.style.borderColor = 'red';
-                    return;
-                }
-
-                const classesStr = classesInput.value.trim();
-                let classesArray = ["Default Level 1", "Default Level 2"];
-                if (classesStr) {
-                    classesArray = classesStr.split(',').map(s => s.trim()).filter(s => s);
-                }
-
-                classesData[catName] = classesArray;
-
-                const navBtn = document.createElement('button');
-                navBtn.className = 'nav-btn';
-                navBtn.setAttribute('data-medium', catName);
-                navBtn.textContent = catName;
-
-                navBtn.addEventListener('click', (e) => {
-                    const mediumBtnsDom = document.querySelectorAll('#mediumNav .nav-btn');
-                    mediumBtnsDom.forEach(b => b.classList.remove('active'));
-                    e.currentTarget.classList.add('active');
-                    currentMedium = e.currentTarget.getAttribute('data-medium');
-                    renderClasses();
-                });
-
-                document.getElementById('mediumNav').appendChild(navBtn);
-
-                // Set the current medium to the new category and render
-                navBtn.click();
-                modalOverlay.classList.remove('active');
-            }
-
-            // Init
-            renderClasses();
-        });
-    </script>
-
     <script type="module" src="../../js/sidebar.js"></script>
     <script type="module" src="../../js/header-sync.js"></script>
     <script type="module" src="resources.js"></script>
 
 </body>
 
-</html>
+</html>
