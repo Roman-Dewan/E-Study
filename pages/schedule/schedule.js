@@ -1,9 +1,21 @@
 // ── AUTH GUARD & LOGOUT ───────────────────────────────────────────────────────
-import { auth } from '../../js/firebase-config.js';
+import { auth, db } from '../../js/firebase-config.js';
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, getDoc, setDoc, deleteDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = '../../index.html'; }
+  else {
+      // Fetch tasks from Firestore
+      tasks = [];
+      const q = collection(db, "E-study", user.email, "schedule_task");
+      const snap = await getDocs(q);
+      snap.forEach(docSnap => {
+          tasks.push({ ...docSnap.data(), id: docSnap.id });
+      });
+      initCalendar();
+      renderReminders();
+  }
 });
 
 document.addEventListener('estudy-logout', async () => {
@@ -12,11 +24,7 @@ document.addEventListener('estudy-logout', async () => {
 });
 
 // Setup global state
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [
-    // Default seed tasks mapping closer to the UI
-    { id: 1, title: "Figma Prototype Class", date: "2020-07-17", startTime: "12:00", endTime: "13:00", theme: "green" },
-    { id: 2, title: "Sketch learning", date: "2020-07-17", startTime: "17:00", endTime: "18:00", theme: "purple" }
-];
+let tasks = [];
 
 let currentDate = new Date(); // Using real date, but for mockup accuracy, one could hardcode 2020-07-17
 
@@ -37,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Uncomment next line to simulate the mockup's exact timeline:
     // currentDate = new Date(2020, 6, 17); // July 17, 2020
     
-    initCalendar();
-    renderReminders();
+    // initCalendar();
+    // renderReminders();
     
     // Auto sync timeline scroll to 10:00 AM initially to match design
     const gridContainer = document.getElementById("schedule-grid-container");
@@ -204,10 +212,10 @@ function renderGrid() {
     let dailyTasks = tasks.filter(t => t.date === dateStr);
 
     dailyTasks.forEach(task => {
-        let startHour = parseInt(task.startTime.split(":")[0]);
-        let startMin = parseInt(task.startTime.split(":")[1] || 0);
-        let endHour = parseInt(task.endTime.split(":")[0]);
-        let endMin = parseInt(task.endTime.split(":")[1] || 0);
+        let startHour = parseInt(task.start_time.split(":")[0]);
+        let startMin = parseInt(task.start_time.split(":")[1] || 0);
+        let endHour = parseInt(task.end_time.split(":")[0]);
+        let endMin = parseInt(task.end_time.split(":")[1] || 0);
 
         // Grid starts at 10:00, 60px per hour
         let startGridOffset = startHour + (startMin / 60) - 10;
@@ -226,7 +234,7 @@ function renderGrid() {
             eventsContainer.innerHTML += `
                 <div class="event-card" data-theme="${task.theme}" style="top: ${topPx}px; height: ${heightPx}px;">
                     <h4>${task.title}</h4>
-                    <p><i class="fa-regular fa-clock"></i> ${task.startTime} - ${task.endTime} AM</p>
+                    <p><i class="fa-regular fa-clock"></i> ${task.start_time} - ${task.end_time} AM</p>
                 </div>
             `;
         }
@@ -254,17 +262,24 @@ function renderReminders() {
                 <div class="task-icon ${t.theme}"><i class="fa-solid fa-folder-open"></i></div>
                 <div class="task-detail">
                     <h4>${t.title}</h4>
-                    <p>${t.startTime}</p>
+                    <p>${t.start_time}</p>
                 </div>
-                <i class="fa-solid fa-trash" style="color: #ff7875; cursor: pointer; padding: 5px;" onclick="deleteTask(${t.id})" title="Delete Reminder"></i>
+                <i class="fa-solid fa-trash" style="color: #ff7875; cursor: pointer; padding: 5px;" onclick="deleteTask('${t.id}')" title="Delete Reminder"></i>
             </div>
         `;
     });
 }
 
-function deleteTask(id) {
+async function deleteTask(id) {
     tasks = tasks.filter(t => t.id !== id);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    if(auth.currentUser) {
+        try {
+            const taskRef = doc(db, "E-study", auth.currentUser.email, "schedule_task", id);
+            await deleteDoc(taskRef);
+        } catch(e) {
+            console.error("deleting task error", e);
+        }
+    }
     initCalendar();
     renderReminders();
 }
@@ -294,18 +309,34 @@ function saveTask() {
         return;
     }
 
+    const [y, m, d] = date.split('-');
+    const [h, min] = startTime.split(':');
+    let hour = parseInt(h);
+    let ampm = hour >= 12 ? 'PM' : 'AM';
+    let displayHour = hour % 12;
+    if(displayHour === 0) displayHour = 12;
+    const formattedId = `${d}-${m}-${y}-${String(displayHour).padStart(2, '0')}:${min} ${ampm}`;
+
     const newTask = {
-        id: Date.now(),
-        title, date, startTime, endTime, theme, email
+        id: formattedId,
+        title: title, 
+        date: date, 
+        start_time: startTime, 
+        end_time: endTime, 
+        theme: theme, 
+        gmail_notification: email
     };
 
     tasks.push(newTask);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    
+    if(auth.currentUser) {
+        const taskRef = doc(db, "E-study", auth.currentUser.email, "schedule_task", formattedId);
+        setDoc(taskRef, newTask).catch(e => console.error(e));
+    }
 
     closeTaskModal();
     
     // Automatically select the date the task was added to
-    const [y, m, d] = date.split('-');
     selectDate(parseInt(y), parseInt(m)-1, parseInt(d));
     renderReminders();
 
