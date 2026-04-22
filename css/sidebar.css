@@ -11,6 +11,8 @@
     top: 0;
     z-index: 1000;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 @media (max-width: 1024px) {
