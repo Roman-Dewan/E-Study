@@ -147,35 +147,12 @@
               <span class="card-title">My Courses</span>
             </div>
             <div class="tabs">
-              <div class="tab active">All</div>
-              <div class="tab">Ongoing</div>
-              <div class="tab">Complete</div>
+              <div class="tab active" data-filter="all">All</div>
+              <div class="tab" data-filter="ongoing">Ongoing</div>
+              <div class="tab" data-filter="complete">Complete</div>
             </div>
-            <div class="courses-list">
-              <div class="course-item">
-                <div class="course-thumb-sm" style="background:linear-gradient(135deg,#f5a623,#f76b1c)">🎨</div>
-                <div class="course-info">
-                  <h4>History of graphic design</h4>
-                  <span>By Shakespeare &nbsp; <span class="stars">★★★★★</span> 4.7</span>
-                </div>
-                <a href="courses-detail.html" class="view-btn">view course</a>
-              </div>
-              <div class="course-item">
-                <div class="course-thumb-sm" style="background:linear-gradient(135deg,#6a82fb,#fc5c7d)">📱</div>
-                <div class="course-info">
-                  <h4>App Design</h4>
-                  <span>By Devdas &nbsp; <span class="stars">★★★★★</span> 4.7</span>
-                </div>
-                <a href="../courses/courses-detail.html" class="view-btn">view course</a>
-              </div>
-              <div class="course-item">
-                <div class="course-thumb-sm" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">🖌️</div>
-                <div class="course-info">
-                  <h4>Digital painting</h4>
-                  <span>By Tesla &nbsp; <span class="stars">★★★★★</span> 4.7</span>
-                </div>
-                <a href="../courses/courses-detail.html" class="view-btn">view course</a>
-              </div>
+            <div class="courses-list" id="courses-list">
+              <div style="text-align:center;padding:20px 0;color:var(--muted);font-size:13px;">Loading...</div>
             </div>
           </div>
         </div>
