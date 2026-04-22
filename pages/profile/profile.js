@@ -1,6 +1,6 @@
 import { auth, db } from "../../js/firebase-config.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, getDoc, setDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { UserModel, NotificationModel, PersonalDetailsModel, PrivacyModel } from "../../js/models.js";
 
 // --- STATE ---
@@ -53,7 +53,36 @@ onAuthStateChanged(auth, async (user) => {
 
     console.log("Authenticated user:", user.email);
     await loadUserProfile(user.email);
+    await loadCourseStats(user.email);
 });
+
+// ── COURSE STATS (Progress & Complete counts) ────────────────────────────────
+async function loadCourseStats(email) {
+    try {
+        const colRef = collection(db, 'E-study', email, 'enrolled_courses');
+        const snap = await getDocs(colRef);
+
+        let inProgress = 0;
+        let completed = 0;
+
+        snap.forEach(d => {
+            const c = d.data();
+            const done = c.isCompleted === true || c.isCompleted === 'true';
+            if (done) {
+                completed++;
+            } else {
+                inProgress++;
+            }
+        });
+
+        const progressEl = document.getElementById('progress-count');
+        const completeEl = document.getElementById('complete-count');
+        if (progressEl) progressEl.textContent = inProgress;
+        if (completeEl) completeEl.textContent = completed;
+    } catch (err) {
+        console.error('Error loading course stats:', err);
+    }
+}
 
 async function loadUserProfile(email) {
     try {

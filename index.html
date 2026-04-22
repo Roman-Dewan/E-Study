@@ -314,6 +314,40 @@
         </div>
     </footer>
 
+    <!-- COURSES MODAL -->
+    <div class="courses-modal-overlay" id="coursesModalOverlay">
+        <div class="courses-modal">
+            <div class="modal-header">
+                <h2>Explore All Courses</h2>
+                <button class="close-modal" id="closeCoursesModal">&times;</button>
+            </div>
+            <div class="modal-controls">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="modalSearchInput" placeholder="Search courses, instructors...">
+                </div>
+                <button class="filter-btn">
+                    <i class="fa-solid fa-bolt"></i> Filter
+                </button>
+                <select class="sort-select" id="modalCategorySort">
+                    <option>All Categories</option>
+                    <option>AI</option>
+                    <option>Development</option>
+                    <option>Design</option>
+                    <option>Marketing</option>
+                    <option>Business</option>
+                    <option>Science</option>
+                    <option>ML</option>
+                    <option>Academic</option>
+                    <option>General</option>
+                </select>
+            </div>
+            <div class="courses-modal-grid" id="modalCoursesGrid">
+                <p style="text-align:center; grid-column: 1/-1; padding: 40px; color: #6b7280;">Loading courses...</p>
+            </div>
+        </div>
+    </div>
+
     <!-- RESOURCE FRONT MODAL -->
     <div class="courses-modal-overlay" id="resourceFrontModalOverlay" style="z-index: 2000;">
         <div class="courses-modal" style="max-width: 850px; padding: 0;">

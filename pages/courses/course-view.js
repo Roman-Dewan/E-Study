@@ -25,7 +25,7 @@ onAuthStateChanged(auth, async (user) => {
 async function loadCourseData(courseId, email) {
     try {
         const courseDoc = await getDoc(doc(db, "E-study", email, "enrolled_courses", courseId));
-        
+
         if (!courseDoc.exists()) {
             console.error("Course not found in enrollments.");
             // Try fetching from global courses if not in enrollments (e.g. preview)
@@ -93,9 +93,9 @@ function renderLectureList() {
     const list = document.getElementById('lectureList');
     // For now, we mock modules based on the lecture count
     const lessonCount = parseInt(currentCourse.lesson) || 5;
-    
+
     let html = '';
-    
+
     // Module 1
     html += `<div class="module-item">
         <span class="module-title">MODULE 1 - INTRODUCTION</span>
