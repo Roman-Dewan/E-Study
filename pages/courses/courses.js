@@ -214,6 +214,7 @@ confirmBtn?.addEventListener('click', async () => {
       course_image: selectedCourse.course_image || selectedCourse.thumbnail || "",
       course_price: selectedCourse.course_price || 0,
       createdAt: selectedCourse.createdAt || new Date().toISOString(),
+      url: selectedCourse.url || "",
       
       instructor_id: selectedCourse.instructor_id || "unknown",
       instructor_name: selectedCourse.instructor_name || "Expert Instructor",

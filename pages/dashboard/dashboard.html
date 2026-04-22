@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="../../css/resources-modal.css">
   <link rel="stylesheet" href="dashboard.css">
 </head>
 
@@ -273,14 +274,47 @@
               <span class="payment-amount">$ 10</span>
             </div>
           </div>
+
+          <!-- QUICK RESOURCES -->
+          <div style="margin-top: 30px;">
+              <div class="task-header">
+                <h3>Quick Resources</h3>
+                <a href="../resources/resources.html" class="see-all">All</a>
+              </div>
+              <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-1')">
+                <div class="course-thumb-sm" style="background:#3B82F6;">📄</div>
+                <div class="course-info">
+                  <h4>Math Formulas</h4>
+                  <span>Formula guide for Class 10</span>
+                </div>
+              </div>
+              <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-2')">
+                <div class="course-thumb-sm" style="background:#8B5CF6;">📑</div>
+                <div class="course-info">
+                  <h4>Organic Notes</h4>
+                  <span>Chemistry Class 12</span>
+                </div>
+              </div>
+          </div>
         </div>
 
       </div><!-- /.content -->
     </div><!-- /.main -->
   </div><!-- /.app-container -->
 
+  <!-- RESOURCE FRONT MODAL -->
+  <div class="courses-modal-overlay" id="resourceFrontModalOverlay" style="z-index: 2000;">
+      <div class="courses-modal" style="max-width: 850px; padding: 0;">
+          <button class="close-modal" id="closeResourceFrontModal" style="z-index: 10;">&times;</button>
+          <div id="resourceFrontContent">
+              <p style="padding: 50px; text-align: center;">Loading resource...</p>
+          </div>
+      </div>
+  </div>
+
   <script type="module" src="../../js/sidebar.js"></script>
   <script type="module" src="../../js/header-sync.js"></script>
+  <script type="module" src="../../js/resources-modal.js"></script>
   <script type="module" src="dashboard.js"></script>
 </body>
 

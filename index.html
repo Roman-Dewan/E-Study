@@ -10,6 +10,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/landing.css">
     <link rel="stylesheet" href="css/courses-modal.css">
+    <link rel="stylesheet" href="css/resources-modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -218,6 +219,49 @@
         </div>
     </section>
 
+    <!-- STUDY LIBRARY (Resources) -->
+    <section class="section resources-section" style="background:#F8FAFC;">
+        <div class="courses-header">
+            <div>
+                <div class="section-tag" style="background:#E6F0FF; color:#3B82F6;">Resource Library</div>
+                <div class="section-title">Essential Study Material</div>
+            </div>
+            <a href="pages/resources/resources.html" class="btn-ghost">Access All Library</a>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card" onclick="openResourceFrontModal('777-dummy-1')">
+                <div class="course-thumb" style="background:#3B82F6;">📄</div>
+                <div class="course-body">
+                    <div class="course-cat" style="color:#3B82F6;">Academic • Class 10</div>
+                    <h3>Mathematics Formula Sheet</h3>
+                    <div class="course-meta">
+                        <span><i class="fa-solid fa-file-pdf"></i> PDF Guide</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card" onclick="openResourceFrontModal('777-dummy-2')">
+                <div class="course-thumb" style="background:#8B5CF6;">📑</div>
+                <div class="course-body">
+                    <div class="course-cat" style="color:#8B5CF6;">Notes • Class 12</div>
+                    <h3>Organic Chemistry Notes</h3>
+                    <div class="course-meta">
+                        <span><i class="fa-solid fa-file-lines"></i> Detailed PDF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card" onclick="openResourceFrontModal('777-dummy-3')">
+                <div class="course-thumb" style="background:#F59E0B;">📚</div>
+                <div class="course-body">
+                    <div class="course-cat" style="color:#F59E0B;">Reference • All</div>
+                    <h3>English Grammar Masterclass</h3>
+                    <div class="course-meta">
+                        <span><i class="fa-solid fa-book"></i> Full Book</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section class="cta-section">
         <h2>Start Learning Today</h2>
@@ -269,36 +313,13 @@
         </div>
     </footer>
 
-    <!-- EXPLORE COURSES MODAL -->
-    <div class="courses-modal-overlay" id="coursesModalOverlay">
-        <div class="courses-modal">
-            <div class="modal-header">
-                <h2>Explore All Courses</h2>
-                <button class="close-modal" id="closeCoursesModal">&times;</button>
-            </div>
-
-            <div class="modal-controls">
-                <div class="search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" placeholder="Search courses, instructors..." id="modalSearchInput">
-                </div>
-                <button class="filter-btn">
-                    <i class="fa-solid fa-bolt"></i> Filter
-                </button>
-                <select class="sort-select" id="modalCategorySort">
-                    <option>All Categories</option>
-                    <option>AI</option>
-                    <option>Development</option>
-                    <option>Design</option>
-                    <option>Marketing</option>
-                    <option>Business</option>
-                    <option>Science</option>
-                    <option>History</option>
-                </select>
-            </div>
-
-            <div class="courses-modal-grid" id="modalCoursesGrid">
-                <!-- Courses will be loaded here -->
+    <!-- RESOURCE FRONT MODAL -->
+    <div class="courses-modal-overlay" id="resourceFrontModalOverlay" style="z-index: 2000;">
+        <div class="courses-modal" style="max-width: 850px; padding: 0;">
+            <button class="close-modal" id="closeResourceFrontModal" style="z-index: 10;">&times;</button>
+            <div id="resourceFrontContent">
+                <!-- Content loaded via resources-modal.js -->
+                <p style="padding: 50px; text-align: center;">Loading resource details...</p>
             </div>
         </div>
     </div>
@@ -333,6 +354,7 @@
         });
     </script>
     <script type="module" src="js/courses-modal.js"></script>
+    <script type="module" src="js/resources-modal.js"></script>
     <script>
         // Trigger for the modal from different buttons
         document.addEventListener('DOMContentLoaded', () => {

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Player – Estudy</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="course-view.css">
+</head>
+
+<body class="player-page">
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <div id="sidebar-placeholder"></div>
+
+        <div class="main-player">
+            <!-- VIDEO & MAIN CONTENT -->
+            <div class="player-content">
+                <div class="video-container">
+                    <div id="videoPlaceholder" class="video-wrapper">
+                        <!-- YouTube Embed will load here -->
+                        <div class="loading-video">
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+                            <span>Loading Video...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-header-info">
+                    <div class="course-main-meta">
+                        <h1 id="courseTitle">Machine Learning Basic to Advanced</h1>
+                        <div class="instructor-row">
+                            <div class="instr-avatar" id="instrAvatar">M</div>
+                            <div class="instr-details">
+                                <span class="instr-name" id="instrName">Monkey D Lufy</span>
+                                <span class="instr-tag">Figma</span>
+                            </div>
+                            <button class="btn-follow">+ follow</button>
+                        </div>
+                    </div>
+                    <div class="status-cards">
+                        <div class="stat-card">
+                            <div class="stat-num" id="statLessons">15</div>
+                            <div class="stat-lbl">IN PROGRESS</div>
+                        </div>
+                        <div class="stat-card ghost">
+                            <div class="stat-num">15</div>
+                            <div class="stat-lbl">COMPLETED</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="player-tabs">
+                    <div class="tab-triggers">
+                        <button class="player-tab active" data-tab="overview">Overview</button>
+                        <button class="player-tab" data-tab="faq">FAQ</button>
+                        <button class="player-tab" data-tab="notes">Notes</button>
+                        <button class="player-tab" data-tab="reviews">Reviews</button>
+                    </div>
+                    <div class="tab-content active" id="tab-overview">
+                        <p id="courseDesc">This is a comprehensive course on Machine Learning from Basic to Advanced...</p>
+                    </div>
+                    <div class="tab-content" id="tab-faq">
+                        <div class="faq-item">
+                            <div class="faq-q">What are the prerequisites? <i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-q">01. Course Overview <i class="fa-solid fa-minus"></i></div>
+                            <div class="faq-a">This course covers everything from data preprocessing to deep learning...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR (COURSE CONTENTS) -->
+            <aside class="course-contents">
+                <div class="aside-header">
+                    <h2>Course Contents</h2>
+                    <div class="contents-search">
+                        <input type="text" placeholder="Search lectures..." id="lectureSearch">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="contents-tabs">
+                    <button class="c-tab active">Lectures</button>
+                    <button class="c-tab">Resources</button>
+                </div>
+
+                <div class="lecture-list" id="lectureList">
+                    <!-- Modules and Lectures populated here -->
+                    <div class="module-item">
+                        <span class="module-title">MODULE 1 - INTRODUCTION</span>
+                        <div class="lecture-item active">
+                            <div class="l-info">
+                                <span class="l-name">Course Overview</span>
+                                <span class="l-meta"><i class="fa-regular fa-clock"></i> 10:00</span>
+                            </div>
+                            <i class="fa-solid fa-play l-icon"></i>
+                        </div>
+                        <div class="lecture-item">
+                            <div class="l-info">
+                                <span class="l-name">Setting Expectations</span>
+                                <span class="l-meta"><i class="fa-regular fa-clock"></i> 10:00</span>
+                            </div>
+                            <i class="fa-regular fa-circle l-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../../js/sidebar.js"></script>
+    <script type="module" src="../../js/header-sync.js"></script>
+    <script type="module" src="course-view.js"></script>
+</body>
+
+</html>

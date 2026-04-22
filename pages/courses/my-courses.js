@@ -113,7 +113,7 @@ function renderMyCourses() {
           </div>
           
           <div class="card-actions">
-              <button class="btn-action btn-enroll" style="width:100%;">Continue Learning</button>
+              <a href="course-view.html?id=${c.id}" class="btn-action btn-enroll" style="width:100%; text-align:center; text-decoration:none;">Continue Learning</a>
           </div>
       </div>
     `;
@@ -158,6 +158,12 @@ window.openStatusModal = (courseId) => {
         </div>
     </div>
   `;
+
+  // Update the button in the modal too
+  const continueBtn = document.getElementById('continueLearningBtn');
+  if (continueBtn) {
+      continueBtn.onclick = () => window.location.href = `course-view.html?id=${courseId}`;
+  }
 
   modalOverlay.classList.add('active');
 };
