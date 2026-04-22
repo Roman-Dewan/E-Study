@@ -1,6 +1,6 @@
 import { auth, db } from '../../js/firebase-config.js';
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc, collection, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, getDoc, collection, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const today = new Date();
 let selectedDate = { year: today.getFullYear(), month: today.getMonth(), day: today.getDate() };
@@ -22,6 +22,7 @@ onAuthStateChanged(auth, async (user) => {
     if (heroH2) heroH2.textContent = `Hi ${firstName || fullName} \uD83D\uDC4B`;
   }
   updateDashboardForDate(selectedDate.year, selectedDate.month, selectedDate.day);
+  if (user.email) loadUpcomingTasks(user.email);
 });
 
 
@@ -35,6 +36,71 @@ document.addEventListener('estudy-logout', async () => {
   }
 });
 
+
+// ── UPCOMING TASKS ───────────────────────────────────────────────────────────
+
+const THEME_CONFIG = {
+  green:  { bg: '#e0f8ec', color: '#45D48B', icon: '📗' },
+  orange: { bg: '#fff5eb', color: '#f97316', icon: '📙' },
+  purple: { bg: '#f5f3ff', color: '#8b5cf6', icon: '📘' },
+};
+
+async function loadUpcomingTasks(email) {
+  const list = document.getElementById('upcoming-tasks-list');
+  if (!list) return;
+
+  // Today's date string in YYYY-MM-DD
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+
+  try {
+    const q = collection(db, 'E-study', email, 'schedule_task');
+    const snap = await getDocs(q);
+
+    const tasks = [];
+    snap.forEach(d => tasks.push({ ...d.data(), id: d.id }));
+
+    // Filter: only today and future; sort by date then start_time
+    const upcoming = tasks
+      .filter(t => t.date >= todayStr)
+      .sort((a, b) => (a.date + a.start_time).localeCompare(b.date + b.start_time))
+      .slice(0, 3);
+
+    if (upcoming.length === 0) {
+      list.innerHTML = `<div style="text-align:center;padding:16px 0;color:var(--muted);font-size:13px;">No upcoming tasks</div>`;
+      return;
+    }
+
+    const todayLabel = todayStr;
+    list.innerHTML = upcoming.map(t => {
+      const cfg = THEME_CONFIG[t.theme] || THEME_CONFIG.green;
+      const isToday = t.date === todayLabel;
+      const dateObj = new Date(t.date + 'T00:00:00');
+      const dateDisplay = isToday ? 'Today' : dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+      // Format times to AM/PM
+      const fmtTime = (str) => {
+        if (!str) return '';
+        const [h, m] = str.split(':').map(Number);
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const h12 = h % 12 || 12;
+        return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+      };
+
+      return `
+        <div class="task-item" style="border-left: 3px solid ${cfg.color}; padding-left: 10px;">
+          <div class="task-icon" style="background:${cfg.bg}; font-size:16px;">${cfg.icon}</div>
+          <div class="task-info">
+            <h4 style="margin:0 0 2px;font-size:13px;color:#222;">${t.title}</h4>
+            <span style="font-size:11px;color:var(--muted);">${dateDisplay} &nbsp;·&nbsp; ${fmtTime(t.start_time)} – ${fmtTime(t.end_time)}</span>
+          </div>
+        </div>`;
+    }).join('');
+
+  } catch (e) {
+    console.error('Error loading upcoming tasks:', e);
+    list.innerHTML = `<div style="text-align:center;padding:16px 0;color:var(--muted);font-size:13px;">Could not load tasks</div>`;
+  }
+}
 
 // ── DASHBOARD DATA ENGINE (FIREBASE) ─────────────────────────────────────────
 
