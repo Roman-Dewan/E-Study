@@ -176,7 +176,7 @@ function renderCourses(filter) {
           </div>
           <span style="font-size:10px;color:var(--muted);">${progress}% complete</span>
         </div>
-        <a href="../courses/courses-detail.html" class="view-btn" style="flex-shrink:0;">View</a>
+        <a href="../courses/course-view.html?id=${course.id}" class="view-btn" style="flex-shrink:0;">View</a>
       </div>`;
   }).join('');
 }
