@@ -67,7 +67,7 @@ async function loadDynamicNavigation() {
 
         // Extract unique Mediums
         const mediums = [...new Set(allResources.map(r => r.medium).filter(Boolean))].sort();
-        
+
         if (mediums.length > 0) {
             selectedMedium = mediums[0];
             renderMediumTabs(mediums);
@@ -96,7 +96,7 @@ function renderMediumTabs(mediumList) {
 
 function renderClasses() {
     classesGrid.innerHTML = '';
-    
+
     // Get unique classes for the selected medium
     const classMap = new Map(); // id -> name
     allResources
@@ -134,7 +134,7 @@ function showSubjectsModal(classId, className) {
     selectedClassName = className;
     modalTitle.textContent = `Subjects for ${className}`;
     modalBody.innerHTML = '';
-    
+
     // Get unique subjects for the selected class and medium
     const subjectMap = new Map(); // id -> name
     allResources
@@ -173,9 +173,9 @@ function showChaptersModal(subjectId, subjectName) {
     modalTitle.textContent = `Chapters for ${subjectName}`;
     modalBody.innerHTML = '';
 
-    const chapters = allResources.filter(r => 
-        r.medium === selectedMedium && 
-        r.class_id === selectedClassId && 
+    const chapters = allResources.filter(r =>
+        r.medium === selectedMedium &&
+        r.class_id === selectedClassId &&
         r.subject_id === subjectId
     ).sort((a, b) => a.title.localeCompare(b.title));
 
@@ -218,7 +218,7 @@ function showVideoModal(chapter, subjectName) {
     const videoArea = document.createElement('div');
     videoArea.id = 'videoArea';
     videoArea.style.display = 'none';
-    
+
     container.appendChild(linkCard);
     container.appendChild(videoArea);
     modalBody.appendChild(container);
@@ -231,7 +231,7 @@ function showVideoModal(chapter, subjectName) {
         } else if (videoUrl.includes('youtu.be/')) {
             videoUrl = videoUrl.replace('youtu.be/', 'youtube.com/embed/').split('?')[0];
         }
-        
+
         videoUrl += (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1';
 
         videoArea.innerHTML = `

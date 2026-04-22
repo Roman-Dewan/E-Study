@@ -291,6 +291,7 @@
     .resources-card {
         padding: 20px;
     }
+
     .modal-grid {
         grid-template-columns: 1fr;
     }

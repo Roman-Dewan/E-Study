@@ -1,0 +1,116 @@
+/* --- RESOURCE BROWSE MODAL (Categories Preview) --- */
+
+.resource-browse-modal {
+    max-width: 900px !important;
+    width: 90% !important;
+    padding: 0 !important;
+    background: #fff !important;
+    border-radius: 24px !important;
+}
+
+.rb-modal-header {
+    padding: 25px 35px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rb-modal-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+}
+
+.rb-modal-body {
+    padding: 30px 35px 40px;
+}
+
+/* Tabs */
+.rb-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.rb-tab {
+    padding: 10px 22px;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.rb-tab.active {
+    background: #10B981;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.rb-tab:hover:not(.active) {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* Grid */
+.rb-classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.rb-class-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rb-class-card span {
+    font-weight: 600;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+.rb-class-card i {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.rb-class-card:hover {
+    border-color: #10B981;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.rb-class-card:hover i {
+    color: #10B981;
+    transform: translateX(3px);
+}
+
+/* Loading state */
+.rb-loading {
+    text-align: center;
+    padding: 60px;
+    color: #10B981;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .rb-classes-grid {
+        grid-template-columns: 1fr;
+    }
+}
