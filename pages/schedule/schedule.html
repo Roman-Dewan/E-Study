@@ -15,13 +15,19 @@
 
 <body class="schedule-page">
     <div class="app-background"></div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <div class="app-container">
         <div id="sidebar-placeholder"></div>
         <!-- ── MAIN ── -->
         <main class="main-content">
-            <!-- Schedule header removed to push calendar up -->
+            <div class="schedule-toolbar mobile-only-header">
+                <button class="mobile-toggle" id="mobile-sidebar-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h2>Schedule</h2>
+            </div>
             <div class="calendar-large">
-                <div class="schedule-toolbar">
+                <div class="schedule-toolbar desktop-toolbar">
                     <h2>Schedule</h2>
                     <div class="toolbar-actions">
                         <span id="main-month-year">July 2020</span>

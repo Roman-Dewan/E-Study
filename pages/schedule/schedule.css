@@ -22,9 +22,11 @@ body.schedule-page {
     background: transparent !important;
     border: none;
     box-shadow: none;
-    padding: 10px 0;
+    padding: 30px 40px; /* Increased padding */
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
 }
 
 .top-header {
@@ -53,9 +55,10 @@ body.schedule-page {
     padding: 30px;
     border-radius: 30px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-    height: calc(100vh - 40px);
+    flex: 1; /* Match remaining height */
     display: flex;
     flex-direction: column;
+    min-height: 0;
 }
 
 .schedule-toolbar {
@@ -700,3 +703,39 @@ body.schedule-page {
     color: #45D48B;
     font-size: 20px;
 }
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 1200px) {
+    .app-container { grid-template-columns: var(--sidebar-width) 1fr 280px; }
+    .main-content { padding: 20px; }
+}
+
+@media (max-width: 1024px) {
+    body.schedule-page, .app-container { overflow: auto; height: auto; }
+    .app-container { grid-template-columns: 1fr 300px; }
+    .mobile-only-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .desktop-toolbar { display: none; }
+    .mobile-toggle {
+        display: flex; background: #6174FF; color: white; border: none;
+        width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
+        align-items: center; justify-content: center; font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container { display: block; }
+    .right-panel {
+        width: 100%; padding: 20px; border-left: none;
+        border-top: 1px solid rgba(0,0,0,0.05); height: auto;
+    }
+    .schedule-grid-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .schedule-grid { min-width: 600px; }
+}
+
+.sidebar-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px); z-index: 999; display: none;
+    opacity: 0; transition: opacity 0.3s;
+}
+.sidebar-overlay.active { display: block; opacity: 1; }
+.mobile-only-header { display: none; }

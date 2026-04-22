@@ -780,12 +780,8 @@
 
     <!-- ── FIREBASE AUTH JAVASCRIPT ── -->
     <script type="module">
-        import { initializeApp }
-            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAnalytics }
-            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { auth, db } from "../../js/firebase-config.js";
         import {
-            getAuth,
             signInWithEmailAndPassword,
             signInWithPopup,
             GoogleAuthProvider,
@@ -795,31 +791,63 @@
             browserSessionPersistence,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // ── YOUR FIREBASE CONFIG ──
-        // Replace these with your real values from Firebase Console
-        const firebaseConfig = {
-            apiKey: "AIzaSyBwGBnnMnKsZ2Pqa2mQv4pO8qMJ07Y2XlI",
-            authDomain: "e-study-97072.firebaseapp.com",
-            projectId: "e-study-97072",
-            storageBucket: "e-study-97072.firebasestorage.app",
-            messagingSenderId: "351324744836",
-            appId: "1:351324744836:web:fad5eb89dbb91d197426d1",
-            measurementId: "G-LQYD0NQMWS"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // GöÇGöÇ REDIRECT IF ALREADY LOGGED IN GöÇGöÇ
+        // ── REDIRECT IF ALREADY LOGGED IN ──
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 window.location.href = '../../pages/dashboard/dashboard.html';
             }
         });
+
+        // ── SAVE USER PROFILE TO FIRESTORE (For Social Login) ──
+        async function saveUserProfile(user, firstName, lastName) {
+            const userDocRef = doc(db, 'E-study', user.email);
+            const docSnap = await getDoc(userDocRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const fullName = `${data.first_name || ''} ${data.last_name || ''}`.trim() || user.displayName || "User";
+                localStorage.setItem('estudy_user_name', fullName);
+                if (data.avatar_url) localStorage.setItem('estudy_user_avatar', data.avatar_url);
+                return;
+            }
+
+            const nameParts = (user.displayName || 'New User').split(' ');
+            const finalFirstName = firstName || nameParts[0] || 'New';
+            const finalLastName = lastName || nameParts.slice(1).join(' ') || 'User';
+            const fullNameDisplay = `${finalFirstName} ${finalLastName}`.trim();
+
+            localStorage.setItem('estudy_user_name', fullNameDisplay);
+            if (user.photoURL) localStorage.setItem('estudy_user_avatar', user.photoURL);
+
+            await setDoc(userDocRef, {
+                email: user.email,
+                first_name: finalFirstName,
+                last_name: finalLastName,
+                password: "", 
+                role: 'student',
+                notification: {
+                    course_anouncements: false,
+                    lesson_reminders: false,
+                    new_messages: false,
+                    progress_report: false,
+                    recieve_email_updates: false
+                },
+                personal_details: {
+                    address: "", city: "", country: "Bangladesh", state: "", zip: "", phone: "", gender: "", location: ""
+                },
+                privacy: {
+                    active_status: false, profile_private: false, messages: true
+                },
+                mentor_data: {
+                    gender: "", city: "", location: "", email: user.email
+                },
+                schedule_task: {
+                    date: "", end_time: "", name: "", start_time: ""
+                }
+            });
+        }
 
         // GöÇGöÇ UTILITY HELPERS GöÇGöÇ
         function showToast(msg, isError = false) {
@@ -855,8 +883,10 @@
             return ok;
         }
 
-        // GöÇGöÇ FIREBASE ERROR MESSAGES GöÇGöÇ
-        function friendlyError(code) {
+        // ── FIREBASE ERROR MESSAGES ──
+        function friendlyError(err) {
+            console.error("Auth Error:", err); // Log for debugging
+            const code = err.code;
             const map = {
                 'auth/user-not-found': 'No account found with this email.',
                 'auth/wrong-password': 'Incorrect password. Please try again.',
@@ -865,8 +895,11 @@
                 'auth/network-request-failed': 'Network error. Check your connection.',
                 'auth/popup-closed-by-user': 'Sign-in popup was closed.',
                 'auth/invalid-credential': 'Invalid credentials. Please try again.',
+                'auth/operation-not-allowed': 'Google Sign-In is not enabled in your Firebase Console.',
+                'auth/unauthorized-domain': 'This domain is not authorized in Firebase Console.',
+                'auth/popup-blocked': 'Sign-in popup was blocked by your browser.',
             };
-            return map[code] || 'Something went wrong. Please try again.';
+            return map[code] || `Error (${code}): Something went wrong.`;
         }
 
         // GöÇGöÇ EMAIL / PASSWORD LOGIN GöÇGöÇ
@@ -900,42 +933,38 @@
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 setLoading(false);
-                showToast(friendlyError(err.code), true);
+                showToast(friendlyError(err), true);
             }
         });
 
-        // GöÇGöÇ GOOGLE LOGIN GöÇGöÇ
+        // ── GOOGLE LOGIN ──
         document.getElementById('googleBtn').addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
             provider.setCustomParameters({ prompt: 'select_account' });
             try {
                 const { user } = await signInWithPopup(auth, provider);
                 
-                // Cache immediately
-                localStorage.setItem('estudy_user_name', user.displayName || "User");
-                if (user.photoURL) localStorage.setItem('estudy_user_avatar', user.photoURL);
+                await saveUserProfile(user);
 
                 showToast('Signed in with Google! Redirecting...');
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
-                showToast(friendlyError(err.code), true);
+                showToast(friendlyError(err), true);
             }
         });
 
-        // GöÇGöÇ GITHUB LOGIN GöÇGöÇ
+        // ── GITHUB LOGIN ──
         document.getElementById('githubBtn').addEventListener('click', async () => {
             const provider = new GithubAuthProvider();
             try {
                 const { user } = await signInWithPopup(auth, provider);
                 
-                // Cache immediately
-                localStorage.setItem('estudy_user_name', user.displayName || "User");
-                if (user.photoURL) localStorage.setItem('estudy_user_avatar', user.photoURL);
+                await saveUserProfile(user);
 
                 showToast('Signed in with GitHub! Redirecting...');
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
-                showToast(friendlyError(err.code), true);
+                showToast(friendlyError(err), true);
             }
         });
 

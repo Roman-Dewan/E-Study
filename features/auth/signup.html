@@ -310,7 +310,7 @@
 
         /* fields */
         .field {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             position: relative;
         }
 
@@ -320,6 +320,12 @@
             font-weight: 600;
             color: var(--text);
             margin-bottom: 6px;
+        }
+
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .field input,
@@ -355,27 +361,30 @@
         .field-icon {
             position: absolute;
             left: 14px;
-            bottom: 13px;
             font-size: 16px;
             pointer-events: none;
             color: var(--muted);
             transition: color .25s;
+            display: flex;
+            align-items: center;
         }
 
-        .field input:focus~.field-icon {
+        .field input:focus ~ .field-icon {
             color: var(--green);
         }
 
         .toggle-pw {
             position: absolute;
             right: 13px;
-            bottom: 12px;
             background: none;
             border: none;
             cursor: pointer;
             font-size: 16px;
             color: var(--muted);
             transition: color .2s;
+            padding: 5px;
+            display: flex;
+            align-items: center;
         }
 
         .toggle-pw:hover {
@@ -704,14 +713,18 @@
             <div class="two-col">
                 <div class="field">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
-                    <span class="field-icon">👤</span>
+                    <div class="input-wrap">
+                        <input type="text" id="firstName" placeholder="First Name" autocomplete="given-name">
+                        <span class="field-icon">👤</span>
+                    </div>
                     <div class="field-error" id="firstNameErr">Enter your first name.</div>
                 </div>
                 <div class="field">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" placeholder="Last Name" autocomplete="family-name">
-                    <span class="field-icon">👤</span>
+                    <div class="input-wrap">
+                        <input type="text" id="lastName" placeholder="Last Name" autocomplete="family-name">
+                        <span class="field-icon">👤</span>
+                    </div>
                     <div class="field-error" id="lastNameErr">Enter your last name.</div>
                 </div>
             </div>
@@ -719,20 +732,23 @@
             <!-- Email -->
             <div class="field">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
-                <span class="field-icon">✉️</span>
+                <div class="input-wrap">
+                    <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+                    <span class="field-icon">✉️</span>
+                </div>
                 <div class="field-error" id="emailErr">Please enter a valid email.</div>
             </div>
 
             <!-- Password -->
             <div class="field">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="At least 8 characters" autocomplete="new-password">
-                <span class="field-icon">🔒</span>
-                <button class="toggle-pw" id="togglePw" type="button">
-                    <i class="fa-regular fa-eye-slash"></i>
-                </button>
-                <div class="field-error" id="passwordErr">Password must be at least 8 characters.</div>
+                <div class="input-wrap">
+                    <input type="password" id="password" placeholder="At least 8 characters" autocomplete="new-password">
+                    <span class="field-icon">🔒</span>
+                    <button class="toggle-pw" id="togglePw" type="button">
+                        <i class="fa-regular fa-eye-slash"></i>
+                    </button>
+                </div>
                 <div class="strength-wrap">
                     <div class="strength-bar">
                         <div class="strength-seg" id="seg1"></div>
@@ -742,17 +758,20 @@
                     </div>
                     <div class="strength-label" id="strengthLabel"></div>
                 </div>
+                <div class="field-error" id="passwordErr">Password must be at least 8 characters.</div>
             </div>
 
             <!-- Confirm Password -->
             <div class="field">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" placeholder="Repeat your password"
-                    autocomplete="new-password">
-                <span class="field-icon">🔒</span>
-                <button class="toggle-pw" id="toggleConfirm" type="button">
-                    <i class="fa-regular fa-eye-slash"></i>
-                </button>
+                <div class="input-wrap">
+                    <input type="password" id="confirmPassword" placeholder="Repeat your password"
+                        autocomplete="new-password">
+                    <span class="field-icon">🔒</span>
+                    <button class="toggle-pw" id="toggleConfirm" type="button">
+                        <i class="fa-regular fa-eye-slash"></i>
+                    </button>
+                </div>
                 <div class="field-error" id="confirmErr">Passwords do not match.</div>
             </div>
 
@@ -898,15 +917,21 @@
             if (err) err.classList.toggle('show', show);
         }
 
-        function friendlyError(code) {
+        // ── FIREBASE ERROR MESSAGES ──
+        function friendlyError(err) {
+            console.error("Auth Error:", err); // Log for debugging
+            const code = err.code;
             const map = {
                 'auth/email-already-in-use': 'That email is already registered. Try logging in.',
                 'auth/invalid-email': 'Please enter a valid email address.',
                 'auth/weak-password': 'Password should be at least 8 characters.',
                 'auth/network-request-failed': 'Network error. Check your connection.',
                 'auth/popup-closed-by-user': 'Sign-in popup was closed.',
+                'auth/operation-not-allowed': 'Google Sign-In is not enabled in your Firebase Console.',
+                'auth/unauthorized-domain': 'This domain is not authorized in Firebase Console.',
+                'auth/popup-blocked': 'Sign-in popup was blocked by your browser.',
             };
-            return map[code] || 'Something went wrong. Please try again.';
+            return map[code] || `Error (${code}): Something went wrong.`;
         }
 
         // ── PASSWORD STRENGTH ──
@@ -984,7 +1009,7 @@
             } catch (err) {
                 setLoading(false);
                 isSigningUp = false;
-                showToast(friendlyError(err.code), true);
+                showToast(friendlyError(err), true);
             }
         });
 
@@ -1001,7 +1026,7 @@
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 isSigningUp = false;
-                showToast(friendlyError(err.code), true);
+                showToast(friendlyError(err), true);
             }
         });
 
@@ -1017,7 +1042,7 @@
                 setTimeout(() => window.location.href = '../../pages/dashboard/dashboard.html', 1400);
             } catch (err) {
                 isSigningUp = false;
-                showToast(friendlyError(err.code), true);
+                showToast(friendlyError(err), true);
             }
         });
 
