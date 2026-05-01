@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudy - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body class="profile-page">
+    <div class="app-container">
+        <!-- Sidebar placeholder for dynamic loading -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Profile Summary Column -->
+        <aside class="profile-card-col">
+            <h2>Profile</h2>
+            <div class="profile-card-content">
+                <div class="profile-main">
+                    <img src="../../assets/images/blank-profile-picture-.webp" class="profile-avatar-large"
+                        id="card-avatar">
+                    <h3 id="card-name">Roman Dewan</h3>
+                </div>
+
+                <div class="status-summary">
+                    <div class="status-badge progress">
+                        <span class="count" id="progress-count">–</span>
+                        <span class="label">Course in Progress</span>
+                    </div>
+                    <div class="status-badge complete">
+                        <span class="count" id="complete-count">–</span>
+                        <span class="label">Course Complete</span>
+                    </div>
+                </div>
+
+                <div class="achievement-section">
+                    <h4>Last Achievement</h4>
+                    <div class="achievement-grid">
+                        <div class="achievement-circle"></div>
+                        <div class="achievement-circle"></div>
+                        <div class="achievement-circle"></div>
+                        <div class="achievement-circle"></div>
+                    </div>
+                </div>
+
+                <!-- Support section removed here as it is now in the sidebar -->
+            </div>
+        </aside>
+
+        <!-- Profile Settings Column -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-toggle" id="mobile-sidebar-toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search..." id="searchInput">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="notification-btn-wrapper">
+                        <i class="fa-regular fa-bell" id="notification-btn"></i>
+                    </div>
+                    <div class="user-dropdown-container">
+                        <div class="user-header" id="user-dropdown-toggle">
+                            <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small"
+                                id="header-avatar" alt="Profile">
+                            <span id="header-name" class="user-name">rayhan</span>
+                            <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                        </div>
+                        <div class="user-dropdown-menu" id="user-dropdown-menu">
+                            <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i>
+                                Profile Details</a>
+                            <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
+                            <a href="#" class="dropdown-item logout-action"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="settings-container">
+                <h2>Profile Setting</h2>
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="personal">Personal Details</button>
+                    <button class="tab-btn" data-tab="notification">Notification</button>
+                    <button class="tab-btn" data-tab="privacy">Privacy</button>
+                </div>
+
+                <div class="tab-content-area">
+                    <!-- Tab: Personal Details -->
+                    <div class="tab-pane active" id="personal">
+                        <div class="avatar-edit">
+                            <label for="avatar-upload">
+                                <img src="../../assets/images/blank-profile-picture-.webp" alt="Profile placeholder"
+                                    class="profile-avatar-medium">
+                            </label>
+                            <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                            <label for="avatar-upload" class="edit-btn">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                        </div>
+                        <form class="settings-form" id="personal-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="full-name" value="Roman Dewan">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" id="email-address" value="roman.dewan18@gmail.com" readonly>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Address</label>
+                                    <input type="text" id="address" value="120F, Joydevpur, Gazipur">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" id="city" value="Gazipur">
+                                </div>
+                                <div class="form-group">
+                                    <label>State/Province</label>
+                                    <input type="text" id="state" value="Gazipur">
+                                </div>
+                                <div class="form-group">
+                                    <label>Zip Code</label>
+                                    <input type="text" id="zip" value="1700">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <select id="country">
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="USA">USA</option>
+                                        <option value="UK">UK</option>
+                                        <option value="Canada">Canada</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">Submit</button>
+                                <button type="button" class="btn-cancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tab: Notification -->
+                    <div class="tab-pane" id="notification">
+                        <div class="settings-group">
+                            <h4>Email Notifications</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Receive Email updates</span>
+                                    <label class="toggle"><input type="checkbox" id="notif-email-updates" checked><span
+                                            class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>New Messages</span>
+                                    <label class="toggle"><input type="checkbox" id="notif-messages"><span
+                                            class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h4>Push Notifications</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Course Announcements</span>
+                                    <label class="toggle"><input type="checkbox" id="notif-announcements" checked><span
+                                            class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>Progress Report</span>
+                                    <label class="toggle"><input type="checkbox" id="notif-progress"><span
+                                            class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>Lesson Reminders</span>
+                                    <label class="toggle"><input type="checkbox" id="notif-reminders"><span
+                                            class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Privacy -->
+                    <div class="tab-pane" id="privacy">
+                        <div class="settings-group">
+                            <h4>Account Privacy</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Keep my profile private</span>
+                                    <label class="toggle"><input type="checkbox" id="priv-profile-private" checked><span
+                                            class="slider"></span></label>
+                                </div>
+                                <div class="setting-item">
+                                    <span>Active Status</span>
+                                    <label class="toggle"><input type="checkbox" id="priv-active-status"><span
+                                            class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h4>Privacy and Data</h4>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <span>Messages</span>
+                                    <label class="toggle"><input type="checkbox" id="priv-messages" checked><span
+                                            class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </section>
+    </main>
+    </div>
+
+
+
+    <!-- Support modal is now in the sidebar -->
+
+
+
+    <script type="module" src="../../js/sidebar.js"></script>
+    <script type="module" src="../../js/header-sync.js"></script>
+    <script type="module" src="profile.js"></script>
+</body>
+
+</html>

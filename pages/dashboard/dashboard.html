@@ -1,0 +1,278 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DashBoard – Estudy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="../../css/resources-modal.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="full-width-page">
+  <div class="app-container">
+    <div id="sidebar-placeholder"></div>
+
+    <!-- ── MAIN ── -->
+    <div class="main">
+
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-toggle" id="mobile-sidebar-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="page-title">Dashboard</div>
+        </div>
+        <div class="search-container">
+          <div class="search-bar">
+            <input type="text" placeholder="Search..." id="searchInput">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="notification-btn-wrapper">
+            <i class="fa-regular fa-bell" id="notification-btn"></i>
+          </div>
+          <div class="user-dropdown-container">
+            <div class="user-header" id="user-dropdown-toggle">
+              <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar"
+                alt="Profile">
+              <span id="header-name" class="user-name">rayhan</span>
+              <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="user-dropdown-menu" id="user-dropdown-menu">
+              <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile
+                Details</a>
+              <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
+              <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <!-- HERO BANNER -->
+        <div class="hero-banner">
+          <div>
+            <h2 id="greeting-name">Hi User 👋</h2>
+            <p>You have completed 5 lessons in last day. Start your lesson today</p>
+          </div>
+          <div class="hero-emoji">📚</div>
+        </div>
+
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+          <div class="row-2">
+
+            <!-- LEARNING TIME -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">LEARNING TIME</span>
+                <div style="display:flex; align-items:center; gap:8px">
+                  <span id="learningDateLabel" style="font-size:13px; color:var(--muted)">Today</span>
+                  <span style="font-size:16px">📅</span>
+                </div>
+              </div>
+              <div class="donut-wrap">
+                <svg class="donut" width="120" height="120" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#f0f0f0" stroke-width="14" />
+                  <circle id="donutWriting" cx="60" cy="60" r="50" fill="none" stroke="#d4f0e2" stroke-width="14"
+                    stroke-dasharray="115 200" />
+                  <circle id="donutVideo" cx="60" cy="60" r="50" fill="none" stroke="#a8e6c7" stroke-width="14"
+                    stroke-dasharray="60 200" stroke-dashoffset="-115" />
+                  <circle id="donutReading" cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="14"
+                    stroke-dasharray="40 200" stroke-dashoffset="-175" />
+                </svg>
+              </div>
+              <div class="donut-labels">
+                <div class="donut-label">
+                  <div class="donut-dot" style="background:var(--green)"></div><span id="labelReading">Reading</span>
+                </div>
+                <div class="donut-label">
+                  <div class="donut-dot" style="background:#a8e6c7"></div><span id="labelVideo">Video</span>
+                </div>
+                <div class="donut-label">
+                  <div class="donut-dot" style="background:#d4f0e2"></div><span id="labelWriting">Writing</span>
+                </div>
+                <div class="donut-label">
+                  <div class="donut-dot" style="background:#f0f0f0"></div><span id="labelAssignment">Assignment</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- MY ACTIVITY -->
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">My activity</span>
+                <span id="activityPeriodLabel" class="card-action">weekly</span>
+              </div>
+              <div class="activity-chart">
+                <svg viewBox="0 0 260 100" preserveAspectRatio="none" height="100">
+                  <defs>
+                    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--green)" stop-opacity="0.2" />
+                      <stop offset="100%" stop-color="var(--green)" stop-opacity="0" />
+                    </linearGradient>
+                    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#667eea" stop-opacity="0.2" />
+                      <stop offset="100%" stop-color="#667eea" stop-opacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <polyline id="activityLine2" fill="url(#g2)" stroke="#667eea" stroke-width="2.5"
+                    stroke-linejoin="round" stroke-linecap="round"
+                    points="0,80 40,60 80,70 120,40 160,55 200,30 240,20 260,25" />
+                  <polyline id="activityLine1" fill="url(#g1)" stroke="var(--green)" stroke-width="2.5"
+                    stroke-linejoin="round" stroke-linecap="round"
+                    points="0,90 40,70 80,85 120,55 160,65 200,45 240,15 260,10" />
+                  <circle id="activityDot" cx="220" cy="38" r="5" fill="var(--green)" />
+                  <text id="activityDotText" x="218" y="28" text-anchor="middle" fill="var(--green)" font-size="11"
+                    font-weight="700">4</text>
+                  <text id="activityDotLabel" x="218" y="55" text-anchor="middle" fill="var(--muted)"
+                    font-size="9">Task</text>
+                </svg>
+                <div id="activityDayLabels"
+                  style="display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-top:4px; padding:0 4px">
+                  <span>Sat</span><span>Sun</span><span>Mon</span><span>Tue</span>
+                  <span>Wed</span><span style="color:var(--green); font-weight:700">Thu</span><span>Fri</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MY COURSES -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">My Courses</span>
+            </div>
+            <div class="tabs">
+              <div class="tab active" data-filter="all">All</div>
+              <div class="tab" data-filter="ongoing">Ongoing</div>
+              <div class="tab" data-filter="complete">Complete</div>
+            </div>
+            <div class="courses-list" id="courses-list">
+              <div style="text-align:center;padding:20px 0;color:var(--muted);font-size:13px;">Loading...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+
+          <!-- CALENDAR -->
+          <div class="calendar-card">
+            <div class="cal-header">
+              <button class="cal-nav">‹</button>
+              <div class="cal-selects">
+                <select id="calMonth">
+                  <option>Jan</option>
+                  <option>Feb</option>
+                  <option>Mar</option>
+                  <option>Apr</option>
+                  <option>May</option>
+                  <option>Jun</option>
+                  <option>Jul</option>
+                  <option>Aug</option>
+                  <option selected>Sep</option>
+                  <option>Oct</option>
+                  <option>Nov</option>
+                  <option>Dec</option>
+                </select>
+                <select id="calYear">
+                  <option>2024</option>
+                  <option selected>2025</option>
+                  <option>2026</option>
+                </select>
+              </div>
+              <button class="cal-nav">›</button>
+            </div>
+            <div class="cal-grid" id="calGrid">
+              <div class="cal-day-label">Su</div>
+              <div class="cal-day-label">Mo</div>
+              <div class="cal-day-label">Tu</div>
+              <div class="cal-day-label">We</div>
+              <div class="cal-day-label">Th</div>
+              <div class="cal-day-label">Fr</div>
+              <div class="cal-day-label">Sa</div>
+            </div>
+          </div>
+
+          <!-- UPCOMING TASKS -->
+          <div>
+            <div class="task-header">
+              <h3>Upcoming Task</h3>
+              <a href="../schedule/schedule.html" class="see-all">See All</a>
+            </div>
+            <div id="upcoming-tasks-list">
+              <div style="text-align:center;padding:16px 0;color:var(--muted);font-size:13px;">Loading...</div>
+            </div>
+          </div>
+
+          <!-- PAYMENT HISTORY -->
+          <div>
+            <div class="task-header">
+              <h3>Payment History</h3>
+              <a href="#" class="see-all">See All</a>
+            </div>
+            <div class="payment-item">
+              <span class="payment-name">Machine Learning:</span>
+              <span class="payment-amount">$ 11</span>
+            </div>
+            <div class="payment-item">
+              <span class="payment-name">Wireframe and Prototype:</span>
+              <span class="payment-amount">$ 19</span>
+            </div>
+            <div class="payment-item">
+              <span class="payment-name">Python basic:</span>
+              <span class="payment-amount">$ 10</span>
+            </div>
+          </div>
+
+          <!-- QUICK RESOURCES -->
+          <div style="margin-top: 30px;">
+            <div class="task-header">
+              <h3>Quick Resources</h3>
+              <a href="../resources/resources.html" class="see-all">All</a>
+            </div>
+            <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-1')">
+              <div class="course-thumb-sm" style="background:#3B82F6;">📄</div>
+              <div class="course-info">
+                <h4>Math Formulas</h4>
+                <span>Formula guide for Class 10</span>
+              </div>
+            </div>
+            <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-2')">
+              <div class="course-thumb-sm" style="background:#8B5CF6;">📑</div>
+              <div class="course-info">
+                <h4>Organic Notes</h4>
+                <span>Chemistry Class 12</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.content -->
+    </div><!-- /.main -->
+  </div><!-- /.app-container -->
+
+  <!-- RESOURCE FRONT MODAL -->
+  <!-- <div class="courses-modal-overlay" id="resourceFrontModalOverlay" style="z-index: 2000;">
+      <div class="courses-modal" style="max-width: 850px; padding: 0;">
+          <button class="close-modal" id="closeResourceFrontModal" style="z-index: 10;">&times;</button>
+          <div id="resourceFrontContent">
+              <p style="padding: 50px; text-align: center;">Loading resource...</p>
+          </div>
+      </div>
+  </div> -->
+
+  <script type="module" src="../../js/sidebar.js"></script>
+  <script type="module" src="../../js/header-sync.js"></script>
+  <script type="module" src="../../js/resources-modal.js"></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+
+</html>

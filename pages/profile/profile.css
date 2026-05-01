@@ -1,0 +1,746 @@
+.profile-page .app-container {
+    grid-template-columns: var(--sidebar-width) 350px 1fr;
+    background: #EAF2F8;
+    min-height: 100vh;
+}
+
+@media (max-width: 1200px) {
+    .profile-page .app-container {
+        grid-template-columns: var(--sidebar-width) 300px 1fr;
+    }
+}
+
+/* --- MIDDLE COLUMN: PROFILE SUMMARY --- */
+.profile-card-col {
+    background: #F8F9FA;
+    padding: 40px 30px;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profile-card-col h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.profile-main {
+    text-align: center;
+}
+
+.profile-avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid var(--white);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-main h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Status Badges */
+.status-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.status-badge {
+    flex: 1;
+    background: var(--white);
+    padding: 15px 10px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.status-badge .count {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.status-badge.progress .count {
+    color: #A27B7B;
+    /* Dusty rose/greyish */
+}
+
+.status-badge.complete .count {
+    color: var(--primary-color);
+}
+
+.status-badge .label {
+    font-size: 10px;
+    color: var(--text-grey);
+    line-height: 1.2;
+    display: block;
+}
+
+/* Achievement Section */
+.achievement-section h4,
+.support-section h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.achievement-circle {
+    aspect-ratio: 1;
+    background: #FADBD8;
+    /* Light pink from design */
+    border-radius: 50%;
+}
+
+
+/* --- RIGHT COLUMN: SETTINGS --- */
+.main-content {
+    background: #EAF2F8;
+    padding: 40px 50px;
+}
+
+/* Header with Search */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.search-container {
+    position: relative;
+    margin-left: 20px;
+}
+
+.search-bar {
+    background: linear-gradient(135deg, var(--white) 0%, #f8f9fa 100%);
+    padding: 12px 16px;
+    border-radius: 25px;
+    width: 320px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-grey);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(65, 209, 133, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    cursor: text;
+}
+
+.search-bar:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-color: rgba(65, 209, 133, 0.2);
+    transform: translateY(-1px);
+}
+
+.search-bar:focus-within {
+    box-shadow: 0 8px 30px rgba(65, 209, 133, 0.15);
+    border-color: var(--primary-color);
+    background: var(--white);
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    width: auto;
+    opacity: 1;
+    font-size: 14px;
+    color: var(--text-dark);
+    transition: all 0.4s ease;
+    margin-right: 12px;
+}
+
+.search-bar:focus-within input {
+    opacity: 1;
+}
+
+.search-bar i {
+    font-size: 16px;
+    transition: all 0.3s ease;
+    color: var(--text-grey);
+}
+
+.search-bar:focus-within i {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Placeholder animation */
+.search-bar input::placeholder {
+    color: var(--text-grey);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.search-bar:focus-within input::placeholder {
+    opacity: 0.5;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-right i.fa-bell {
+    font-size: 20px;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.user-avatar-small {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+/* Settings Container */
+.settings-container {
+    background: var(--white);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    min-height: calc(100vh - 180px);
+}
+
+.settings-container h2 {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Tabs */
+.settings-tabs {
+    display: flex;
+    gap: 40px;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    padding-bottom: 12px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-grey);
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+/* Tab Content */
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Personal Details Area */
+.avatar-edit {
+    position: relative;
+    width: 80px;
+    margin: 0 auto 30px;
+}
+
+.profile-avatar-medium {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.edit-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #B4C6FC;
+    /* Light blue per design */
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    border: 2px solid white;
+    transform: translate(20%, 20%);
+}
+
+/* Form Styling */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: var(--text-grey);
+}
+
+.form-group input,
+.form-group select {
+    background: #F4F7F9;
+    border: 1px solid #E2E8F0;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+}
+
+.form-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-submit {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 50px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    filter: brightness(1.1);
+}
+
+.btn-cancel {
+    background: #F1F5F9;
+    color: var(--text-dark);
+    border: 1px solid #E2E8F0;
+    padding: 12px 50px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Notification & Privacy Groups */
+.settings-group {
+    margin-bottom: 30px;
+}
+
+.settings-group h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.settings-list {
+    background: #F1F5F9;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Toggle Switch */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #CBD5E0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #5ED185;
+    /* Design specific green */
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Action Buttons */
+.btn-action-outline {
+    background: #5ED185;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-action-danger {
+    background: #FF5E5E;
+    /* Design specific red/salmon */
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.btn-action-danger small {
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* --- INVITE FRIEND MODAL --- */
+/* --- MODALS (Replaced by global sidebar modals for some, keeping common base if needed but sidebar.css covers it) --- */
+/* Common modal base is in sidebar.css */
+
+
+/* Delete Modal Styles */
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cancel:hover {
+    background: #5a6268;
+}
+
+#delete-modal .modal-icon {
+    background: #f8d7da;
+    color: #dc3545;
+}
+
+/* Support modal styles moved to sidebar.css */
+
+
+/* --- NOTIFICATION MODAL --- */
+.notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 350px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.notification-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: #F8F9FA;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.notification-item.unread {
+    background: #E8F4EC;
+    border-left: 3px solid var(--primary-color);
+}
+
+.notification-item-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+
+.notification-text h4 {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.notification-text p {
+    font-size: 13px;
+    color: var(--text-grey);
+    margin-bottom: 5px;
+}
+
+.notification-text .time {
+    font-size: 11px;
+    color: #A0AEC0;
+}
+
+/* Custom scrollbar for notification list */
+.notification-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notification-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+.notification-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet Styles (768px - 1024px) */
+@media (max-width: 1024px) {
+    .profile-page .app-container {
+        grid-template-columns: 240px 320px 1fr;
+    }
+
+    .profile-card-col {
+        padding: 30px 20px;
+    }
+
+    .main-content {
+        padding: 30px 30px;
+    }
+
+    .search-bar:focus-within {
+        width: 280px;
+    }
+
+    .settings-container {
+        padding: 30px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+}
+
+/* Mobile Styles (up to 768px) */
+@media (max-width: 1024px) {
+    .profile-page .app-container {
+        display: block; /* Stack everything */
+    }
+
+    .profile-card-col {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 30px 20px;
+    }
+
+    .main-content {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .settings-container {
+        padding: 20px;
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-tabs {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .tab-btn {
+        flex: 1;
+        min-width: 100px;
+        font-size: 13px;
+        padding-bottom: 8px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-submit, .btn-cancel {
+        width: 100%;
+    }
+}
+
+/* Small Mobile Styles (up to 480px) */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+    }
+
+    .settings-container {
+        padding: 15px;
+        margin: 0 -5px;
+    }
+
+    .top-header {
+        margin-bottom: 20px;
+    }
+
+    .settings-tabs {
+        gap: 15px;
+    }
+
+    .tab-btn {
+        font-size: 13px;
+        padding-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        padding: 10px 40px;
+        font-size: 13px;
+    }
+
+    .modal-card {
+        padding: 25px 15px;
+    }
+
+    .modal-header h3 {
+        font-size: 20px;
+    }
+
+    .support-form select,
+    .support-form textarea {
+        padding: 10px;
+        font-size: 13px;
+    }
+}

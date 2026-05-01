@@ -1,0 +1,296 @@
+<aside class="sidebar">
+    <button class="sidebar-close" id="sidebar-close-btn">&times;</button>
+    <div class="sidebar-logo">
+        <img src="ROOT/assets/images/e-study-logo.png" class="logo-box" alt="Estudy Logo" style="background: transparent; border-radius: 50%; border: 1px solid var(--primary-color);">
+        <div class="brand">Estudy</div>
+        <div class="tagline">Learn from Home</div>
+    </div>
+
+    <nav class="menu">
+        <a href="ROOT/pages/dashboard/dashboard.html" class="nav-item" data-page="dashboard">
+            <span class="nav-icon">⊞</span> DashBoard
+        </a>
+        <a href="ROOT/pages/courses/courses.html" class="nav-item" data-page="courses">
+            <span class="nav-icon">🌐</span> Explore
+        </a>
+        <a href="ROOT/pages/courses/my-courses.html" class="nav-item" data-page="my-courses">
+            <span class="nav-icon">📘</span> My courses
+        </a>
+        <a href="ROOT/pages/resources/resources.html" class="nav-item" data-page="resources">
+            <span class="nav-icon">📁</span> Resources
+        </a>
+        <a href="ROOT/pages/chat/chat.html" class="nav-item" data-page="chat">
+            <span class="nav-icon">💬</span> Chat
+        </a>
+        <a href="ROOT/pages/schedule/schedule.html" class="nav-item" data-page="schedule">
+            <span class="nav-icon">📅</span> Schedule
+        </a>
+        <a href="ROOT/pages/profile/profile.html" class="nav-item" data-page="profile">
+            <span class="nav-icon">👤</span> Profile
+        </a>
+        <a href="ROOT/pages/mentor/mentor-dashboard.html" class="nav-item" data-page="mentor" id="mentor-nav-item" style="display: none;">
+            <span class="nav-icon">🎓</span> Mentor
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="support-section">
+            <h4>Support</h4>
+            <nav class="support-menu">
+                <a href="#" id="mentor-link"><i class="fa-regular fa-user"></i> Become a Mentor</a>
+                <a href="#" id="support-link"><i class="fa-solid fa-headphones"></i> Support</a>
+                <a href="#" id="invite-friend-link"><i class="fa-solid fa-user-plus"></i> Invite Friend</a>
+                <a href="#" id="logout-link" style="color: #ef4444;"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Modals (Initially hidden, triggered by support menu) -->
+    
+    <!-- Invite Friend Modal -->
+    <div id="invite-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <h3>Invite Your Friends</h3>
+                <p>Share the link below and learn together!</p>
+            </div>
+            <div class="share-link-container">
+                <input type="text" id="share-url" value="https://estudy.com/join/user-roman" readonly>
+                <button id="copy-btn" class="copy-btn">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <div id="copy-toast" class="copy-toast">Link copied to clipboard!</div>
+        </div>
+    </div>
+
+    <!-- Become a Mentor Modal -->
+    <div id="mentor-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="mentor-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <h3>Become a Mentor</h3>
+                <p>Share your knowledge, help learners, and grow as a mentor.</p>
+            </div>
+            <div class="mentor-modal-content">
+                <form id="mentor-registration-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mentor-name">Name *</label>
+                            <input type="text" id="mentor-name" placeholder="Rafsan Chowdhury" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender *</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                                <label><input type="radio" name="gender" value="Female"> Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mentor-phone">Phone Number *</label>
+                            <input type="tel" id="mentor-phone" placeholder="01756441122" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mentor-email">Email *</label>
+                            <input type="email" id="mentor-email" placeholder="name@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mentor-city">City *</label>
+                            <input type="text" id="mentor-city" placeholder="Ex: Dhaka" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mentor-location">Location *</label>
+                            <input type="text" id="mentor-location" placeholder="Ex: Dhanmondi" required>
+                        </div>
+                    </div>
+                    <div class="form-group terms">
+                        <label><input type="checkbox" required> I agree to the <a href="#">Terms of Use and Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" id="mentor-confirm-btn" class="btn-confirm">Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div id="support-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="support-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-headphones"></i>
+                </div>
+                <h3>Get Support</h3>
+                <p>We're here to help! Choose how you'd like to contact us.</p>
+            </div>
+            <div class="support-modal-content">
+                <div class="support-options">
+                    <div class="support-option">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h4>Email Support</h4>
+                            <p>support@estudy.com</p>
+                        </div>
+                    </div>
+                    <div class="support-option">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <h4>Phone Support</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="support-option">
+                        <i class="fa-solid fa-comments"></i>
+                        <div>
+                            <h4>Live Chat</h4>
+                            <p>Available 9 AM - 6 PM EST</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="support-form">
+                    <h4>Quick Support Request</h4>
+                    <form id="support-form">
+                        <div class="form-group">
+                            <label for="support-subject">Subject</label>
+                            <select id="support-subject">
+                                <option value="">Select a topic</option>
+                                <option value="technical">Technical Issue</option>
+                                <option value="account">Account Problem</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="support-message">Message</label>
+                            <textarea id="support-message" placeholder="Describe your issue..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="notification-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <h3>Notifications</h3>
+                <p>Stay updated with the latest news and activities.</p>
+            </div>
+            <div class="notification-modal-content">
+                <div class="notification-list">
+                    <div class="notification-item unread">
+                        <div class="notification-item-icon"><i class="fa-solid fa-gift"></i></div>
+                        <div class="notification-text">
+                            <h4>Special Offer!</h4>
+                            <p>Get 50% off on all new courses. Limited time only!</p>
+                            <span class="time">2 mins ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="notification-text">
+                            <h4>Course Completed</h4>
+                            <p>You have successfully completed the 'Advanced Web Design' course.</p>
+                            <span class="time">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-item-icon"><i class="fa-regular fa-calendar"></i></div>
+                        <div class="notification-text">
+                            <h4>Upcoming Class</h4>
+                            <p>Your 'React JS Fundamentals' class starts in 30 minutes.</p>
+                            <span class="time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="password-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="password-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" style="color: var(--primary-color); background: #E6F9F0;">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <h3>Change Password</h3>
+                <p>Enter your current password to set a new one.</p>
+            </div>
+            <div class="mentor-modal-content">
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Current Password *</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="current-password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password-btn" data-target="current-password">
+                                <i class="fa-regular fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">New Password *</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="new-password" placeholder="Min 6 characters" required minlength="6">
+                            <button type="button" class="toggle-password-btn" data-target="new-password">
+                                <i class="fa-regular fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-new-password">Confirm New Password *</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="confirm-new-password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password-btn" data-target="confirm-new-password">
+                                <i class="fa-regular fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="password-error" style="color: #ef4444; font-size: 13px; margin-top: 12px; font-weight: 500; display: none;"></div>
+                    <button type="submit" id="password-confirm-btn" class="btn-confirm">Update Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logout-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="logout-modal-close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" style="color: #ef4444; background: #fee2e2;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </div>
+                <h3>Confirm Logout</h3>
+                <p>Are you sure you want to log out of your account?</p>
+            </div>
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <button id="cancel-logout-btn" class="btn-cancel" style="flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #E5E7EB; background: white; color: #374151; font-weight: 500; cursor: pointer; transition: background 0.2s;">Cancel</button>
+                <button id="confirm-logout-btn" class="btn-submit" style="flex: 1; background: #ef4444; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer;">Yes, Log out</button>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>

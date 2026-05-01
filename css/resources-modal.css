@@ -1,0 +1,123 @@
+/* --- RESOURCE FRONT MODAL STYLES --- */
+
+.resource-front-view {
+    display: flex;
+    gap: 30px;
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.resource-img-main {
+    flex: 0 0 250px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: white;
+}
+
+.resource-details-main {
+    flex: 1;
+    padding: 40px 40px 40px 0;
+}
+
+.res-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-green, #3DBE7B);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.res-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.res-meta-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-grey, #9CA3AF);
+}
+
+.res-meta-row span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.res-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 30px;
+}
+
+.res-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.res-stat {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #f1f5f9;
+}
+
+.stat-v {
+    display: block;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--text-dark, #1a1a2e);
+}
+
+.stat-l {
+    display: block;
+    font-size: 11px;
+    color: var(--text-grey);
+    font-weight: 600;
+}
+
+.btn-primary-res {
+    width: 100%;
+    background: var(--primary-green, #3DBE7B);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(61, 190, 123, 0.2);
+    transition: 0.3s;
+}
+
+.btn-primary-res:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .resource-front-view {
+        flex-direction: column;
+    }
+    .resource-img-main {
+        flex: none;
+        height: 200px;
+    }
+    .resource-details-main {
+        padding: 30px;
+    }
+}

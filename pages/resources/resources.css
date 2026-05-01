@@ -1,0 +1,298 @@
+/* --- RESOURCES PAGE REDESIGN --- */
+:root {
+    --primary-green: #10B981;
+    --primary-green-dark: #059669;
+    --primary-green-light: #ECFDF5;
+    --text-dark: #1F2937;
+    --text-light: #6B7280;
+    --bg-light: #F9FAFB;
+    --white: #FFFFFF;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.resources-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    min-height: calc(100vh - 120px);
+    box-shadow: var(--shadow-sm);
+}
+
+.rc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.rc-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* --- MEDIUM TABS --- */
+.medium-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.medium-tab {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    background: var(--bg-light);
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.medium-tab:hover {
+    background: #E5E7EB;
+}
+
+.medium-tab.active {
+    background: var(--primary-green);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+/* --- CLASSES GRID --- */
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.class-card {
+    background: var(--white);
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.class-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-green);
+    box-shadow: var(--shadow-lg);
+}
+
+.class-card span {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+.class-card i {
+    color: var(--text-light);
+    font-size: 14px;
+    transition: transform 0.3s;
+}
+
+.class-card:hover i {
+    transform: translateX(4px);
+    color: var(--primary-green);
+}
+
+/* --- REUSABLE MODAL --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background: var(--white);
+    width: 90%;
+    max-width: 650px;
+    max-height: 85vh;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-overlay.active .modal-box {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 24px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.modal-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.close-modal {
+    background: #F3F4F6;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: all 0.2s;
+}
+
+.close-modal:hover {
+    background: #E5E7EB;
+    color: var(--text-dark);
+}
+
+.modal-body {
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* Grid within Modal (Subjects/Chapters) */
+.modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.modal-item-btn {
+    background: var(--white);
+    border: 1px solid #E5E7EB;
+    padding: 15px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    width: 100%;
+}
+
+.modal-item-btn:hover {
+    border-color: var(--primary-green);
+    background: var(--primary-green-light);
+}
+
+.modal-item-btn span {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--text-dark);
+}
+
+.modal-item-btn i {
+    font-size: 12px;
+    color: var(--text-light);
+    transition: transform 0.2s;
+}
+
+.modal-item-btn:hover i {
+    transform: translateX(3px);
+    color: var(--primary-green);
+}
+
+/* Specific highlight for active chapter if needed */
+.modal-item-btn.selected {
+    border-color: var(--primary-green);
+    background: var(--primary-green-light);
+}
+
+/* --- VIDEO STEP STYLES --- */
+.video-step-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lecture-link-card {
+    background: var(--primary-green-light);
+    border: 1px dashed var(--primary-green);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.lecture-link-card i {
+    font-size: 32px;
+    color: var(--primary-green);
+}
+
+.lecture-link-card p {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.yt-link {
+    color: var(--primary-green);
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    word-break: break-all;
+}
+
+.video-embed-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.video-embed-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .resources-card {
+        padding: 20px;
+    }
+
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
+}

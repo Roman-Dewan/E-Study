@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses – Estudy</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="../../css/courses-modal.css">
+  <link rel="stylesheet" href="courses.css">
+</head>
+
+<body class="full-width-page">
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <div id="sidebar-placeholder"></div>
+
+    <div class="main">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-toggle" id="mobile-sidebar-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="page-title">Explore Courses</div>
+        </div>
+        <div class="search-container" style="display: none;">
+          <div class="search-bar">
+            <input type="text" placeholder="Search..." id="headerSearchInput">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="notification-btn-wrapper">
+            <i class="fa-regular fa-bell" id="notification-btn"></i>
+          </div>
+          <div class="user-dropdown-container">
+            <div class="user-header" id="user-dropdown-toggle">
+              <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar" alt="Profile">
+              <span id="header-name" class="user-name">rayhan</span>
+              <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+            </div>
+            <div class="user-dropdown-menu" id="user-dropdown-menu">
+              <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile Details</a>
+              <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
+              <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- EXPLORE ALL COURSES SECTION -->
+        <section class="courses-section">
+          <div class="explore-controls" style="display: flex; gap: 15px; align-items: center; justify-content: flex-end; margin-bottom: 20px; flex-wrap: wrap;">
+                <div class="search-bar" style="margin: 0; max-width: 300px; flex: 1;">
+                   <input type="text" placeholder="Search courses..." id="searchInput">
+                   <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="sort-select" style="box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                   <select id="categoryFilter">
+                        <option>All Categories</option>
+                        <option>AI</option>
+                        <option>Development</option>
+                        <option>Design</option>
+                        <option>Marketing</option>
+                        <option>Business</option>
+                        <option>Science</option>
+                        <option>History</option>
+                        <option>Martial Arts</option>
+                        <option>Game Dev</option>
+                        <option>Trading</option>
+                   </select>
+                </div>
+            </div>
+          <div class="courses-grid" id="coursesGrid"></div>
+        </section>
+      </div>
+    </div>
+
+  </div> <!-- End app-container -->
+
+  <!-- ENROLLMENT MODAL (Reusing courses-modal.css styles) -->
+  <div class="courses-modal-overlay" id="enrollmentModalOverlay">
+      <div class="courses-modal" style="max-width: 600px;">
+          <div class="modal-header">
+              <h2 id="modalCourseName">Course Details</h2>
+              <button class="close-modal" id="closeEnrollmentModal">&times;</button>
+          </div>
+          <div id="modalCourseContent" style="margin-bottom: 25px;">
+              <!-- Dynamic content -->
+          </div>
+          <div class="modal-actions" style="display: flex; gap: 15px;">
+              <button class="btn-action btn-enroll" id="confirmEnrollBtn" style="flex: 1; padding: 15px; font-size: 16px;">Enroll Now</button>
+          </div>
+      </div>
+  </div>
+  <!-- Common Sidebar Logic -->
+  <script type="module" src="../../js/sidebar.js"></script>
+  <script type="module" src="../../js/header-sync.js"></script>
+  <!-- Page Specific Logic -->
+  <script type="module" src="courses.js"></script>
+</body>
+
+</html>

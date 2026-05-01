@@ -20,8 +20,8 @@
 body {
     background-color: var(--bg-light);
     color: var(--text-dark);
-    height: 100vh;
-    overflow: hidden;
+    line-height: 1.5;
+    min-height: 100vh;
 }
 
 a {
@@ -37,7 +37,25 @@ li {
 .app-container {
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr var(--right-panel-width);
-    height: 100vh;
+    min-height: 100vh;
+}
+
+@media (max-width: 1200px) {
+    .app-container {
+        grid-template-columns: var(--sidebar-width) 1fr;
+    }
+    .right-panel {
+        display: none; /* Hide right panel on smaller desktops/tablets */
+    }
+}
+
+@media (max-width: 1024px) {
+    .app-container {
+        display: block; /* Stack everything on mobile/tablets */
+    }
+    .sidebar {
+        display: none; /* Hidden by default on mobile, shown via toggle */
+    }
 }
 
 /* --- LEFT SIDEBAR --- */
@@ -135,43 +153,86 @@ li {
 .main-content {
     padding: 30px 40px;
     background: var(--bg-light);
-    overflow-y: auto;
+    min-height: 100vh;
 }
 
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px;
+    }
+}
+
+/* --- TOP HEADER (Shared across pages) --- */
 .top-header {
+    padding: 30px 40px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    justify-content: space-between;
+    background: var(--bg-light);
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    gap: 20px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .top-header {
+        padding: 20px;
+        z-index: 1001; /* Above toggle if needed */
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+        padding-top: 50px; /* Space for fixed burger menu */
+    }
+}
+
+/* --- SEARCH BAR (Shared across pages) --- */
+.search-container {
+    flex: 1;
+    max-width: 450px;
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .search-bar {
     background: var(--white);
-    padding: 10px 15px;
-    border-radius: 20px;
-    width: 40px;
-    height: 40px;
+    padding: 12px 25px;
+    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--text-grey);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    transition: width 0.4s ease;
-    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.search-bar:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 20px rgba(65, 209, 133, 0.15);
 }
 
 .search-bar input {
     border: none;
     outline: none;
-    background: transparent;
-    width: 0;
-    opacity: 0;
-    transition: all 0.4s ease;
-}
-
-.search-bar:focus-within,
-.search-bar:hover {
-    width: 300px;
 }
 
 .search-bar:focus-within input,
@@ -319,6 +380,12 @@ body.full-width-page .app-container {
     grid-template-columns: var(--sidebar-width) 1fr;
 }
 
+@media (max-width: 1024px) {
+    body.full-width-page .app-container {
+        display: block;
+    }
+}
+
 body.full-width-page .main-content {
     padding-right: 40px;
 }
@@ -328,4 +395,113 @@ body.full-width-page .main-content {
     color: var(--text-dark);
     margin-right: 20px;
     cursor: pointer;
+}
+
+/* Schedule page: sidebar + main + right panel */
+body.schedule-page .app-container {
+    grid-template-columns: var(--sidebar-width) 1fr var(--right-panel-width);
+}
+
+/* Resources page layout (if needed) */
+body.resources-page .app-container {
+    grid-template-columns: var(--sidebar-width) 1fr;
+}
+
+/* Courses-detail: no right panel, sidebar + two column content */
+body.courses-detail-page .app-container {
+    grid-template-columns: var(--sidebar-width) 1fr;
+}
+
+/* --- GLOBAL HEADER RIGHT WIDGET --- */
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 25px;
+}
+
+.notification-btn-wrapper {
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.notification-btn-wrapper:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.notification-btn-wrapper i {
+    font-size: 22px;
+    color: var(--text-grey);
+}
+
+.user-dropdown-container {
+    position: relative;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.user-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dropdown-icon {
+    font-size: 10px;
+    margin-left: 5px;
+    color: var(--text-grey);
+}
+
+.user-dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 200px;
+    padding: 10px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.user-dropdown-menu.show {
+    display: flex;
+}
+
+.user-dropdown-menu .dropdown-item {
+    padding: 10px 20px;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+}
+
+.user-dropdown-menu .dropdown-item:hover {
+    background: #f5f9fc;
+    color: var(--primary-color);
+}
+
+.user-dropdown-menu .dropdown-item i {
+    width: 16px;
+    text-align: center;
 }
