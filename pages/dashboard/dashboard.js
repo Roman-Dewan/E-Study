@@ -9,17 +9,31 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = '../../index.html'; return; }
-  const snap = await getDoc(doc(db, 'E-study', user.uid));
+  
+  // Set immediate fallback from cache/auth to prevent blink
+  const cachedName = localStorage.getItem('estudy_user_name') || user.displayName || 'User';
+  const firstNameFallback = cachedName.split(' ')[0];
+  
+  const nameEl = document.querySelector('.user-name');
+  if (nameEl) nameEl.textContent = cachedName;
+  
+  const greetingEl = document.getElementById('greeting-name');
+  if (greetingEl) greetingEl.textContent = `${firstNameFallback} \uD83D\uDC4B`;
+
+  // Fetch full data from Firestore using email (consistent with signup/login)
+  const snap = await getDoc(doc(db, 'E-study', user.email));
   if (snap.exists()) {
     const userData = snap.data();
-    const firstName = userData.first_name || '';
-    const fullName = `${firstName} ${userData.last_name || ''}`.trim() || 'User';
+    const firstName = userData.first_name || firstNameFallback;
+    const fullName = `${firstName} ${userData.last_name || ''}`.trim() || cachedName;
+    
     // Update topbar name
-    const nameEl = document.querySelector('.user-name');
     if (nameEl) nameEl.textContent = fullName;
     // Update hero banner greeting
-    const heroH2 = document.querySelector('.hero-banner h2');
-    if (heroH2) heroH2.textContent = `Hi ${firstName || fullName} \uD83D\uDC4B`;
+    if (greetingEl) greetingEl.textContent = `${fullName} \uD83D\uDC4B`;
+    
+    // Sync back to localStorage
+    localStorage.setItem('estudy_user_name', fullName);
   }
   updateDashboardForDate(selectedDate.year, selectedDate.month, selectedDate.day);
   if (user.email) {

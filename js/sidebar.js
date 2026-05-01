@@ -16,26 +16,26 @@ async function initSidebar() {
     if (!placeholder) return;
 
     const rootPath = calculateRootPath();
-    
+
     try {
         const response = await fetch(`${rootPath}components/sidebar.html`);
         if (!response.ok) throw new Error('Failed to fetch sidebar');
-        
+
         let html = await response.text();
         placeholder.innerHTML = html.replace(/ROOT\//g, rootPath);
-        
+
         highlightActiveLink();
         setupSidebarActions();
         setupSidebarToggle(); // Added toggle logic initialization
         setupGlobalHeader();
-        
+
         // Listen for Auth changes after sidebar is loaded
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 await updateSidebarForUser(user.email);
             }
         });
-        
+
     } catch (error) {
         console.error('Sidebar Loader Error:', error);
     }
@@ -47,10 +47,10 @@ async function updateSidebarForUser(email) {
         if (userDocSnap.exists()) {
             const userData = userDocSnap.data();
             const role = userData.role || 'student';
-            
+
             const mentorNavItem = document.getElementById('mentor-nav-item');
             const becomeMentorLink = document.getElementById('mentor-link');
-            
+
             if (role === 'mentor') {
                 if (mentorNavItem) mentorNavItem.style.display = 'flex';
                 if (becomeMentorLink) becomeMentorLink.style.display = 'none'; // Already a mentor
@@ -75,15 +75,15 @@ function calculateRootPath() {
 function highlightActiveLink() {
     const currentPath = window.location.pathname.toLowerCase();
     const navItems = document.querySelectorAll('.nav-item');
-    
+
     navItems.forEach(item => {
         const href = item.getAttribute('href');
         const page = item.getAttribute('data-page');
         if (!href) return;
-        
+
         const parts = href.split('/');
         const filename = parts[parts.length - 1].split('.')[0].toLowerCase();
-        
+
         if ((page && currentPath.includes(page)) || currentPath.includes(filename)) {
             item.classList.add('active');
         }
@@ -113,9 +113,9 @@ function setupSidebarActions() {
 
         confirmLogoutBtn?.addEventListener('click', (e) => {
             e.preventDefault();
-            const event = new CustomEvent('estudy-logout', { 
-                bubbles: true, 
-                detail: { originalEvent: e } 
+            const event = new CustomEvent('estudy-logout', {
+                bubbles: true,
+                detail: { originalEvent: e }
             });
             document.dispatchEvent(event);
         });
@@ -133,7 +133,8 @@ function setupSidebarActions() {
 
     if (inviteBtn && inviteModal) {
         if (shareUrl) {
-            shareUrl.value = window.location.origin + "/invite/roman-dewan";
+            // shareUrl.value = window.location.origin + "/invite/roman-dewan";
+            shareUrl.value = "";
         }
 
         inviteBtn.addEventListener('click', (e) => {
@@ -170,14 +171,14 @@ function setupSidebarActions() {
     if (mentorBtn && mentorModal) {
         mentorBtn.addEventListener('click', async (e) => {
             e.preventDefault();
-            
+
             // Pre-fill user data if available
             if (auth.currentUser) {
                 const emailInput = document.getElementById('mentor-email');
                 const nameInput = document.getElementById('mentor-name');
-                
+
                 if (emailInput) emailInput.value = auth.currentUser.email;
-                
+
                 // If name is not yet set in input and we can get it from Firestore
                 if (nameInput && !nameInput.value) {
                     try {
@@ -205,7 +206,7 @@ function setupSidebarActions() {
             e.preventDefault();
             const btn = document.getElementById('mentor-confirm-btn');
             const originalText = btn.textContent;
-            
+
             if (!auth.currentUser) {
                 alert('You must be logged in to register.');
                 return;
@@ -224,7 +225,7 @@ function setupSidebarActions() {
                         orderBy("instructor_id", "desc"),
                         limit(1)
                     );
-                    
+
                     const querySnapshot = await getDocs(mentorsQuery);
                     if (!querySnapshot.empty) {
                         const lastMentor = querySnapshot.docs[0].data();
@@ -238,7 +239,7 @@ function setupSidebarActions() {
                 } catch (queryErr) {
                     console.warn("Could not fetch last mentor ID (possibly missing index):", queryErr);
                     // Fallback to a timestamp-based ID to ensure registration proceeds
-                    nextId = "M" + Date.now().toString().slice(-4); 
+                    nextId = "M" + Date.now().toString().slice(-4);
                 }
 
                 // 2. Prepare Update Data
@@ -253,18 +254,18 @@ function setupSidebarActions() {
 
                 // 3. Update User Document
                 const userDocRef = doc(db, "E-study", auth.currentUser.email);
-                
+
                 await updateDoc(userDocRef, updateData);
 
                 mentorModal.classList.remove('active');
                 alert('Congratulations! You are now a mentor. Your Instructor ID is: ' + nextId);
-                
+
                 // Refresh sidebar UI
                 await updateSidebarForUser(auth.currentUser.email);
-                
+
             } catch (error) {
                 console.error("Mentor Registration Error:", error);
-                
+
                 if (error.code === 'not-found') {
                     alert('User profile not found. Please contact support.');
                 } else {
@@ -297,7 +298,7 @@ function setupSidebarActions() {
             const newPassword = document.getElementById('new-password').value;
             const confirmPassword = document.getElementById('confirm-new-password').value;
             const btn = document.getElementById('password-confirm-btn');
-            
+
             if (newPassword !== confirmPassword) {
                 if (passwordError) {
                     passwordError.textContent = "New passwords do not match!";
@@ -348,7 +349,7 @@ function setupSidebarActions() {
                 const targetId = button.getAttribute('data-target');
                 const input = document.getElementById(targetId);
                 const icon = button.querySelector('i');
-                
+
                 if (input.type === 'password') {
                     input.type = 'text';
                     icon.classList.remove('fa-eye-slash');

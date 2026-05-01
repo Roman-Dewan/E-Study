@@ -37,14 +37,17 @@
           </div>
           <div class="user-dropdown-container">
             <div class="user-header" id="user-dropdown-toggle">
-              <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar" alt="Profile">
+              <img src="../../assets/images/blank-profile-picture-.webp" class="user-avatar-small" id="header-avatar"
+                alt="Profile">
               <span id="header-name" class="user-name">rayhan</span>
               <i class="fa-solid fa-chevron-down dropdown-icon"></i>
             </div>
             <div class="user-dropdown-menu" id="user-dropdown-menu">
-              <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile Details</a>
+              <a href="../profile/profile.html" class="dropdown-item"><i class="fa-regular fa-user"></i> Profile
+                Details</a>
               <a href="#" class="dropdown-item"><i class="fa-solid fa-key"></i> Change Password</a>
-              <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+              <a href="#" class="dropdown-item logout-action"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout</a>
             </div>
           </div>
         </div>
@@ -56,7 +59,7 @@
         <!-- HERO BANNER -->
         <div class="hero-banner">
           <div>
-            <h2>Hi Rifat 👋</h2>
+            <h2 id="greeting-name">Hi User 👋</h2>
             <p>You have completed 5 lessons in last day. Start your lesson today</p>
           </div>
           <div class="hero-emoji">📚</div>
@@ -231,24 +234,24 @@
 
           <!-- QUICK RESOURCES -->
           <div style="margin-top: 30px;">
-              <div class="task-header">
-                <h3>Quick Resources</h3>
-                <a href="../resources/resources.html" class="see-all">All</a>
+            <div class="task-header">
+              <h3>Quick Resources</h3>
+              <a href="../resources/resources.html" class="see-all">All</a>
+            </div>
+            <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-1')">
+              <div class="course-thumb-sm" style="background:#3B82F6;">📄</div>
+              <div class="course-info">
+                <h4>Math Formulas</h4>
+                <span>Formula guide for Class 10</span>
               </div>
-              <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-1')">
-                <div class="course-thumb-sm" style="background:#3B82F6;">📄</div>
-                <div class="course-info">
-                  <h4>Math Formulas</h4>
-                  <span>Formula guide for Class 10</span>
-                </div>
+            </div>
+            <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-2')">
+              <div class="course-thumb-sm" style="background:#8B5CF6;">📑</div>
+              <div class="course-info">
+                <h4>Organic Notes</h4>
+                <span>Chemistry Class 12</span>
               </div>
-              <div class="course-item" style="cursor:pointer;" onclick="openResourceFrontModal('777-dummy-2')">
-                <div class="course-thumb-sm" style="background:#8B5CF6;">📑</div>
-                <div class="course-info">
-                  <h4>Organic Notes</h4>
-                  <span>Chemistry Class 12</span>
-                </div>
-              </div>
+            </div>
           </div>
         </div>
 
@@ -257,14 +260,14 @@
   </div><!-- /.app-container -->
 
   <!-- RESOURCE FRONT MODAL -->
-  <div class="courses-modal-overlay" id="resourceFrontModalOverlay" style="z-index: 2000;">
+  <!-- <div class="courses-modal-overlay" id="resourceFrontModalOverlay" style="z-index: 2000;">
       <div class="courses-modal" style="max-width: 850px; padding: 0;">
           <button class="close-modal" id="closeResourceFrontModal" style="z-index: 10;">&times;</button>
           <div id="resourceFrontContent">
               <p style="padding: 50px; text-align: center;">Loading resource...</p>
           </div>
       </div>
-  </div>
+  </div> -->
 
   <script type="module" src="../../js/sidebar.js"></script>
   <script type="module" src="../../js/header-sync.js"></script>

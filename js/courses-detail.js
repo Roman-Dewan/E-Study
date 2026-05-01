@@ -20,7 +20,7 @@ onAuthStateChanged(auth, async (user) => {
 
     // Fetch profile
     try {
-        const snap = await getDoc(doc(db, 'E-study', user.uid));
+        const snap = await getDoc(doc(db, 'E-study', user.email));
         if (snap.exists()) {
             const data = snap.data();
             const nameEl = document.getElementById('user-name');
